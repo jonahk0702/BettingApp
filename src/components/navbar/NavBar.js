@@ -27,7 +27,7 @@ const Navbar = () => {
         <Button variant="link">Link</Button>
       </ButtonToolbar>
 
-      <h1 className="tc pa6"> Welcome ! It workds </h1>
+      <h1 className="tc pa6"> Welcome to Custom Bets ! </h1>
     </div>
   );
 };
