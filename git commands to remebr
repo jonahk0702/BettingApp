@@ -1,8 +1,12 @@
 just some commands i must remeber
 
 To start using this, youll need to downlaod github, not neccarliy desktop version
-Then clone this project into a folder. (Just ask if you need)
 
+- https://git-scm.com/download/win
+
+
+Then clone this project into a folder. (Just ask if you need)
+- you push the clone button on the git page, and then copy the link. Go to your terminal and type "git " then paste link.
 
 How to get the lastest version (Do whenever starting to code)
 - git pull
