@@ -1,0 +1,14 @@
+just some commands i must remeber
+
+To start using this, youll need to downlaod github, not neccarliy desktop version
+Then clone this project into a folder. (Just ask if you need)
+
+
+How to get the lastest version (Do whenever starting to code)
+- git pull
+
+How to publish your changes (whenever finish coding for that time - you have to do all in order)
+- git status
+- git add . 
+- git commit -m 'Here put in a note on what you change, in a string fromat'
+- git push 
