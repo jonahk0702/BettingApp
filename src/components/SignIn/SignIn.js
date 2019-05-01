@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './SignIn.css'
 class signIn extends React.Component {
 	constructor(props){
 		super();
@@ -11,12 +11,12 @@ class signIn extends React.Component {
 	render(){
 	
 		 return(
-		 	<div className='mw5 mw7-ns center'>
+		 	<div className='mw5 mw7-ns center br5 black'>
 
 
 		 		<br/><br/>
 		 		
-					<article className="br3 ba --black-10 w-100 w-100-m center shadow-5">
+					<article className="br3 ba --black-10 w-100 w-100-m center shadow-5 solidBR">
 						
 						<main className="pa4 black-80 tc">
 			  				<div className="">
