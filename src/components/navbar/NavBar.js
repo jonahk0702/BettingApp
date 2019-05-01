@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Nav, Navbar, Form, } from "react-bootstrap";
+import { Nav, Navbar, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
 
@@ -19,9 +19,7 @@ export default class NavBar extends Component{
       </Nav>
       <Form inline>
       
-      <Nav.Link href="/sign-In">Sign In</Nav.Link>
-      <Nav.Link href="/sign-In">Creat Account</Nav.Link>
-
+      <Nav.Link href="/sign-In">Sign In/Create Account</Nav.Link>
     </Form>
     </Navbar>
   );

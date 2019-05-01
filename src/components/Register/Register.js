@@ -34,13 +34,13 @@ class Register extends Component {
                 />
               </div>
               <br />
-              <button
+              <p
 
                 onClick={() => this.props.handleSwitch(false)}
                 className="f6 link dim black db pointer tc">
               
                 Already have an account?
-              </button>
+              </p>
             </fieldset>
           </main>
         </article>

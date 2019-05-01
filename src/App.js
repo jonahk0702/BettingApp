@@ -3,7 +3,7 @@ import "./App.css";
 import NavBar from "./components/navbar/NavBar";
 import "bootstrap/dist/css/bootstrap.css";
 import Particles from "react-particles-js";
-import signInReg from './components/signInReg';
+import signIn from './components/signIn';
 import Home from './components/Home';
 import HowThisWorks from './components/HowThisWorks';
 import Fees from './components/Fees';
@@ -40,7 +40,7 @@ class App extends Component {
           Each pages just needs it own Route.
           The borswer and switch is n=just needed.
         */}
-              <Route path="/sign-In" component = {signInReg}/>
+              <Route path="/sign-In" component = {signIn}/>
               <Route exact path="/" component = {Home}/>
               <Route path="/howWeWork" component = {HowThisWorks}/>
               <Route path="/Our-Fees" component = {Fees}/>

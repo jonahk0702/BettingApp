@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SignIn from "./SignIn/SignIn";
 import Register from "./Register/Register";
 
-class signInReg extends Component {
+class signIn extends Component {
   constructor(props) {
     super();
     this.state = {
@@ -30,4 +30,4 @@ class signInReg extends Component {
   }
 }
 
-export default signInReg;
+export default signIn;
