@@ -10,7 +10,3 @@ body {
 background: linear-gradient(90deg, rgba(175,8,8,1) 22%, rgba(13,9,121,1) 85%);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
