@@ -1,8 +1,7 @@
-import React, {Component} from "react";
-import { Nav, Navbar, } from "react-bootstrap";
-
-
+import React, { Component } from "react";
+import { Nav, Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+
 
 export default class NavBar extends Component{
   render(){
@@ -20,8 +19,4 @@ export default class NavBar extends Component{
       </Nav>
     </Navbar>
   );
-}
-
-
-
-}
+}}
