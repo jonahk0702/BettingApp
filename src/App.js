@@ -1,19 +1,26 @@
-import React from 'react';
-import './App.css';
-import SignIn from './components/SignIn';
-import NavBar from './components/navbar/NavBar';
-import 'bootstrap/dist/css/bootstrap.css';
+import React, { Component } from "react";
+import "./App.css";
+import SignInOrReg from "./SignInOrReg";
+import NavBar from "./components/navbar/NavBar";
+import "bootstrap/dist/css/bootstrap.css";
 
-function App() {
-  return (
-    <div>
+class App extends Component {
+  state = { isLogin: true };
 
-    <NavBar/>
-    <SignIn/>
-    
-    </div>
-    
-  );
+  handleSwitch = () => {
+    this.state.isLogin === true
+      ? this.setState({ isLogin: false })
+      : this.setState({ isLogin: true });
+  };
+  render() {
+    return (
+      <div>
+        <NavBar />
+        <SignInOrReg onSwitch={this.handleSwitch} page={this.state.isLogin} />
+        {console.log(this.state.isLogin)};
+      </div>
+    );
+  }
 }
 
 export default App;
