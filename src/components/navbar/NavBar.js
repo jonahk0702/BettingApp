@@ -1,35 +1,23 @@
 import React from "react";
 import {
   Nav,
-  NavDropdown,
-  Form,
-  Button,
-  Dropdown,
-  ButtonToolbar
+  Navbar,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
-const Navbar = () => {
+const NavBar = () => {
   return (
-    <div className="center">
-      <br />
-      <br />
-
-      <ButtonToolbar>
-        <Button variant="primary">Primary</Button>
-        <Button variant="secondary">Secondary</Button>
-        <Button variant="success">Success</Button>
-        <Button variant="warning">Warning</Button>
-        <Button variant="danger">Danger</Button>
-        <Button variant="info">Info</Button>
-        <Button variant="light">Light</Button>
-        <Button variant="dark">Dark</Button>
-        <Button variant="link">Link</Button>
-      </ButtonToolbar>
-
-      <h1 className="tc pa6"> Welcome to Custom Bets ! </h1>
-    </div>
+   <Navbar bg="dark" variant="dark">
+    <Navbar.Brand href="#home">Custom Bets</Navbar.Brand>
+    <Nav className="mr-auto">
+      <Nav.Link href="#home">Sign In</Nav.Link>
+      <Nav.Link onClick={console.log("woo")} href="#features">Create Account</Nav.Link>
+      <Nav.Link href="#features">How does this work</Nav.Link>
+      <Nav.Link href="#pricing">Our fees</Nav.Link>
+      <Nav.Link href="#pricing">Boring info</Nav.Link>
+    </Nav>
+  </Navbar>
   );
 };
 
-export default Navbar;
+export default NavBar;
