@@ -3,7 +3,9 @@ import "./SignIn.css";
 class signIn extends React.Component {
   constructor(props) {
     super();
-    this.state = {};
+    this.state = {
+
+    };
   }
 
   render() {
@@ -49,9 +51,8 @@ class signIn extends React.Component {
               </div>
               <div className="lh-copy mt3">
                 <p
-                  onClick={() => this.props.onSwitch()}
-                  className="f6 link dim black db pointer"
-                >
+                  onClick={() => this.props.handleSwitch(true)}
+                  className="f6 link dim black db pointer">
                   Register
                 </p>
               </div>

@@ -1,23 +1,22 @@
 import React, { Component } from "react";
 import "./App.css";
-import SignInOrReg from "./SignInOrReg";
 import NavBar from "./components/navbar/NavBar";
 import "bootstrap/dist/css/bootstrap.css";
 import Particles from "react-particles-js";
+import signInReg from './components/signInReg';
 
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 class App extends Component {
-  state = { isLogin: true };
+  state = {
 
-  handleSwitch = () => {
-    this.state.isLogin === true
-      ? this.setState({ isLogin: false })
-      : this.setState({ isLogin: true });
   };
 
+ 
+
   backgroundOptions = {
-    particles: {
+    particles: { 
       number: {
-        value: 150,
+        value: 200,
         density: {
           enable: true,
           value_area: 800
@@ -29,9 +28,19 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavBar onSwitch={this.handleSwitch} page={this.state.isLogin} />
-        <SignInOrReg onSwitch={this.handleSwitch} page={this.state.isLogin} />
+        <NavBar/>
         <Particles className="particles" params={this.backgroundOptions} />
+        <BrowserRouter>
+          <Switch> 
+
+        {/*
+          Each pages just needs it own Route.
+          The borswer and switch is n=just needed.
+        */}
+              <Route path="/sign-In" component = {signInReg}/>
+         
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }

@@ -32,7 +32,13 @@ class Register extends Component {
                   type="submit"
                   value="Next"
                 />
-              </div>
+                </div>
+                <br/>
+                <p
+                  onClick={() => this.props.handleSwitch(false)}
+                  className="f6 link dim black db pointer">
+                  Already have an account?
+                </p>
             </fieldset>
           </main>
         </article>
