@@ -28,7 +28,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavBar/>
+        <NavBar />
         <Particles className="particles" params={this.backgroundOptions} />
         <BrowserRouter>
           <Switch> 
