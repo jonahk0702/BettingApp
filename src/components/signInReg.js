@@ -6,15 +6,15 @@ class signInReg extends Component {
   constructor(props) {
     super();
     this.state = {
-    createA: false,  
+      onCreateAccount: false,  
 
   };
 }
-   handleSwitch = (create) => {
-   if(create){
-    this.setState({ createA: true });
+   handleSwitch = (onCreateAccountPage) => {
+   if(onCreateAccountPage){
+    this.setState({ onCreateAccount: true });
    }else{
-       this.setState({ createA: false })
+       this.setState({ onCreateAccount: false })
        }
   };
 

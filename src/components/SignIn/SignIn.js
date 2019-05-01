@@ -53,7 +53,7 @@ class signIn extends React.Component {
                 <p
                   onClick={() => this.props.handleSwitch(true)}
                   className="f6 link dim black db pointer">
-                  Register
+                  Create an Account
                 </p>
               </div>
             </div>

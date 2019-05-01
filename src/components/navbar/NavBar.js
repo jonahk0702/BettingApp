@@ -8,11 +8,11 @@ export default class NavBar extends Component{
   render(){
   return (
     <Navbar bg="dark" variant="dark">
-      <Navbar.Brand href="#home">Custom Bets</Navbar.Brand>
+      <Navbar.Brand href="/">Custom Bets</Navbar.Brand>
       <Nav className="mr-auto">
-      <React.Fragment>
+   
         <Nav.Link href="/sign-In">Sign In</Nav.Link>
-        </React.Fragment>
+    
        
         <Nav.Link href="#features">How does this work</Nav.Link>
         <Nav.Link href="#pricing">Our fees</Nav.Link>
