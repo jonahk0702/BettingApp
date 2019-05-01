@@ -29,7 +29,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavBar onSwitch={this.handleSwitch} page={this.state.isLogin} />
+        <NavBar />
         <SignInOrReg onSwitch={this.handleSwitch} page={this.state.isLogin} />
         <Particles className="particles" params={this.backgroundOptions} />
       </div>
