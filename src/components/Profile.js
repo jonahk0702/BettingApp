@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import NavbarIn from './navbar/NavbarIn'
 import IndividaulBet from './IndividaulBet/IndividaulBet';
-class SignInHome extends Component {
+class Profile extends Component {
   constructor(props) {
     super();
     this.state = { 
@@ -16,7 +16,7 @@ class SignInHome extends Component {
      <div>
      <NavbarIn/>
      <br/><br/><br/>
-     <h1 className="tc white i grow f1 font">Explore Open Bets!</h1>
+     <h1 className="tc white i grow f1 font">My Profile</h1>
      <br/><br/>
         <Container>
   			<Row>
@@ -34,7 +34,7 @@ class SignInHome extends Component {
           <hr/><br/>
           <IndividaulBet name={"I bet that Ramaposa is an Alien"}/>
            <IndividaulBet name={"I bet the Mac Miller faked his death"}/> 
-           <IndividaulBet name={"I bet that Micheal Obama is a man"}/>
+           <IndividaulBet name={"I bet that Micheal Obama is "}/>
 
  			   </Col>
   		
@@ -45,4 +45,4 @@ class SignInHome extends Component {
   }
 }
 
-export default SignInHome;  
+export default Profile;  

@@ -3,6 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import SignIn from './SignIn/SignIn';
 import './SignIn/SignIn.css';
 import './pages.css';
+import NavBar from "./navbar/NavBar";
+
 class Home extends Component {
   constructor(props) {
     super();
@@ -14,6 +16,8 @@ class Home extends Component {
 
   render() {
     return (
+      <div>
+      <NavBar/>
      <div className='tc'>
      <br/><br/><br/>
      <h1 className="tc white i grow f1 font">Welcome to Custome Bets</h1>
@@ -38,6 +42,7 @@ class Home extends Component {
   			  <Col> <SignIn/> </Col>
 			</Row>
 		</Container>
+      </div>
       </div>
     );
   }

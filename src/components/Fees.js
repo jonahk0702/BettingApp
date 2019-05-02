@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 import './pages.css';
+import NavBar from "./navbar/NavBar";
+
 class Fees extends Component {
   constructor(props) {
     super();
@@ -13,6 +15,8 @@ class Fees extends Component {
 
   render() {
     return (
+      <div>
+      <NavBar/>
      <div className='tc'>
      <br/><br/><br/>
      <h1 className="tc white i grow f1 font">Lets talk about fees</h1>
@@ -30,6 +34,7 @@ class Fees extends Component {
 			</Row>
 		</Container>
       </div>
+       </div>
     );
   }
 }

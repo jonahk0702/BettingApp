@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SignIn from "./SignIn/SignIn";
 import Register from "./Register/Register";
+import NavBar from "./navbar/NavBar";
 
 class signIn extends Component {
   constructor(props) {
@@ -27,7 +28,9 @@ class signIn extends Component {
     } else {
       current = <SignIn handleSwitch={this.handleSwitch} />;
     }
-    return <div>{current}</div>;
+    return <div>
+    <NavBar/>
+     {current}</div>;
   }
 }
 

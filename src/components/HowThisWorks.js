@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-
+import NavBar from "./navbar/NavBar";
 import './pages.css';
 class HowThisWorks extends Component {
   constructor(props) {
@@ -13,6 +13,8 @@ class HowThisWorks extends Component {
 
   render() {
     return (
+      <div>
+      <NavBar/>
      <div className='tc'>
      <br/><br/><br/>
      <h1 className="tc white i grow f1 font">Wait, so how does this really work?</h1>
@@ -28,6 +30,7 @@ class HowThisWorks extends Component {
   			  
 			</Row>
 		</Container>
+      </div>
       </div>
     );
   }

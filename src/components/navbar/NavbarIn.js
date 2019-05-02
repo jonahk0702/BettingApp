@@ -9,13 +9,13 @@ export default class NavBar extends Component{
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="/">Custom Bets</Navbar.Brand>
       <Nav className="mr-auto">
-        <Nav.Link href="/">Explore</Nav.Link>
+        <Nav.Link href="/Explore">Explore</Nav.Link>
         
     
        
-        <Nav.Link href="/howWeWork">Create a Bet</Nav.Link>
-        <Nav.Link href="/Our-Fees">My bets</Nav.Link>
-        <Nav.Link href="/Our-Fees">Profile</Nav.Link>
+        <Nav.Link href="/Create-Bet">Create a Bet</Nav.Link>
+        <Nav.Link href="/My-Bets">My bets</Nav.Link>
+        <Nav.Link href="/profile">Profile</Nav.Link>
       </Nav>
       <Form inline>
       
