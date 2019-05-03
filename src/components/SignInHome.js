@@ -34,7 +34,7 @@ class SignInHome extends Component {
           <hr/><br/>
           <IndividaulBet name={"I bet that Ramaposa is an Alien"}/>
            <IndividaulBet name={"I bet the Mac Miller faked his death"}/> 
-           <IndividaulBet name={"I bet that Micheal Obama is a man"}/>
+           <IndividaulBet name={"I bet that Micheal Obama is "}/>
 
  			   </Col>
   		

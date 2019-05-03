@@ -4,8 +4,19 @@ class signIn extends React.Component {
   constructor(props) {
     super();
     this.state = {
+      email:' ',
+      password: ' '
 
     };
+  }
+  
+
+  enterPassword = (newPassword) =>{
+      this.setState({password: newPassword.target.value});
+  }
+
+  enterUsername = (newEmail) =>{
+      this.setState({email: newEmail.target.value});
   }
 
   render() {
@@ -28,26 +39,30 @@ class signIn extends React.Component {
                     type="email"
                     name="email-address"
                     id="email-address"
+                    onChange={this.enterUsername}
                   />
                 </div>
                 <div className="mv3">
-                  <label className="db fw6 lh-copy f6" htmlFor="password">
+                  <label 
+                   className="db fw6 lh-copy f6" htmlFor="password">
                     Password
                   </label>
-                  <input //onChange={this.onPasswordChange}
+                  <input
                     className="b pa2 input-reset ba bg-transparent hover-bg-black w-100"
                     type="password"
                     name="password"
                     id="password"
+                    onChange={this.enterPassword}
                   />
                 </div>
               </fieldset>
               <div className="">
-                <input //onClick={this.onSubmitSignIn}
+                <button 
                   className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                   type="submit"
-                  value="Sign in"
-                />
+                  >
+                  Sign in
+                </button>
               </div>
               <div className="lh-copy mt3">
                 <p
