@@ -28,6 +28,15 @@ class App extends Component {
     }
   };
 
+requireAuth = (nextState, replace) => {
+  
+    replace({
+      pathname: '/sign-In'
+    })
+  
+}
+
+
   render() {
     return (
       <div>
@@ -42,7 +51,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/howWeWork" component={HowThisWorks} />
               <Route path="/Our-Fees" component={Fees} />
-              <Route path="/Explore" component={SignInHome} />
+              <Route path="/Explore" component={SignInHome} />}
               <Route path="/profile" component={Profile} />
               <Route path="/My-Bets" component={MyBets} />
               <Route path="/Create-Bet" component={CreateBet} />

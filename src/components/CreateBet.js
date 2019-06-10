@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import NavbarIn from './navbar/NavbarIn'
-import IndividaulBet from './IndividaulBet/IndividaulBet';
+
 class CreateBet extends Component {
   constructor(props) {
     super();
@@ -21,20 +21,29 @@ class CreateBet extends Component {
         <Container>
   			<Row>
  			   <Col className='tc f3 solidBR bg-white'>
- 			   Hw shall we order all open Bets? 
+ 			   Create a Bet! 
+         <hr/>
 
-         <ButtonToolbar className='center mw5 mw7-ns center bg-light-gray pa3 ph5-ns'>
-            <ToggleButtonGroup className='center ' type="radio" name="options" defaultValue={1}>
-                <ToggleButton className='ma3' value={1}>Most Popular</ToggleButton>
-                <ToggleButton className='ma3' value={2}>Highest odds</ToggleButton>
-                <ToggleButton className='ma3' value={3}>Highest Wager</ToggleButton>
-                <ToggleButton className='ma3' value={4}>Lowest Wager</ToggleButton>
-            </ToggleButtonGroup>
-          </ButtonToolbar>
+          <Container>
+            <Row>
+              <Col>We Offer three main types of bets. With proper wording, almost any bet should fit.
+              I bet That ______ will happen before [Date] will happen
+              I bet That ______ will ______
+              I bet that ______ is really actualy ______
+              I bet that ______ happened ________
+
+
+              </Col>
+            </Row>
+            <Row>
+              <Col>1 of 3</Col>
+              <Col>2 of 3</Col>
+              <Col>3 of 3</Col>
+            </Row>
+          </Container>
+          
           <hr/><br/>
-          <IndividaulBet name={"I bet that Ramaposa is an Alien"}/>
-           <IndividaulBet name={"I bet the Mac Miller faked his death"}/> 
-           <IndividaulBet name={"I bet that Micheal Obama is "}/>
+          
 
  			   </Col>
   		

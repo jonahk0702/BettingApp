@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-
 import { CountryDropdown} from 'react-country-region-selector';
-
 import "./Register.css";
 //Okay, this is quite messy, but here I go
 
@@ -89,7 +87,8 @@ ValidateFirst = () => {
       }
 
 
-    this.setState({num: 'a'});  
+    this.setState({num: 'a'});
+
 
 }
 
@@ -139,7 +138,7 @@ ValidateFinal = () => {
         }
          this.setState({num: 'a'});
 
-        
+        window.location.href = "/Explore";
 }    
         
      
@@ -239,6 +238,7 @@ enterEmail = (newEmail) =>{
                       <input 
                           onChange={this.enterEmail}
                            className={emailStyles} 
+                           placeholder = "Example@gmail.com"
                       />
                       {emailMessage}
                     </div>

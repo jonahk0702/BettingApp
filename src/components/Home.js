@@ -44,6 +44,8 @@ class Home extends Component {
               </Col>
             </Row>
           </Container>
+          <br/>
+          <br/>
         </div>
       </div>
     );
