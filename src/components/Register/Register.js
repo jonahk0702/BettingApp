@@ -1,249 +1,404 @@
 import React, { Component } from "react";
 
-import { CountryDropdown } from "react-country-region-selector";
+import { CountryDropdown} from 'react-country-region-selector';
 
+import "./Register.css";
 //Okay, this is quite messy, but here I go
 
 //For the states, i think we'll need to save all of the users
 //inputed data in this state. I havent done it yet
-class Register extends Component {
+let stylesHolder = 'pa2 input-reset ba bg-transparent hover-bg-black w-100';
+let countryHolder = 'Please select a country'; 
+let countryStyles = " ";
+let idStyles = "";
+let idNumberMessage = "";
+let FirstMSG = '';
+let nameStyle = stylesHolder;
+let DateBirthStyle =stylesHolder;
+
+let emailStyles = stylesHolder;
+let passwordStyle = stylesHolder;
+  
+ let emailMessage = '';
+ let passwordMsg ='';
+ let currentPage = 1;
+
+  class Register extends Component {
+
   state = {
-    Country: "",
-    firstName: " ",
-    secondName: " ",
-    dateOfBirth: " ", //Time.now,
-    email: " ",
-    password: " ",
-    passwordConfirm: " ",
-    IdNumber: " ",
+    Country:'',
+    
+    firstName:'',
+    dateOfBirth: '',//Time.now,
+    email: '',
+    password: '',
+    passwordConfirm: '',
 
-    currentPage: 1
-  };
-
-  //This just stores in state the country they are from
-  selectCountry(val) {
-    this.setState({ country: val });
+    IdNumber: '',
+    num:'', 
+    gender: 'Female'
   }
 
-  ValidateFirst = () => {
-    let { firstName, secondName, dateOfBirth } = this.state;
 
-    console.log(this.detAge);
+//This just stores in state the country they are from
+ 
 
-    if (firstName === " " || secondName === " " || dateOfBirth === " ") {
-      console.log("Please fill in all infomation");
-    } else if (this.detAge < 18) {
-      console.log("You are too young to bet !");
-    } else {
-      console.log("Sucess!");
-      this.setState({ currentPage: 2 });
+ValidateFirst = () => {
+  let {firstName, dateOfBirth, email} = this.state;
+
+  if(firstName === ''){
+    
+    
+    nameStyle += ' invalid bw1';
+    FirstMSG = 'Please note all fields are required';
+     
+  }
+
+  if(dateOfBirth === ''){
+      DateBirthStyle += ' invalid bw1';
+      FirstMSG = 'Please note all fields are required';
+     
+
+  }
+  if(firstName !== ""){
+    nameStyle = "pa2 input-reset ba bg-transparent hover-bg-black w-100";
+  }
+  if(dateOfBirth !== ""){
+      DateBirthStyle ="pa2 input-reset ba bg-transparent hover-bg-black w-100";
+  }
+ 
+
+  
+   if(email === ''){
+      emailStyles += " invalid bw1 ";
     }
-  };
 
-  ValidateFinal = () => {
-    let { Country, email, password, passwordConfirm, IdNumber } = this.state;
-
-    if (
-      email === " " ||
-      password === " " ||
-      passwordConfirm === " " ||
-      IdNumber === " " ||
-      Country === " "
-    ) {
-      console.log("Please fill in all infomation");
-    } else if (!email.includes(".") || !email.includes("@")) {
-      console.log("Not a valid Email");
-    } else if (password.length < 8) {
-      console.log("Password is too short");
+    if(!email.includes('.') || !email.includes('@')){
+        emailStyles += " invalid bw1 ";
+        emailMessage = "Please enter a valid email adress";
+        
+    }else{
+       emailStyles = stylesHolder;
+      emailMessage = "";
     }
-    //password contains special cases
-    else if (
-      password.toUpperCase() === password ||
-      password.toLowerCase() === password
-    ) {
-      console.log("Password has only upper or lowers cases");
-    } else if (!isNaN(parseFloat(password)) && isFinite(password)) {
-      console.log("It may contain a number");
-    } else if (password !== passwordConfirm) {
-      console.log("make sure the passwords match");
-    } else {
-      console.log("Sucess!");
+
+    if(firstName !== "" && dateOfBirth !== ""
+      && email.includes('.') && email.includes('@')){
+        currentPage = 2;
+        FirstMSG = '';
+      }
+
+
+    this.setState({num: 'a'});  
+
+}
+
+
+
+ValidateFinal = () => {
+  let {Country, password, passwordConfirm, IdNumber} = this.state;
+  
+  if(password === ''){
+    passwordStyle += " invalid bw1 ";
+  }  
+  if(passwordConfirm === ''){
+    passwordStyle += " invalid bw1 ";
+  } 
+
+  if(IdNumber === ''){
+    idStyles = " invalid bw1";
+    idNumberMessage = "Please enter a valid Idenitifaction Number";
+  }else{
+    idStyles = "";
+  }
+ 
+  
+  if(Country === ''){
+    countryStyles = " invalid bw1 ";
+    console.log('run one');
+  }else{
+    countryStyles = " black ";
+      console.log("Run to counter");
+     
+  }
+       
+  
+
+
+  if (password.length < 8 || password.toUpperCase() === password || password.toLowerCase()
+          === password || (isNaN(parseFloat(password)) && isFinite(password))){
+          passwordMsg = 'Please chose a valid password. Check below for our password guidlines.';
+        }else{
+          if(password === passwordConfirm){
+            passwordMsg = '';
+            passwordStyle = stylesHolder;
+           }
+           else{
+              passwordMsg = 'Please make sure the passwords match';
+           }
+        }
+         this.setState({num: 'a'});
+
+        
+}    
+        
+     
+radioChange = (e) =>{
+    this.setState({
+      gender: e.currentTarget.value
+    });
+  }
+
+enterEmail = (newEmail) =>{
+      this.setState({email: newEmail.target.value});
+
+  }
+
+  enterPassword = (newPassword) =>{
+      this.setState({password: newPassword.target.value});
+  }
+
+  
+
+  enterName = (name) =>{
+      this.setState({firstName: name.target.value});
+      
+  }
+
+  enterSurname = (secondName) =>{
+      this.setState({secondName: secondName.target.value});
+      console.log(secondName.target.value);
     }
-  };
 
-  enterEmail = newEmail => {
-    this.setState({ email: newEmail.target.value });
-  };
+  enterDateofBirth = (dateBirth) =>{
+      this.setState({dateOfBirth: dateBirth.target.value});
+  }
 
-  enterPassword = newPassword => {
-    this.setState({ password: newPassword.target.value });
-  };
+  enterconPassword = (ConfirmPassWord) =>{
+      this.setState({passwordConfirm: ConfirmPassWord.target.value});
+  }
+   selectCountry (val) {
+    
+    this.setState({ Country: val });
+    countryHolder = val;
+  }
 
-  enterName = name => {
-    this.setState({ firstName: name.target.value });
-    console.log(name.target.value);
-  };
+  enterIDNum = (idNum) =>{
+      this.setState({IdNumber:idNum});      
+  }
 
-  enterSurname = secondName => {
-    this.setState({ secondName: secondName.target.value });
-    console.log(secondName.target.value);
-  };
-
-  enterDateofBirth = dateBirth => {
-    this.setState({ dateOfBirth: dateBirth.target.value });
-  };
-
-  enterconPassword = ConfirmPassWord => {
-    this.setState({ passwordConfirm: ConfirmPassWord.target.value });
-  };
-
-  enterIDNum = idNum => {
-    this.setState({ IdNumber: idNum.target.value });
-  };
-
-  enterUsername = countrys => {
-    this.setState({ Country: countrys.target.value });
-  };
+  enterUsername = (countrys) =>{
+      this.setState({Country: countrys.target.value});
+  }
 
   render() {
-    //Just making variables for each state, so i dont have to
+    //Just making variables for each state, so i dont have to 
     //say this.state every time
-    const { country } = this.state;
+    const {country} = this.state;
+
+
+
+ 
 
     //Okay, so I am making an condition. If we are on first page of
     //create account then show this part of the form
-
+  
+   
     let first;
     let final;
 
-    if (this.state.currentPage === 1) {
-      first = (
-        <div>
-          <div className="mt3">
-            <label className="db fw6 lh-copy f6">First Name</label>
-            <input
-              onChange={this.enterName}
-              className="pa2 input-reset ba bg-transparent hover-bg-black w-100"
-            />
-          </div>
-          <div className="mv3">
-            <label className="db fw6 lh-copy f6">Surname</label>
-            <input
-              onChange={this.enterSurname}
-              className="pa2 input-reset ba bg-transparent hover-bg-black w-100"
-            />
-          </div>
 
-          <div className="mt3">
-            <label className="db fw6 lh-copy f6">Date of Birth</label>
-            <input
-              onChange={this.enterDateofBirth}
-              id="bday"
-              className="pa2 input-reset ba bg-transparent hover-bg-black w-100"
-              type="date"
-            />
-          </div>
+    if(currentPage === 1){
+      first = <div>
 
-          <br />
-          <input
-            onClick={this.ValidateFirst}
-            className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-            type="submit"
-            value="Next"
-          />
-        </div>
-      );
+              <div className="mt3">
+                        <label className="db fw6 lh-copy f6">Full Name</label>
+                        <input 
+                        placeholder="IE John Smith"
+                        type='name'
+                        onChange={this.enterName}
 
-      final = <div />;
-    } else {
-      first = <div />;
-      final = (
-        <div>
-          <div className="mt3">
-            <label className="db fw6 lh-copy f6">email Adress</label>
-            <input
-              onChange={this.enterEmail}
-              className="pa2 input-reset ba bg-transparent hover-bg-black w-100"
-            />
-          </div>
+                        className={nameStyle}/>
 
-          <div className="mv3">
-            <label className="db fw6 lh-copy f6">Password</label>
-            <input
-              type="password"
-              onChange={this.enterPassword}
-              className="pa2 input-reset ba bg-transparent hover-bg-black w-100"
-            />
-          </div>
+              </div>
+             
+                  
+                <div className="mt3">
+                      <label className="db fw6 lh-copy f6">Date of Birth</label>
+                      <input
+                            onChange={this.enterDateofBirth}
+                            type="date"
+                            placeholder='YYYY/MM/DD'
+                            className={DateBirthStyle}
+                      />
+              
+                </div>
 
-          <div className="mv3">
-            <label className="db fw6 lh-copy f6">Confirm Password</label>
-            <input
-              type="password"
-              onChange={this.enterconPassword}
-              className="pa2 input-reset ba bg-transparent hover-bg-black w-100"
-            />
-          </div>
-          <div className="mt3">
-            <label className="db fw6 lh-copy f6">Country of Residence</label>
-            <CountryDropdown
-              value={country}
-              onChange={val => this.selectCountry(val)}
-            />
-          </div>
+                 <div className="mt3">
+                      <label className="db fw6 lh-copy f6">Email Adress</label>
+                      <input 
+                          onChange={this.enterEmail}
+                           className={emailStyles} 
+                      />
+                      {emailMessage}
+                    </div>
+                <br/>
 
-          <div className="mt3">
-            <label className="db fw6 lh-copy f6">
-              {country} Idenitifaction Number
-            </label>
-            <input
-              type=""
-              onChange={this.enterIDNum}
-              className="pa2 input-reset ba bg-transparent hover-bg-black w-100"
-            />
-          </div>
 
-          <div className="mt3">
-            <input
-              onClick={this.ValidateFinal}
-              className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-              type="submit"
-              value="Create Account!"
-            />
-          </div>
-        </div>
-      );
-    }
+                <div className="mt3 tl br2 ba pa3">
+                      <label className="db fw6 lh-copy f6">Gender</label>
+                        <input type="radio"
+                          value="Male"
+                          checked={this.state.gender === "Male"}
+                          onChange={this.radioChange}
+                          defaultChecked
+                        />Male
+                  <br/>
+
+                        <input type="radio"
+                          value="Female"
+                          checked={this.state.gender === "Female"}
+                          onChange={this.radioChange}
+                          />Female
+
+                          <br/>
+
+                        <input type="radio"
+                          value="Other"
+                          checked={this.state.gender === "Other"}
+                          onChange={this.radioChange}
+                          />Other
+
+                          <br/>
+
+                        <input type="radio"
+                          value="Rather"
+                          checked={this.state.gender === "Rather"}
+                          onChange={this.radioChange}
+                          />Rather not say
+                  </div>
+
+                
+                    <h5><i>{FirstMSG}</i></h5>
+                    <br/>
+
+
+                  
+        
+
+                    <input
+                          onClick={this.ValidateFirst}
+                          className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                          type="submit"
+                          value="Next"
+                        />
+            </div>
+
+            final = <div></div>
+}else{
+
+  first= <div></div>
+            final = <div>
+              
+                 
+
+                    <div className="mv3">
+                      <label className="db fw6 lh-copy f6">Password</label>
+                      <input type="password"
+                        onChange={this.enterPassword}
+                        className={passwordStyle}/>
+                        {passwordMsg}
+                      </div>
+
+                      <div className="mv3">
+                       <label className="db fw6 lh-copy f6">Confirm Password</label>
+                        <input type="password"
+                        onChange={this.enterconPassword}
+                          className={passwordStyle} />
+                      </div>
+                        <div className="mt3">
+                          <label className="db fw6 lh-copy f6">Country of Residence</label>
+                          <CountryDropdown
+                          defaultOptionLabel= {countryHolder}
+                            value={"country"}
+                            className={countryStyles}
+                            onChange={(val) => this.selectCountry(val)} />
+                      </div>
+
+                      <div className="mt3">
+                          <label className="db fw6 lh-copy f6">{country} Idenitifaction Number</label>
+                          <input 
+                          type='text'
+                          className={idStyles}
+                          onChange={this.enterIDNum}
+                         />
+                         <br/>
+                         {idNumberMessage}
+                      </div>
+
+                      <div className="mt3">
+                        <input
+                          onClick={this.ValidateFinal}
+                          className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                          type="submit"
+                          value="Create Account!"
+                        />
+                      </div>
+
+                      <br/>
+                      <hr/>
+                      <br/>
+                      <div className='br3 ba tl pa3'>
+                      For security purposes, your password must contain: <br/>
+                      - An Upper case<br/>
+                      - A Lower Case<br/>
+                      - A Letter<br/>
+                      - A Number<br/>
+                      - At least seven charactors
+
+                        
+
+                      </div>
+
+
+
+            </div>
+}
     return (
+
+
       //Depending on page, im changing current, but whatever it is
       //current is always displayed
       <div>
-        <div className="mw5 mw7-ns center br5 black">
-          <br />
-          <br />
+         <div className="mw5 mw7-ns center br5 black">
+              <br />
+              <br />
 
-          <article className="br3 ba --black-10 w-100 w-100-m center shadow-5 solidBR">
-            <main className="pa4 black-80 tc">
-              <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                <legend className="f1 ph0 mh0">Register</legend>
-                <p
-                  onClick={() => this.props.handleSwitch(false)}
-                  className="f6 link dim black db pointer tc"
-                >
-                  Already have an account?
-                </p>
+              <article className="br3 ba --black-10 w-100 w-100-m center shadow-5 solidBR">
+                <main className="pa4 black-80 tc">
+                  <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+                    <legend className="f1 ph0 mh0">Register</legend>
+                    <p
+                      onClick={() => this.props.handleSwitch(false)}
+                      className="f6 link dim black db pointer tc">
+                      Already have an account?
+                    </p>
+                    {first} 
+                    {final}
 
-                {first}
+                    
+                      <br />
+                          
+                    </fieldset>
+                 </main>
+              </article>
+            </div>
+            <br/> <br/> <br/>
+  
+ 
 
-                {final}
-
-                <br />
-              </fieldset>
-            </main>
-          </article>
-        </div>
-        <br /> <br /> <br />
       </div>
+      
     );
   }
 }
