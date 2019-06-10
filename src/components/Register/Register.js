@@ -378,11 +378,11 @@ enterEmail = (newEmail) =>{
                 <main className="pa4 black-80 tc">
                   <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                     <legend className="f1 ph0 mh0">Register</legend>
-                    <p
-                      onClick={() => this.props.handleSwitch(false)}
+                    <a
+                      href = "/sign-In"
                       className="f6 link dim black db pointer tc">
                       Already have an account?
-                    </p>
+                    </a>
                     {first} 
                     {final}
 

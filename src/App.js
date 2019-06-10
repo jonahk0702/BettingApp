@@ -11,6 +11,7 @@ import signIn from "./components/signIn";
 import Home from "./components/Home";
 import HowThisWorks from "./components/HowThisWorks";
 import Fees from "./components/Fees";
+import CreateAccount from "./components/CreateAccount";
 
 class App extends Component {
   state = {};
@@ -37,6 +38,7 @@ class App extends Component {
               Each pages just needs it own Route. The borswer and switch is
               n=just needed.
               <Route path="/sign-In" component={signIn} />
+              <Route path="/Create-Account" component={CreateAccount} />
               <Route exact path="/" component={Home} />
               <Route path="/howWeWork" component={HowThisWorks} />
               <Route path="/Our-Fees" component={Fees} />
