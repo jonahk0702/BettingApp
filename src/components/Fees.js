@@ -10,6 +10,12 @@ class Fees extends Component {
     this.state = {};
   }
 
+  callCur = () =>{
+    
+
+
+  }
+
   render() {
     return (
       <div>
@@ -26,7 +32,10 @@ class Fees extends Component {
               <Col className="tc f3 solidBR">
                 We want to be as transparent as possible <hr />
                 <p className="tl f4">
-                  Fill this in later
+                  We try to make our costs as simple as possible. We have made our own currency in order to make
+                  betting with people all over the world super simple. Our exange rates are updated hourly.
+                  WE charge a 5% conversion fee when you put in or take out money. We also charge a 5% fee on any bet won.
+                  <button onClick={this.callCur}>Take a test</button>
                   <br />
                   <br />
                   <br />

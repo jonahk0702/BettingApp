@@ -22,7 +22,7 @@ class SignInHome extends Component {
         <br />
         <br />
         <br />
-        <h1 className="tc white i grow f1 font">Explore Open Bets!</h1>
+        <h1 className="tc white i f1 font">Explore Open Bets!</h1>
         <br />
         <br />
         <Container>

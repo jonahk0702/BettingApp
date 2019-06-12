@@ -18,6 +18,12 @@ class signIn extends React.Component {
   enterUsername = (newEmail) =>{
       this.setState({email: newEmail.target.value});
   }
+  check = () => {
+    //Will be a full check with the data base.
+    if(true){
+      window.location.href = "/Explore";
+    }
+  }
 
   render() {
     return (
@@ -60,6 +66,7 @@ class signIn extends React.Component {
                 <button 
                   className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                   type="submit"
+                  onClick={this.check}
                   >
                   Sign in
                 </button>

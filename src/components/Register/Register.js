@@ -95,30 +95,33 @@ ValidateFirst = () => {
 
 
 ValidateFinal = () => {
+  let success = true;
   let {Country, password, passwordConfirm, IdNumber} = this.state;
   
   if(password === ''){
     passwordStyle += " invalid bw1 ";
+    success = false;
   }  
   if(passwordConfirm === ''){
     passwordStyle += " invalid bw1 ";
+    success = false;
   } 
 
   if(IdNumber === ''){
     idStyles = " invalid bw1";
     idNumberMessage = "Please enter a valid Idenitifaction Number";
+    success = false;
   }else{
     idStyles = "";
+    idNumberMessage ="";
   }
  
   
   if(Country === ''){
     countryStyles = " invalid bw1 ";
-    console.log('run one');
+    success = false;
   }else{
-    countryStyles = " black ";
-      console.log("Run to counter");
-     
+    countryStyles = " black ";     
   }
        
   
@@ -127,6 +130,7 @@ ValidateFinal = () => {
   if (password.length < 8 || password.toUpperCase() === password || password.toLowerCase()
           === password || (isNaN(parseFloat(password)) && isFinite(password))){
           passwordMsg = 'Please chose a valid password. Check below for our password guidlines.';
+          success = false;
         }else{
           if(password === passwordConfirm){
             passwordMsg = '';
@@ -134,12 +138,15 @@ ValidateFinal = () => {
            }
            else{
               passwordMsg = 'Please make sure the passwords match';
+              success = false;
            }
         }
          this.setState({num: 'a'});
 
+      if(success){
         window.location.href = "/Explore";
-}    
+      }
+  }
         
      
 radioChange = (e) =>{
