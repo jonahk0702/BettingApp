@@ -1,21 +1,15 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  ButtonToolbar,
-  ToggleButton,
-  ToggleButtonGroup
-} from "react-bootstrap";
+import {Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 import NavbarIn from "./navbar/NavbarIn";
 import IndividaulBet from "./IndividaulBet/IndividaulBet";
+
 class SignInHome extends Component {
   constructor(props) {
     super();
     this.state = {};
   }
 
-  render() {
+  render() { 
     return (
       <div>
         <NavbarIn />
@@ -27,7 +21,7 @@ class SignInHome extends Component {
         <br />
         <Container>
           <Row>
-            <Col className="tc f3 solidBR bg-white">
+            <Col className="tc f3 solidBR">
               How should we order all open Bets?
               <ButtonToolbar className="center mw5 mw7-ns center bg-light-gray pa3 ph5-ns">
                 <ToggleButtonGroup
@@ -36,6 +30,7 @@ class SignInHome extends Component {
                   name="options"
                   defaultValue={1}
                 >
+
                   <ToggleButton className="ma3" value={1}>
                     Most Popular
                   </ToggleButton>
@@ -50,8 +45,23 @@ class SignInHome extends Component {
                   </ToggleButton>
                 </ToggleButtonGroup>
               </ButtonToolbar>
-              <hr />
+
+            
               <br />
+              <hr />
+              <br/> 
+              <div className='tc'>
+                <Container>
+                  <Row>
+                    <Col md className='f4 tc bl ma1'>A short descripton of bet</Col>
+                    <Col xs={2} className='ma1'>The Odds</Col>
+                    <Col xs={2} className=' ma1'>Amount (in B)</Col>
+                    <Col xs={2} className='br ma1'>End date</Col>
+                  </Row>   
+                </Container>
+              </div>
+              <hr/>
+              
               <IndividaulBet name={"I bet that Ramaposa is an Alien"} />
               <IndividaulBet name={"I bet the Mac Miller faked his death"} />
               <IndividaulBet name={"I bet that Micheal Obama is "} />
