@@ -1,56 +1,340 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import {Container, Row, Col, Button, InputGroup, FormControl,Form } from "react-bootstrap";
 import NavbarIn from './navbar/NavbarIn'
+import "./Register/Register.css";
+import CreateConfirmModal from './CreateConfirmModal';
+
+
+
+let BetDiscpErrer = "";
+let DateErrer = "";
+let OddsErrer = "";
+let AmountError = "";
 
 class CreateBet extends Component {
   constructor(props) {
     super();
     this.state = { 
-    
+      Choice: 1,
+      daySet:"0",
+      MonthSet:"0",
+      YearSet:"0",
+      betDiscription:" ",
+      BetLenghth:0,
+      ExpiryChoice:" ",
+      modalShow: false,
+      ProOdds:0,
+      AntiOdds:0,
+      ID:"Aj12",
+      Amount:0
 
-  };
-}
+    };
+
+  }
+
+
+  SubmitChecker = () => {
+    let {Amount, daySet, MonthSet, YearSet, BetLenghth, ProOdds, AntiOdds} = this.state;
+    let runner = true;
+    if(BetLenghth < 244){
+      runner = false;
+      BetDiscpErrer = "Your Bet is too long! Please keep it below 244 charactors.";
+    }
+
+
+    if(BetLenghth === 0){
+        BetDiscpErrer = "Here is the error message";
+        runner = false;
+      }
+
+    if(daySet === "0" && MonthSet === "0" && YearSet === "0"){
+      DateErrer = "Please make sure all boxes are filled.";
+      runner = false;
+    }
+    if(ProOdds === 0 && AntiOdds === 0){
+      runner = false;
+      OddsErrer = "Please make sure all the fields are filled with numbers."
+    }
+
+    if(Amount === 0){
+      runner = false;
+      AmountError = "Please enter a number here.";
+    }
+
+    if(runner === true){
+      this.setState({ modalShow: true })
+    }
+    console.log("Well this works");
+    this.setState({test: "A"});
+  }
+
+
+  handleChangeBet = (e) => {
+    let {n, value} = e.target;
+    if(n === 0){
+
+    }
+    this.setState({BetLenghth: value.length});
+
+    this.setState({betDiscription: value});
+  }
+
+  handleChangeOdsPro = (e) => {
+     let {n, value} = e.target;
+    if(n === 0){
+
+    }
+    console.log("pro");
+    this.setState({ProOdds: value});
+  }
+
+  handleChangeAntiPro = (e) => {
+     let {n, value} = e.target;
+    if(n === 0){
+
+    }
+    console.log("anri");
+    this.setState({AntiOdds: value});
+  }
+
+  handleChangeAmount = (e) => {
+     let {n, value} = e.target;
+    if(n === 0){
+
+    }
+    
+    this.setState({Amount: value});
+  }
+
+  handleChangeDay = (e) => {
+    let {n, value} = e.target;
+    if(n === 0){
+
+    }
+    this.setState({daySet: value});
+  }
+
+  handleChangeMonth = (e) => {
+    let {n, value} = e.target;
+    if(n === 0){
+
+    }
+    this.setState({MonthSet: value});
+  }
+
+  handleChangeYear = (e) => {
+    let {n, value} = e.target;
+    if(n === 0){
+
+    }
+    this.setState({YearSet: value});
+  }
 
   render() {
+    //let date = new Date();
+    let modalClose = () => this.setState({ modalShow: false });
+    
+    console.log(this.state.ExpiryChoice);
     return (
      <div>
      <NavbarIn/>
      <br/><br/><br/>
-     <h1 className="tc white i grow f1 font">Create a bet!</h1>
+     <h1 className="tc white i f1 font">Create a bet!</h1>
      <br/><br/>
-        <Container>
-  			<Row>
- 			   <Col className='tc f3 solidBR bg-white'>
- 			   Create a Bet! 
-         <hr/>
+     <Container>
+     <Row>
+     <Col className='f4 solidBR bg-white'>
+     <br/>
+     <Container className='tc'>
+     <Row>
+     <Col>
+      So you're ready to make your own bet? Just some things to keep in mind, make your bet as
+       simple and concise as possible. You only have 400 charactors. Make it simple. Goodluck! 
+       Ps. as ussual there will be more info at the bottom.
+     </Col>
+     </Row>
+     <br/>
+     <hr/>
+     <br/>
+     <h3 className='tl'>I Bet that</h3>
+     <div className='tl'>
+     <InputGroup className="mb-3 sm">
+     <FormControl onChange={this.handleChangeBet} aria-label="Default" aria-describedby="inputGroup-sizing-default"/>
+     </InputGroup>
+     <div className='red'>{BetDiscpErrer}</div>
+     <br/>
+     <br/>
+     Bet Expires on:
+     <Form>
+     <Form.Row>
+     <Form.Group as={Col} controlId="formGridState">
+     <Form.Label>DD</Form.Label>
+     <Form.Control className='invalid' as="select" onChange={this.handleChangeDay}>
+     <option>Choose...</option>
+     <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+     <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+     <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+     <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+     <option>21</option><option>22</option><option>23</option><option>24</option><option>25</option>
+     <option>26</option><option>27</option><option>28</option><option>29</option><option>26</option>
+     <option>31</option>
+     </Form.Control>
+     </Form.Group>
 
-          <Container>
-            <Row>
-              <Col>We Offer three main types of bets. With proper wording, almost any bet should fit.
-              I bet That ______ will happen before [Date] will happen
-              I bet That ______ will ______
-              I bet that ______ is really actualy ______
-              I bet that ______ happened ________
+     <Form.Group as={Col} controlId="formGridState" >
+     <Form.Label>MM</Form.Label>
+     <Form.Control as="select" onChange={this.handleChangeMonth} placeholder={"a"}>
+     <option>Choose...</option>
+     <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+     <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+     <option>11</option><option>12</option>
+     </Form.Control>
+     </Form.Group>
+
+     <Form.Group as={Col} controlId="formGridState">
+     <Form.Label>YYYY</Form.Label>
+     <Form.Control as="select" onChange={this.handleChangeYear}>
+     <option>Choose...</option>
+     <option>2019</option><option>2020</option><option>2021</option>
+     <option>2022</option><option>2023</option><option>2024</option>
+     <option>2025</option><option>2026</option><option>2027</option>
+     <option>2028</option><option>2029</option>
+     </Form.Control>
+     </Form.Group>
+     aaaaaaaaaaaaaaaaaa
+     </Form.Row>
+     <div className='red'>{DateErrer}</div>
+     <br/>
+        <fieldset>
+      <Form.Group as={Row}>
+        <Form.Label as="legend" column sm={2}>
+          On bet Expiry, the winner is:
+        </Form.Label>
+        <Col sm={10} className='bl'>
+          <Form.Check
+          inline
+          defaultChecked 
+            type="radio"
+            label="The Bet Creator"
+            name="formHorizontalRadios"
+            id="formHorizontalRadios1"
+            onChange={() => this.setState({ExpiryChoice:"The bet Creater"})}
+          />
+          <br/>
+          <Form.Check
+          inline
+            type="radio"
+            label="Those who Bet against the Creator"
+            name="formHorizontalRadios"
+            id="formHorizontalRadios2"
+            onChange={() => this.setState({ExpiryChoice:"The opposition"})}
+          />
+          <br/>
+          <Form.Check
+          inline
+            type="radio"
+            label="It's a draw (both Refunded)"
+            name="formHorizontalRadios"
+            id="formHorizontalRadios3"
+            onChange={() => this.setState({ExpiryChoice:"It's a draw"})}
+          />
+
+        </Col>
+
+      </Form.Group>
+    </fieldset>
+    <br/>
+    </Form>  
+    
+     </div>
+
+     <Container className='tl'>
+      <Row>
+        <Col > The odds of the bet are</Col>
+       
+      </Row>
+      <Row>
+        <Col>Fun fact, you can never lose money by winning a bet, 
+            no matter the odds. There is a full descriptoin below.</Col>
+      </Row>
+      <br/>
+      <Row>
+        <Col>The odds of you, on the Positive side are:</Col>
+        <Col>
+          <InputGroup className="mb-3 sm">
+            <FormControl size="lg" onChange={this.handleChangeOdsPro} aria-label="Default" aria-describedby="inputGroup-sizing-default"/>
+          </InputGroup>
+          </Col>
+        <div className='f3'>:</div>
+        <Col><InputGroup className="mb-3 sm">
+            <FormControl size="lg" onChange={this.handleChangeAntiPro} aria-label="Default" aria-describedby="inputGroup-sizing-default"/>
+            </InputGroup>
+          </Col>
+
+        <Col>The odds of the other person, the negetive</Col>
+       
+      </Row>
+
+    </Container>
+    <div className='red'>{OddsErrer}</div>
+     <br/>
+     <br/>
+
+          <Form>
+  <Form.Row>
+    <Col>
+      The Amount you want to bet is: 
+    </Col>
+    <Col className=''>
+      <Form.Control onChange={this.handleChangeAmount} placeholder="B" />
+    </Col>
+  </Form.Row>
+</Form>
+<div className='red'>{AmountError}</div> 
+         
+     <br/>
+     <br/>
+      <h1>
+      <Button variant="outline-secondary" size='lg' block onClick={this.SubmitChecker}>Create Bet!</Button>
+
+      </h1>
+
+      <CreateConfirmModal
+                  show={this.state.modalShow}
+                  onHide={modalClose}
+                  id = {this.state.ID}
+                  price = {this.state.Amount}
+                  odds ={this.state.ProOdds.toString() + ":" + this.state.AntiOdds}  
+                  expiry = {this.state.daySet + "/" + this.state.MonthSet + "/" + this.state.YearSet}
+                  betdiscription = {this.state.betDiscription}
+                  defualtwinner = {this.state.ExpiryChoice}
+                />
+      
+      <a className='f6 black bt bb pa1' href="/">Our Terms of Service and stuff</a>   
+     <br/>
+ 
+     <hr/>
+     <br/>
+     <Row>
+     <Col>Okay, heres the deal... 
+     <br/>
+     For starters, every bet has an expiry date, it may be in days or months. The bet creater will
+      decide if reaching the expiry date means one side wins or if the bet simple dissapears and
+       both sides are reembursed.  
+     </Col>
+     </Row>
+     </Container>
+
+     <br/>
 
 
-              </Col>
-            </Row>
-            <Row>
-              <Col>1 of 3</Col>
-              <Col>2 of 3</Col>
-              <Col>3 of 3</Col>
-            </Row>
-          </Container>
-          
-          <hr/><br/>
-          
+     </Col>
 
- 			   </Col>
-  		
-			</Row>
-		</Container>
-      </div>
-    );
+     </Row>
+     </Container>
+     <br/>
+     </div>
+     );
   }
 }
 

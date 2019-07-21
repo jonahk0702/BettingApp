@@ -6,7 +6,7 @@ export default class NavBar extends Component {
   render() {
     return (
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="/">Custom Bets</Navbar.Brand>
+        <Navbar.Brand href="/Explore">Custom Bets</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="/Explore">Explore</Nav.Link>
           <Nav.Link href="/Create-Bet">Create a Bet</Nav.Link>
@@ -14,7 +14,7 @@ export default class NavBar extends Component {
           <Nav.Link href="/profile">Profile</Nav.Link>
         </Nav>
         <Form inline>
-          <Nav.Link href="/sign-In">Sign In/Create Account</Nav.Link>
+          <Nav.Link href="/">Sign out</Nav.Link>
         </Form>
       </Navbar>
     );

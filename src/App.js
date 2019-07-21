@@ -13,6 +13,7 @@ import HowThisWorks from "./components/HowThisWorks";
 import Fees from "./components/Fees";
 import CreateAccount from "./components/CreateAccount";
 import BuyConfirm from "./components/BuyConfirm";
+import MoreInfo from './components/MoreInfo';
 
 class App extends Component {
   state = {};
@@ -57,6 +58,8 @@ requireAuth = (nextState, replace) => {
               <Route path="/My-Bets" component={MyBets} />
               <Route path="/Create-Bet" component={CreateBet} />
               <Route path="/Confirm" component={BuyConfirm} />
+              <Route path="/TEST!" component={MoreInfo} />
+                      
             </Switch>
           </BrowserRouter>
         }

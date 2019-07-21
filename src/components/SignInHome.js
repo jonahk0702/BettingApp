@@ -44,7 +44,7 @@ class SignInHome extends Component {
                     Lowest Wager
                   </ToggleButton>
                 </ToggleButtonGroup>
-              </ButtonToolbar>
+              </ButtonToolbar> 
 
             
               <br />
@@ -68,6 +68,7 @@ class SignInHome extends Component {
             </Col>
           </Row>
         </Container>
+        <br/>
       </div>
     );
   }

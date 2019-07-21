@@ -8,11 +8,12 @@ export default class NavBar extends Component{
 constructor(props) {
     super();
     this.state = {
+      ID: 111111,
       Price: 0,
       Odds: "",
       Expiry:"",
       BetDiscription:"XXX",
-      modalShow: false
+      modalShow: false,
 
     };
   }
@@ -59,6 +60,10 @@ constructor(props) {
                 <MyVerticallyCenteredModal
                   show={this.state.modalShow}
                   onHide={modalClose}
+                  ID = {this.state.ID}
+                  Price = {this.state.Price}
+                  Odds = {this.state.Odds}
+                  Expiry = {this.state.Expiry}
                 />
               
 

@@ -15,11 +15,23 @@ class Home extends Component {
     return (
       <div>
         <NavBar />
+
         <div className="tc">
           <br />
           <br />
           <br />
-          <h1 className="tc white i grow f1 font">Welcome to Custome Bets</h1>
+          <h1 className="tc white i f1 font">Welcome to Custome Bets</h1>
+          
+
+
+
+
+
+
+
+
+
+
           <br />
           <br />
           <Container>
