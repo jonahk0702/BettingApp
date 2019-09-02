@@ -4,19 +4,24 @@ import NavbarIn from './navbar/NavbarIn'
 import "./Register/Register.css";
 import CreateConfirmModal from './CreateConfirmModal';
 
-
-
 let BetDiscpErrer = "";
 let DateErrer = "";
 let OddsErrer = "";
 let AmountError = "";
+
+let ErrorSumbol = "•";
+
+let BetErr = "";
+let ExpiryErr = "";
+let OddsErr = "";
+let AmountErr = "";
 
 class CreateBet extends Component {
   constructor(props) {
     super();
     this.state = { 
       Choice: 1,
-      daySet:"0",
+      daySet:"0", 
       MonthSet:"0",
       YearSet:"0",
       betDiscription:" ",
@@ -36,35 +41,57 @@ class CreateBet extends Component {
   SubmitChecker = () => {
     let {Amount, daySet, MonthSet, YearSet, BetLenghth, ProOdds, AntiOdds} = this.state;
     let runner = true;
-    if(BetLenghth < 244){
-      runner = false;
+
+    if(BetLenghth > 244){
       BetDiscpErrer = "Your Bet is too long! Please keep it below 244 charactors.";
     }
 
 
     if(BetLenghth === 0){
-        BetDiscpErrer = "Here is the error message";
-        runner = false;
+        BetDiscpErrer = "Please do not leave this blank."; 
       }
+
+    if(BetLenghth !== 0 && BetLenghth < 244){
+      BetDiscpErrer = "";
+      BetErr = "";
+    }else{
+      runner = false;
+      BetErr = ErrorSumbol;
+
+    }
 
     if(daySet === "0" && MonthSet === "0" && YearSet === "0"){
       DateErrer = "Please make sure all boxes are filled.";
       runner = false;
+      ExpiryErr = ErrorSumbol;
     }
-    if(ProOdds === 0 && AntiOdds === 0){
-      runner = false;
-      OddsErrer = "Please make sure all the fields are filled with numbers."
+    if(daySet !== "0" && MonthSet !== "0" && YearSet !== "0"){
+      DateErrer = "";  
+      ExpiryErr = "";
     }
 
-    if(Amount === 0){
+    if((ProOdds === 0 && AntiOdds === 0) || isNaN(ProOdds) || isNaN(AntiOdds)){
+      runner = false;
+      OddsErrer = "Please make sure all the fields are filled with numbers."
+      OddsErr = ErrorSumbol;
+    }else{
+      OddsErrer = "";
+      OddsErrer = "";
+    }
+
+    if(Amount === 0 || isNaN(Amount) ){
       runner = false;
       AmountError = "Please enter a number here.";
+      AmountErr = ErrorSumbol;  
+    }else{
+      AmountError = "";
+      AmountErr = "";
     }
 
     if(runner === true){
       this.setState({ modalShow: true })
     }
-    console.log("Well this works");
+  
     this.setState({test: "A"});
   }
 
@@ -74,18 +101,21 @@ class CreateBet extends Component {
     if(n === 0){
 
     }
-    this.setState({BetLenghth: value.length});
+    if(value !== " "){
+      this.setState({BetLenghth: value.length});
 
-    this.setState({betDiscription: value});
-  }
+      this.setState({betDiscription: value});
+      } 
+    }
 
   handleChangeOdsPro = (e) => {
      let {n, value} = e.target;
     if(n === 0){
 
     }
-    console.log("pro");
-    this.setState({ProOdds: value});
+    if(!value.includes(" ")){
+        this.setState({ProOdds: value});
+      }
   }
 
   handleChangeAntiPro = (e) => {
@@ -93,8 +123,9 @@ class CreateBet extends Component {
     if(n === 0){
 
     }
-    console.log("anri");
-    this.setState({AntiOdds: value});
+    if(!value.includes(" ")){
+      this.setState({AntiOdds: value});
+    }
   }
 
   handleChangeAmount = (e) => {
@@ -102,8 +133,9 @@ class CreateBet extends Component {
     if(n === 0){
 
     }
-    
-    this.setState({Amount: value});
+     if(!value.includes(" ")){
+      this.setState({Amount: value});
+    }
   }
 
   handleChangeDay = (e) => {
@@ -134,7 +166,6 @@ class CreateBet extends Component {
     //let date = new Date();
     let modalClose = () => this.setState({ modalShow: false });
     
-    console.log(this.state.ExpiryChoice);
     return (
      <div>
      <NavbarIn/>
@@ -156,30 +187,33 @@ class CreateBet extends Component {
      <br/>
      <hr/>
      <br/>
-     <h3 className='tl'>I Bet that</h3>
+     <h3 className='tl'>I Bet that <b className='red'>{BetErr}</b></h3>
      <div className='tl'>
-     <InputGroup className="mb-3 sm">
-     <FormControl onChange={this.handleChangeBet} aria-label="Default" aria-describedby="inputGroup-sizing-default"/>
-     </InputGroup>
-     <div className='red'>{BetDiscpErrer}</div>
-     <br/>
-     <br/>
-     Bet Expires on:
-     <Form>
-     <Form.Row>
-     <Form.Group as={Col} controlId="formGridState">
-     <Form.Label>DD</Form.Label>
-     <Form.Control className='invalid' as="select" onChange={this.handleChangeDay}>
-     <option>Choose...</option>
-     <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-     <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
-     <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
-     <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
-     <option>21</option><option>22</option><option>23</option><option>24</option><option>25</option>
-     <option>26</option><option>27</option><option>28</option><option>29</option><option>26</option>
-     <option>31</option>
-     </Form.Control>
-     </Form.Group>
+         <InputGroup className="mb-3 sm  ">
+            <FormControl onChange={this.handleChangeBet} aria-label="Default" aria-describedby="inputGroup-sizing-default"/>
+         </InputGroup>
+         <div className='red'>{BetDiscpErrer}</div>
+
+
+
+         <br/>
+         <br/>
+         Bet Expires on: <b className = 'red f3'> {ExpiryErr} </b>
+         <Form>
+         <Form.Row>
+         <Form.Group as={Col} controlId="formGridState">
+         <Form.Label>DD</Form.Label>
+         <Form.Control className='invalid' as="select" onChange={this.handleChangeDay}>
+         <option>Choose...</option>
+         <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+         <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+         <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+         <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+         <option>21</option><option>22</option><option>23</option><option>24</option><option>25</option>
+         <option>26</option><option>27</option><option>28</option><option>29</option><option>26</option>
+         <option>31</option>
+         </Form.Control>
+         </Form.Group>
 
      <Form.Group as={Col} controlId="formGridState" >
      <Form.Label>MM</Form.Label>
@@ -250,7 +284,7 @@ class CreateBet extends Component {
 
      <Container className='tl'>
       <Row>
-        <Col > The odds of the bet are</Col>
+        <Col >  The odds of the bet are <b className='red f3'>{OddsErr}</b> </Col>
        
       </Row>
       <Row>
@@ -283,12 +317,13 @@ class CreateBet extends Component {
           <Form>
   <Form.Row>
     <Col>
-      The Amount you want to bet is: 
+      The Amount you want to bet is: <b className='red f3'> {AmountErr}</b>
     </Col>
     <Col className=''>
       <Form.Control onChange={this.handleChangeAmount} placeholder="B" />
     </Col>
   </Form.Row>
+
 </Form>
 <div className='red'>{AmountError}</div> 
          
@@ -316,11 +351,19 @@ class CreateBet extends Component {
      <hr/>
      <br/>
      <Row>
-     <Col>Okay, heres the deal... 
+     <Col className='tl f5'>Okay, heres the deal... 
      <br/>
-     For starters, every bet has an expiry date, it may be in days or months. The bet creater will
+     - For starters, every bet has an expiry date, it may be in days or months. The bet creater will
       decide if reaching the expiry date means one side wins or if the bet simple dissapears and
-       both sides are reembursed.  
+       both sides are reembursed. <br/>
+      - The Bet Discirption is what the person who will take up the bet will see. A person will
+       be able to take this pet on the positive (betting on the statement entered) or negetive
+        side (betting against the statement.) <br/>
+      - The odds are supposed to be simple. Think of it as pot. Each side will put a certain Amount 
+       of Bs into the pot and the winner gets the entire pot. The Odds are simply the ratio you'll 
+        need to put in against the other person. <br/>
+      - By clicking "Create Bet!" you are not only agreeing to our terms of service, but also taking 
+       up the positive side of the bet you just created. 
      </Col>
      </Row>
      </Container>
@@ -333,6 +376,7 @@ class CreateBet extends Component {
      </Row>
      </Container>
      <br/>
+
      </div>
      );
   }

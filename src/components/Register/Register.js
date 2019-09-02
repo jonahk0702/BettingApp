@@ -47,7 +47,7 @@ ValidateFirst = () => {
   if(firstName === ''){
     
     
-    nameStyle += ' invalid bw1';
+    nameStyle += '  invalidbw1';
     FirstMSG = 'Please note all fields are required';
      
   }

@@ -25,7 +25,7 @@ class CreateConfirmModal extends React.Component {
         <Modal.Header closeButton>
           
         </Modal.Header>
-        <Modal.Body className='tc'>
+        <Modal.Body className='tc ma3'>
           <h4 className='tc'>Are you sure you want to create and take the bet: </h4>
           <p>
             Are you sure you want to bet {this.props.betdiscription}.

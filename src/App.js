@@ -48,17 +48,8 @@ requireAuth = (nextState, replace) => {
             <Switch>
               Each pages just needs it own Route. The borswer and switch is
               n=just needed.
-              <Route path="/sign-In" component={signIn} />
-              <Route path="/Create-Account" component={CreateAccount} />
-              <Route exact path="/" component={Home} />
-              <Route path="/howWeWork" component={HowThisWorks} />
-              <Route path="/Our-Fees" component={Fees} />
-              <Route path="/Explore" component={SignInHome} />}
-              <Route path="/profile" component={Profile} />
-              <Route path="/My-Bets" component={MyBets} />
-              <Route path="/Create-Bet" component={CreateBet} />
-              <Route path="/Confirm" component={BuyConfirm} />
-              <Route path="/TEST!" component={MoreInfo} />
+              
+              <Route exact path="/" component={Profile} />
                       
             </Switch>
           </BrowserRouter>
