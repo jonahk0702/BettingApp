@@ -16,7 +16,7 @@ class MyBets extends Component {
      <div>
      <NavbarIn/>
      <br/><br/><br/>
-     <h1 className="tc white i grow f1 font">My Bets!</h1>
+     <h1 className="tc white i f1 font">My Bets!</h1>
      <br/><br/>
         <Container>
   			<Row>

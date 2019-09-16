@@ -43,14 +43,21 @@ requireAuth = (nextState, replace) => {
     return (
       <div>
         <Particles className="particles" params={this.backgroundOptions} />
+
         {
           <BrowserRouter>
             <Switch>
-              Each pages just needs it own Route. The borswer and switch is
-              n=just needed.
               
-              <Route exact path="/" component={Profile} />
-                      
+              <Route exact path="/Explore" component={SignInHome} />
+              <Route exact path="/My-Bets" component={MyBets} />
+              <Route exact path="/Create-Bet" component={CreateBet} />
+              <Route exact path="/Profile" component={Profile} />
+              <Route exact path="/" component={Home} />
+              <Route exact path="/MoreInfo" component={MoreInfo} />
+              <Route exact path="/sign-In" component={signIn} />
+              <Route exact path="/Create-Account" component={CreateAccount} />
+              <Route exact path="/howWeWork" component={HowThisWorks} />
+              <Route exact path="/Our-Fees" component={Fees} />
             </Switch>
           </BrowserRouter>
         }
