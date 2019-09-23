@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { CountryDropdown} from 'react-country-region-selector';
 import "./Register.css";
-//Okay, this is quite messy, but here I go
+
+//Okay, this is quite messy, but here I go 
 
 //For the states, i think we'll need to save all of the users
 //inputed data in this state. I havent done it yet
@@ -22,29 +23,31 @@ let passwordStyle = stylesHolder;
  let currentPage = 1;
 
   class Register extends Component {
+   constructor(props) {
+    super(props);
+      this.state = {
+        Country:'',
+        
+        name:'',
+        dateOfBirth: '',//Time.now,
+        email: '',
+        password: '',
+        passwordConfirm: '',
 
-  state = {
-    Country:'',
-    
-    firstName:'',
-    dateOfBirth: '',//Time.now,
-    email: '',
-    password: '',
-    passwordConfirm: '',
-
-    IdNumber: '',
-    num:'', 
-    gender: 'Female'
-  }
+        IdNumber: '',
+        num:'', 
+        gender: 'Female'
+      }
+    }
 
 
 //This just stores in state the country they are from
  
 
 ValidateFirst = () => {
-  let {firstName, dateOfBirth, email} = this.state;
+  let {name, dateOfBirth, email} = this.state;
 
-  if(firstName === ''){
+  if(name === ''){
     
     
     nameStyle += '  invalidbw1';
@@ -58,7 +61,7 @@ ValidateFirst = () => {
      
 
   }
-  if(firstName !== ""){
+  if(name !== ""){
     nameStyle = "pa2 input-reset ba bg-transparent hover-bg-black w-100";
   }
   if(dateOfBirth !== ""){
@@ -80,7 +83,7 @@ ValidateFirst = () => {
       emailMessage = "";
     }
 
-    if(firstName !== "" && dateOfBirth !== ""
+    if(name !== "" && dateOfBirth !== ""
       && email.includes('.') && email.includes('@')){
         currentPage = 2;
         FirstMSG = '';
@@ -96,7 +99,7 @@ ValidateFirst = () => {
 
 ValidateFinal = () => {
   let success = true;
-  let {Country, password, passwordConfirm, IdNumber} = this.state;
+  let {Country, password, passwordConfirm, IdNumber, name, email, dateOfBirth, gender} = this.state;
   
   if(password === ''){
     passwordStyle += " invalid bw1 ";
@@ -144,7 +147,28 @@ ValidateFinal = () => {
          this.setState({num: 'a'});
 
       if(success){
-        window.location.href = "/Explore";
+
+        fetch('http://localhost:3000/register', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify({
+              email:email,
+              password: password, 
+              Country: Country,
+              name: name,
+              dateOfBirth: dateOfBirth,
+              IdNumber: IdNumber,
+              gender: gender 
+          })
+        })
+   .then(response => response.json())
+   .then(user => {
+    if(user){
+      console.log(user);
+     this.props.display();//loadUser(user);
+     window.location.href = "/Explore";
+    }
+   })
       }
   }
         
@@ -167,7 +191,7 @@ enterEmail = (newEmail) =>{
   
 
   enterName = (name) =>{
-      this.setState({firstName: name.target.value});
+      this.setState({name: name.target.value});
       
   }
 
@@ -190,7 +214,7 @@ enterEmail = (newEmail) =>{
   }
 
   enterIDNum = (idNum) =>{
-      this.setState({IdNumber:idNum});      
+      this.setState({IdNumber:idNum.target.value});      
   }
 
   enterUsername = (countrys) =>{
@@ -258,7 +282,7 @@ enterEmail = (newEmail) =>{
                           value="Male"
                           checked={this.state.gender === "Male"}
                           onChange={this.radioChange}
-                          defaultChecked
+                        
                         />Male
                   <br/>
 

@@ -1,8 +1,10 @@
 import React from "react";
 import "./SignIn.css";
+
+
 class signIn extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       email:' ',
       password: ' '
@@ -19,10 +21,29 @@ class signIn extends React.Component {
       this.setState({email: newEmail.target.value});
   }
   check = () => {
-    //Will be a full check with the data base.
-    if(true){
+    console.log(JSON.stringify({
+      email:this.state.email,
+      password: this.state.password
+
+    }));
+   fetch('http://localhost:3000/signin', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      email:this.state.email,
+      password: this.state.password
+
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+    if(data === 'success'){
       window.location.href = "/Explore";
     }
+   })
+    //Will be a full check with the data base.
+    
+     //
   }
 
   render() {

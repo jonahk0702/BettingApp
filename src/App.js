@@ -12,11 +12,21 @@ import Home from "./components/Home";
 import HowThisWorks from "./components/HowThisWorks";
 import Fees from "./components/Fees";
 import CreateAccount from "./components/CreateAccount";
-import BuyConfirm from "./components/BuyConfirm";
 import MoreInfo from './components/MoreInfo';
+import Register from "./components/Register/Register";
+
+//import BuyConfirm from "./components/BuyConfirm";
 
 class App extends Component {
-  state = {};
+  constructor(props){
+    super(props);
+    this.state = {
+    user: {
+      email: '',
+      userId: ''
+    }
+  };
+  }
 
   backgroundOptions = {
     particles: {
@@ -30,14 +40,21 @@ class App extends Component {
     }
   };
 
-requireAuth = (nextState, replace) => {
-  
+loadUser = (data) => {
+  let {email} = data;
+  this.setState({user: {
+    email: email
+  }})
+}
+
+
+requireAuth = (nextState, replace) => { 
     replace({
       pathname: '/sign-In'
     })
   
-}
 
+}
 
   render() {
     return (
@@ -47,15 +64,15 @@ requireAuth = (nextState, replace) => {
         {
           <BrowserRouter>
             <Switch>
-              
+
               <Route exact path="/Explore" component={SignInHome} />
               <Route exact path="/My-Bets" component={MyBets} />
               <Route exact path="/Create-Bet" component={CreateBet} />
               <Route exact path="/Profile" component={Profile} />
               <Route exact path="/" component={Home} />
-              <Route exact path="/MoreInfo" component={MoreInfo} />
+              <Route exact path="/MoreInfo" component={MoreInfo} /> 
               <Route exact path="/sign-In" component={signIn} />
-              <Route exact path="/Create-Account" component={CreateAccount} />
+              <Route exact path="/Create-Account" component={CreateAccount} loadUser={this.loadUser}/>
               <Route exact path="/howWeWork" component={HowThisWorks} />
               <Route exact path="/Our-Fees" component={Fees} />
             </Switch>
@@ -66,4 +83,4 @@ requireAuth = (nextState, replace) => {
   }
 }
 
-export default App;
+export default App; 

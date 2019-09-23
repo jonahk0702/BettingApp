@@ -34,7 +34,6 @@ class Profile extends Component {
             <br/>
             <h3 className='i pointer'>Account stats</h3>
             <hr/>
-    
             
           </Col>
           </Row>

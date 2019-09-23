@@ -235,7 +235,7 @@ class CreateBet extends Component {
      <option>2028</option><option>2029</option>
      </Form.Control>
      </Form.Group>
-     aaaaaaaaaaaaaaaaaa
+     Jonah is cool 
      </Form.Row>
      <div className='red'>{DateErrer}</div>
      <br/>
