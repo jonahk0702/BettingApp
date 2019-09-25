@@ -8,11 +8,15 @@ class Profile extends Component {
     this.state = {};
   }
 
+  changeRoute = (name) => {
+    this.props.changeRoute(name);
+  }
+
   render() {
     return (
       <div>
        
-        <NavbarIn />
+        <NavbarIn changeRoute={this.changeRoute}/>
          <br />
         <br />
         <h1 className="tc i f1 font white">Your Profile</h1>

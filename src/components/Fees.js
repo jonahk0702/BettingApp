@@ -8,17 +8,14 @@ class Fees extends Component {
     super();
     this.state = {};
   }
-
-  callCur = () =>{
-    
-
-
-  }
+changeRoute = (newRoute) => {
+  this.props.changeRoute(newRoute);
+}
 
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar changeRoute={this.changeRoute}/>
         <div className="tc ">
           <br />
           <br />

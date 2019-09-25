@@ -37,6 +37,10 @@ class CreateBet extends Component {
 
   }
 
+  changeRoute = (name) => {
+    this.props.changeRoute(name);
+  }
+
 
   SubmitChecker = () => {
     let {Amount, daySet, MonthSet, YearSet, BetLenghth, ProOdds, AntiOdds} = this.state;
@@ -168,7 +172,7 @@ class CreateBet extends Component {
     
     return (
      <div>
-     <NavbarIn/>
+     <NavbarIn changeRoute={this.changeRoute}/>
      <br/><br/><br/>
      <h1 className="tc white i f1 font">Create a bet!</h1>
      <br/><br/>

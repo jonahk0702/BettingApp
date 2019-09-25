@@ -10,15 +10,19 @@ class CreateAccount extends Component {
   };
 }
 
-display = () => {
-  console.log("I work");
-}  
+changeRoute = (name) => {
+  this.props.changeRoute(name);
+}
+
 
   render() {
    
     return <div>
-    <NavBar/>
-      <Register loadUser={this.display}/>
+    <NavBar changeRoute={this.changeRoute}/>
+     <Register changeRoute={this.changeRoute}/>
+   }
+    
+                      
     </div>;
   }
 }

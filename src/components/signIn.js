@@ -13,13 +13,20 @@ class signIn extends Component {
   };
 }
  
+changeRoute = (home) => {
+  this.props.changeRoute(home);
+}
+
+loadUser = (data) => {
+  this.props.loadUser(data);
+}
 
   render() {
     let current;
-      current = <SignIn handleSwitch={this.handleSwitch} />;
+      current = <SignIn loadUser={this.loadUser} changeRoute={this.changeRoute} handleSwitch={this.handleSwitch} />;
     
     return <div>
-    <NavBar/>
+    <NavBar changeRoute={this.changeRoute}/>
      {current}</div>;
   }
 }

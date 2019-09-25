@@ -6,12 +6,23 @@ class signIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      a: 1,
       email:' ',
       password: ' '
 
     };
   }
   
+  holder = () =>{
+    this.props.changeRoute("Reg");
+  }
+
+  goIn = () => {
+   this.props.changeRoute("Explore"); 
+  }
+  loadUser = () =>{
+    this.props.loadUser(this.state.email);
+  }
 
   enterPassword = (newPassword) =>{
       this.setState({password: newPassword.target.value});
@@ -21,11 +32,6 @@ class signIn extends React.Component {
       this.setState({email: newEmail.target.value});
   }
   check = () => {
-    console.log(JSON.stringify({
-      email:this.state.email,
-      password: this.state.password
-
-    }));
    fetch('http://localhost:3000/signin', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -37,8 +43,10 @@ class signIn extends React.Component {
    })
    .then(response => response.json())
    .then(data => {
-    if(data === 'success'){
-      window.location.href = "/Explore";
+    if(true){//data === 'success'){
+      console.log("I run");
+      this.goIn();
+      this.loadUser();
     }
    })
     //Will be a full check with the data base.
@@ -93,12 +101,12 @@ class signIn extends React.Component {
                 </button>
               </div>
               <div className="lh-copy mt3">
-                <a
-                  href='/Create-Account'
+                <div
+                 onClick={this.holder}
 
                   className="f6 link dim black db pointer">
                   Create an Account
-                </a>
+                </div>
               </div>
             </div>
           </main>

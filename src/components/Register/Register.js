@@ -43,6 +43,9 @@ let passwordStyle = stylesHolder;
 
 //This just stores in state the country they are from
  
+ changeRoute = (home) => {
+  this.props.changeRoute(home);
+ }
 
 ValidateFirst = () => {
   let {name, dateOfBirth, email} = this.state;
@@ -164,9 +167,7 @@ ValidateFinal = () => {
    .then(response => response.json())
    .then(user => {
     if(user){
-      console.log(user);
-     this.props.display();//loadUser(user);
-     window.location.href = "/Explore";
+      this.changeRoute("Explore");
     }
    })
       }
@@ -401,6 +402,7 @@ enterEmail = (newEmail) =>{
       //Depending on page, im changing current, but whatever it is
       //current is always displayed
       <div>
+      
          <div className="mw5 mw7-ns center br5 black">
               <br />
               <br />

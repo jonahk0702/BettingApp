@@ -8,10 +8,14 @@ class HowThisWorks extends Component {
     this.state = {};
   }
 
+  changeRoute = (newRoute) => {
+  this.props.changeRoute(newRoute);
+}
+
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar changeRoute={this.changeRoute}/>
         <div className="tc">
           <br />
           <br />
@@ -26,11 +30,11 @@ class HowThisWorks extends Component {
               <Col>
                 <h3 className='pa3 i f2'>Wait, so what are we really?  </h3>
                 <hr />
-                <p className=" f4">
+                <div className=" f4">
                   Okay, Costume bets is a betting service that facilitates any type of bet.
                   We do this not by simply oppsing any bet but by matching people who have different
                   opinions on a particualr topic.  <hr />
-                 </p>
+                 </div>
               </Col>
             </Row>
             <h3 className='pa3 i f2'>More info And FAQs</h3>

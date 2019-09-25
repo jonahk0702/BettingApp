@@ -9,10 +9,14 @@ class SignInHome extends Component {
     this.state = {};
   }
 
+  changeRoute = (name) => {
+    this.props.changeRoute(name);
+  }
+
   render() { 
     return (
       <div>
-        <NavbarIn />
+        <NavbarIn changeRoute={this.changeRoute} />
         <br />
         <br />
         <br />

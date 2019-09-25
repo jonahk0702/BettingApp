@@ -11,34 +11,30 @@ class Home extends Component {
     this.state = {};
   }
 
+changeRoute = (newRoute) => {
+  this.props.changeRoute(newRoute);
+}
+loadUser = (data) =>{
+  this.props.loadUser(data);
+}
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar changeRoute={this.changeRoute}/>
 
         <div className="tc">
           <br />
           <br />
           <br />
           <h1 className="tc white i f1 font">Welcome to Custome Bets</h1>
-          
-
-
-
-
-
-
-
-
-
-
           <br />
           <br />
           <Container>
             <Row>
               <Col className="tc f3 solidBR">
-                What is Custom bets? <hr />
-                <p className="tl f4">
+                What is Custom bets? 
+                <hr />
+                <div className="tl f4">
                   Custom Bets is the first ever online casino where the bets,
                   odds and time period depends on you. Think that we'll land on
                   Mars before Man United wins a Premier League championship?
@@ -48,11 +44,11 @@ class Home extends Component {
                   bets. You can bet as little as 1$! And you're not betting
                   against the house! You are betting other peole, just like you!
                   There is always a winner! Why not have fun in the porcess?
-                </p>
+                </div>
               </Col>
               <Col>
-                {" "}
-                <SignIn />{" "}
+            
+                <SignIn loadUser={this.loadUser} changeRoute={this.changeRoute}/>
               </Col>
             </Row>
           </Container>

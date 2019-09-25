@@ -6,27 +6,29 @@ import SignInHome from "./components/SignInHome";
 import Profile from "./components/Profile";
 import MyBets from "./components/MyBets";
 import CreateBet from "./components/CreateBet";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import signIn from "./components/signIn";
+import SignIn from "./components/signIn";
 import Home from "./components/Home";
 import HowThisWorks from "./components/HowThisWorks";
 import Fees from "./components/Fees";
 import CreateAccount from "./components/CreateAccount";
-import MoreInfo from './components/MoreInfo';
-import Register from "./components/Register/Register";
+//import MoreInfo from './components/MoreInfo';
 
 //import BuyConfirm from "./components/BuyConfirm";
 
+let cur; 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
     user: {
       email: '',
-      userId: ''
-    }
+      userId: '',
+      
+    },
+    route: 'home',
   };
   }
+
 
   backgroundOptions = {
     particles: {
@@ -55,14 +57,66 @@ requireAuth = (nextState, replace) => {
   
 
 }
+changeRoute = (newer) =>{
+  this.setState({'route' : newer});
+}
 
   render() {
+    let { route } = this.state;
+    if(route === 'home'){
+         cur =  <Home changeRoute={this.changeRoute} loadUser={this.loadUser}/>
+    }
+    if(route === 'Reg'){
+         cur =  <CreateAccount changeRoute={this.changeRoute}/>
+    }
+
+    if(this.state.route === 'Fees'){
+             cur =  <Fees changeRoute={this.changeRoute}/>
+    }
+
+    if(this.state.route === 'weWork'){
+        cur =  <HowThisWorks changeRoute={this.changeRoute}/>
+    }
+    if(this.state.route === 'Explore'){
+         cur =  <SignInHome changeRoute={this.changeRoute}/>
+    }
+    if(this.state.route === 'Create'){
+         cur =  <CreateBet changeRoute={this.changeRoute}/>
+    }
+
+
+    if(this.state.route === 'myBets'){
+         cur =  <MyBets changeRoute={this.changeRoute}/>
+
+    }
+   
+    if(this.state.route === 'Profile'){
+         cur =  <Profile changeRoute={this.changeRoute}/>
+    }
+    
+    if(this.state.route === 'SignIn'){ 
+         cur =  <SignIn changeRoute={this.changeRoute} loadUser={this.loadUser}/>
+    }
+
+/*
+
+    if(this.state.route === 'moreInfo'){
+             cur =  <MoreInfo changeRoute={this.changeRoute}/>
+    }
+
+    if(this.state.route === 'signIn'){
+             cur =  <signIn changeRoute={this.changeRoute}/>
+    }    
+
+    
+    */
+
     return (
       <div>
         <Particles className="particles" params={this.backgroundOptions} />
 
         {
-          <BrowserRouter>
+/*          <BrowserRouter>
             <Switch>
 
               <Route exact path="/Explore" component={SignInHome} />
@@ -72,12 +126,16 @@ requireAuth = (nextState, replace) => {
               <Route exact path="/" component={Home} />
               <Route exact path="/MoreInfo" component={MoreInfo} /> 
               <Route exact path="/sign-In" component={signIn} />
-              <Route exact path="/Create-Account" component={CreateAccount} loadUser={this.loadUser}/>
+              <Route exact path="/Create-Account" component={CreateAccount} />
               <Route exact path="/howWeWork" component={HowThisWorks} />
               <Route exact path="/Our-Fees" component={Fees} />
             </Switch>
           </BrowserRouter>
-        }
+ */       }
+
+      
+        {cur}
+     
       </div>
     );
   }
