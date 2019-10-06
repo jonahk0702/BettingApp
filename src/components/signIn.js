@@ -17,8 +17,8 @@ changeRoute = (home) => {
   this.props.changeRoute(home);
 }
 
-loadUser = (data) => {
-  this.props.loadUser(data);
+loadUser = (email, id) => {
+  this.props.loadUser(email, id);
 }
 
   render() {

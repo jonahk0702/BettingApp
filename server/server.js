@@ -1,7 +1,23 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser'); 
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
+const knex = require('knex')
+
+const register = require('./controllers/register');
+const signin = require('./controllers/signin');
+const createBet = require('./controllers/createBet');
+const displayBet = require('./controllers/displayBet');
+
+const db = knex({
+	client: 'pg',
+	connection : {
+		host : '127.0.0.1', //here it is hosted
+		user : 'postgres',
+		password : 'test',
+		database : 'bettingapp'
+	}
+});
 
 const app = express();
 
@@ -9,62 +25,27 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-const database = {
-	users: [
-		{
-			id: '123',
-			name: 'John',
-			email: 'john@gmail.com',
-			password: 'cookies',
-			enteries: 0, 
-			joined: new Date() 
-		}, 
-		{
-			id: '1234',
-			name: 'Sally',
-			email: 'Sally@gmail.com',
-			password: 'chips',
-			enteries: 0,
-			joined: new Date() 
-		}
-	]
-}
-
 app.get('/', (req, res)=>{
 	res.send(database.users);
 })
 
-app.post('/signin', (req, res) => {  
-
-	if(req.body.email === database.users[0].email &&
-		req.body.password === database.users[0].password){
-			//res.json(database.users[0]);
-		res.json("success");
-		}else{
-		res.status(400).json('erro login in');
-	}
+app.post('/signin', (req, res) => {
+	signin.handleSignin(req, res, db, bcrypt)
 })
 
 app.post('/register', (req, res) => {
-	const {email, name, password , Country, dateOfBirth, gender, IdNumber } = req.body;
-	bcrypt.hash(password, null,null, function(err, hash){
-		console.log(hash);
-	});
-	database.users.push({
-		id: '124',
-			name: name,
-			email: email,
-			password: password,
-			Country: Country,
-			gender: gender,
-			IdNumber: IdNumber,
-			enteries: 0,
-			joined: new Date()  
-	})
-	res.json(database.users[database.users.length -1]);
+	register.handleRegister(req, res, db, bcrypt)
 })
 
-app.get('/profile/:id', (req, res) => {
+app.post('/createBet', (req, res) => {
+	createBet.handleCreateBet(req, res, db)
+})
+
+app.post('/displayBet', (req, res) => {
+	displayBet.handleDisplayBet(req, res, db)
+})
+
+/*app.get('/profile/:id', (req, res) => {
 	const { id } = req.params; 
 	let found = false; 
 	database.users.forEach(user => {
@@ -78,26 +59,11 @@ app.get('/profile/:id', (req, res) => {
 		res.status(400).json("Not found ");
 	}
 })
-
-app.put("/image", (req, res) => {
-	const { id } = req.body; 
-	let found = false; 
-	database.users.forEach(user => {
-		if (user.id === id) {
-			found = true;
-			user.enteries ++;
-			return res.json(user.enteries);
-			
-		}
-	})
-	if(!found){
-		res.status(400).json("Not found ");
-	}
-
-})
+*/
+const PORT = process.env.PORT
 app.listen(3000, () => {
 
-	console.log("app is running on 3000");
+	console.log("app is running on port 3000");
 });
 //the acutal plan
 /* - Maybe start all the way from the begining 

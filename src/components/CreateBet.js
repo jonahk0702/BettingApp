@@ -6,10 +6,10 @@ import CreateConfirmModal from './CreateConfirmModal';
 
 let BetDiscpErrer = "";
 let DateErrer = "";
-let OddsErrer = "";
+
 let AmountError = "";
 
-let ErrorSumbol = "•";
+let ErrorSumbol = "•"; 
 
 let BetErr = "";
 let ExpiryErr = "";
@@ -26,10 +26,8 @@ class CreateBet extends Component {
       YearSet:"0",
       betDiscription:" ",
       BetLenghth:0,
-      ExpiryChoice:" ",
+      ExpiryChoice: "Those who are for this bet",
       modalShow: false,
-      ProOdds:0,
-      AntiOdds:0,
       ID:"Aj12",
       Amount:0
 
@@ -37,13 +35,16 @@ class CreateBet extends Component {
 
   }
 
-  changeRoute = (name) => {
+unloadUser = () => {
+  this.props.unloadUser();
+}
+
+changeRoute = (name) => {
     this.props.changeRoute(name);
   }
 
-
   SubmitChecker = () => {
-    let {Amount, daySet, MonthSet, YearSet, BetLenghth, ProOdds, AntiOdds} = this.state;
+    let {Amount, daySet, MonthSet, YearSet, BetLenghth } = this.state;
     let runner = true;
 
     if(BetLenghth > 244){
@@ -72,15 +73,6 @@ class CreateBet extends Component {
     if(daySet !== "0" && MonthSet !== "0" && YearSet !== "0"){
       DateErrer = "";  
       ExpiryErr = "";
-    }
-
-    if((ProOdds === 0 && AntiOdds === 0) || isNaN(ProOdds) || isNaN(AntiOdds)){
-      runner = false;
-      OddsErrer = "Please make sure all the fields are filled with numbers."
-      OddsErr = ErrorSumbol;
-    }else{
-      OddsErrer = "";
-      OddsErrer = "";
     }
 
     if(Amount === 0 || isNaN(Amount) ){
@@ -112,25 +104,6 @@ class CreateBet extends Component {
       } 
     }
 
-  handleChangeOdsPro = (e) => {
-     let {n, value} = e.target;
-    if(n === 0){
-
-    }
-    if(!value.includes(" ")){
-        this.setState({ProOdds: value});
-      }
-  }
-
-  handleChangeAntiPro = (e) => {
-     let {n, value} = e.target;
-    if(n === 0){
-
-    }
-    if(!value.includes(" ")){
-      this.setState({AntiOdds: value});
-    }
-  }
 
   handleChangeAmount = (e) => {
      let {n, value} = e.target;
@@ -169,10 +142,11 @@ class CreateBet extends Component {
   render() {
     //let date = new Date();
     let modalClose = () => this.setState({ modalShow: false });
+  
     
     return (
      <div>
-     <NavbarIn changeRoute={this.changeRoute}/>
+     <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
      <br/><br/><br/>
      <h1 className="tc white i f1 font">Create a bet!</h1>
      <br/><br/>
@@ -262,7 +236,7 @@ class CreateBet extends Component {
           <Form.Check
           inline
             type="radio"
-            label="Those who Bet against the Creator"
+            label="those who Bet against the Creator"
             name="formHorizontalRadios"
             id="formHorizontalRadios2"
             onChange={() => this.setState({ExpiryChoice:"The opposition"})}
@@ -288,33 +262,15 @@ class CreateBet extends Component {
 
      <Container className='tl'>
       <Row>
-        <Col >  The odds of the bet are <b className='red f3'>{OddsErr}</b> </Col>
-       
-      </Row>
-      <Row>
-        <Col>Fun fact, you can never lose money by winning a bet, 
-            no matter the odds. There is a full descriptoin below.</Col>
-      </Row>
-      <br/>
-      <Row>
-        <Col>The odds of you, on the Positive side are:</Col>
         <Col>
-          <InputGroup className="mb-3 sm">
-            <FormControl size="lg" onChange={this.handleChangeOdsPro} aria-label="Default" aria-describedby="inputGroup-sizing-default"/>
-          </InputGroup>
-          </Col>
-        <div className='f3'>:</div>
-        <Col><InputGroup className="mb-3 sm">
-            <FormControl size="lg" onChange={this.handleChangeAntiPro} aria-label="Default" aria-describedby="inputGroup-sizing-default"/>
-            </InputGroup>
-          </Col>
 
-        <Col>The odds of the other person, the negetive</Col>
-       
+          We pride ourselves on completely organic odds. Thus you will never be able to set 
+          the ods of any bet you create, rather the odds will be determined by the amount people
+          we take either side.
+        </Col>
       </Row>
-
     </Container>
-    <div className='red'>{OddsErrer}</div>
+    
      <br/>
      <br/>
 
@@ -339,14 +295,15 @@ class CreateBet extends Component {
       </h1>
 
       <CreateConfirmModal
+                 
                   show={this.state.modalShow}
                   onHide={modalClose}
                   id = {this.state.ID}
                   price = {this.state.Amount}
-                  odds ={this.state.ProOdds.toString() + ":" + this.state.AntiOdds}  
                   expiry = {this.state.daySet + "/" + this.state.MonthSet + "/" + this.state.YearSet}
                   betdiscription = {this.state.betDiscription}
                   defualtwinner = {this.state.ExpiryChoice}
+                 // 
                 />
       
       <a className='f6 black bt bb pa1' href="/">Our Terms of Service and stuff</a>   

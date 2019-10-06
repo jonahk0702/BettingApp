@@ -2,3 +2,7 @@
 	background-color: white;
 	opacity:0.82;  
 }
+
+.invalid{
+	border-color: red;
+}

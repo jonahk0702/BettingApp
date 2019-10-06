@@ -16,3 +16,8 @@ How to publish your changes (whenever finish coding for that time - you have to 
 - git add . 
 - git commit -m 'Here put in a note on what you change, in a string fromat'
 - git push 
+
+how to clone
+liteerally 
+git clone the name of the file.
+dont be dumb

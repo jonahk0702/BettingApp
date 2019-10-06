@@ -19,7 +19,7 @@ let emailStyles = stylesHolder;
 let passwordStyle = stylesHolder;
   
  let emailMessage = '';
- let passwordMsg ='';
+ let passwordMsg =''; 
  let currentPage = 1;
 
   class Register extends Component {
@@ -45,6 +45,10 @@ let passwordStyle = stylesHolder;
  
  changeRoute = (home) => {
   this.props.changeRoute(home);
+ }
+
+ loadUser = (email, id) =>{
+  this.props.loadUser(email, id);
  }
 
 ValidateFirst = () => {
@@ -157,16 +161,19 @@ ValidateFinal = () => {
             body:JSON.stringify({
               email:email,
               password: password, 
-              Country: Country,
+              country: Country,
               name: name,
               dateOfBirth: dateOfBirth,
-              IdNumber: IdNumber,
-              gender: gender 
+              idnumber: IdNumber,
+              gender: gender,
+              birthday: dateOfBirth  
           })
         })
    .then(response => response.json())
    .then(user => {
-    if(user){
+    if(user.id){
+      
+      this.loadUser(user.email, user.id);
       this.changeRoute("Explore");
     }
    })
@@ -203,6 +210,7 @@ enterEmail = (newEmail) =>{
 
   enterDateofBirth = (dateBirth) =>{
       this.setState({dateOfBirth: dateBirth.target.value});
+      console.log(dateBirth.target.value);
   }
 
   enterconPassword = (ConfirmPassWord) =>{
@@ -215,12 +223,14 @@ enterEmail = (newEmail) =>{
   }
 
   enterIDNum = (idNum) =>{
-      this.setState({IdNumber:idNum.target.value});      
+      this.setState({IdNumber:idNum.target.value});
+
   }
 
   enterUsername = (countrys) =>{
       this.setState({Country: countrys.target.value});
   }
+
 
   render() {
     //Just making variables for each state, so i dont have to 

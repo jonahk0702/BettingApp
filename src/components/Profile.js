@@ -8,15 +8,19 @@ class Profile extends Component {
     this.state = {};
   }
 
-  changeRoute = (name) => {
+  changeRoute = (name) => { 
     this.props.changeRoute(name);
   }
+
+  unloadUser = () => {
+  this.props.unloadUser();
+}
 
   render() {
     return (
       <div>
        
-        <NavbarIn changeRoute={this.changeRoute}/>
+        <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
          <br />
         <br />
         <h1 className="tc i f1 font white">Your Profile</h1>

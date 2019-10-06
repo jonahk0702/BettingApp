@@ -42,11 +42,18 @@ class App extends Component {
     }
   };
 
-loadUser = (data) => {
-  let {email} = data;
+loadUser = (email, id) => {
+
   this.setState({user: {
-    email: email
+    email: email,
+    userId: id
   }})
+  console.log(id + " is ID");
+}
+
+unloadUser = () => {
+  this.setState({email: ''});
+  console.log("em" + this.state.email);
 }
 
 
@@ -67,8 +74,12 @@ changeRoute = (newer) =>{
          cur =  <Home changeRoute={this.changeRoute} loadUser={this.loadUser}/>
     }
     if(route === 'Reg'){
-         cur =  <CreateAccount changeRoute={this.changeRoute}/>
+         cur =  <CreateAccount 
+         changeRoute={this.changeRoute} 
+         loadUser={this.loadUser}
+         />
     }
+  
 
     if(this.state.route === 'Fees'){
              cur =  <Fees changeRoute={this.changeRoute}/>
@@ -78,24 +89,26 @@ changeRoute = (newer) =>{
         cur =  <HowThisWorks changeRoute={this.changeRoute}/>
     }
     if(this.state.route === 'Explore'){
-         cur =  <SignInHome changeRoute={this.changeRoute}/>
+         cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
     }
     if(this.state.route === 'Create'){
-         cur =  <CreateBet changeRoute={this.changeRoute}/>
+         cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
     }
 
 
     if(this.state.route === 'myBets'){
-         cur =  <MyBets changeRoute={this.changeRoute}/>
+         cur =  <MyBets changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
 
     }
    
     if(this.state.route === 'Profile'){
-         cur =  <Profile changeRoute={this.changeRoute}/>
+         cur =  <Profile changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
     }
     
     if(this.state.route === 'SignIn'){ 
-         cur =  <SignIn changeRoute={this.changeRoute} loadUser={this.loadUser}/>
+         cur =  <SignIn 
+         changeRoute={this.changeRoute}
+            loadUser={this.loadUser}/>
     }
 
 /*

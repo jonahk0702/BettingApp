@@ -2,13 +2,15 @@ import React from "react";
 import "./SignIn.css";
 
 
+let id = '';
+let errorMsg = '';
 class signIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       a: 1,
       email:' ',
-      password: ' '
+      password: ''
 
     };
   }
@@ -21,7 +23,7 @@ class signIn extends React.Component {
    this.props.changeRoute("Explore"); 
   }
   loadUser = () =>{
-    this.props.loadUser(this.state.email);
+    this.props.loadUser(this.state.email, id);
   }
 
   enterPassword = (newPassword) =>{
@@ -43,10 +45,18 @@ class signIn extends React.Component {
    })
    .then(response => response.json())
    .then(data => {
-    if(true){//data === 'success'){
-      console.log("I run");
+    if(data.id){
+      id = data.id;
+      console.log("id us " + id);
       this.goIn();
       this.loadUser();
+    }
+    if(data === "wrong"){
+      this.clearFields("Please enter correct credentials");
+    }
+    if(data === 'unable to get user'){
+      this.clearFields('check Internet connection.');
+     
     }
    })
     //Will be a full check with the data base.
@@ -54,9 +64,17 @@ class signIn extends React.Component {
      //
   }
 
+  clearFields = (errorName) => {
+    errorMsg = errorName;
+    this.setState({password: ''});
+    this.setState({a: 1});
+  }
   render() {
+
     return (
+
       <div className="mw5 mw7-ns center br5 black">
+
         <br />
         <br />
 
@@ -70,6 +88,7 @@ class signIn extends React.Component {
                     Email
                   </label>
                   <input
+                    value = {this.state.email}
                     className="pa2 input-reset ba bg-transparent hover-bg-black  w-100"
                     type="email"
                     name="email-address"
@@ -83,6 +102,7 @@ class signIn extends React.Component {
                     Password
                   </label>
                   <input
+                  value = {this.state.password}
                     className="b pa2 input-reset ba bg-transparent hover-bg-black w-100"
                     type="password"
                     name="password"
@@ -99,6 +119,12 @@ class signIn extends React.Component {
                   >
                   Sign in
                 </button>
+              </div>
+              <div className="lh-copy mt3">
+                <div
+                 className="f5 b link dim red db pointer">
+                  {errorMsg}
+                </div>
               </div>
               <div className="lh-copy mt3">
                 <div

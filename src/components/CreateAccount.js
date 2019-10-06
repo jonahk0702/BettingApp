@@ -14,13 +14,17 @@ changeRoute = (name) => {
   this.props.changeRoute(name);
 }
 
+loadUser = name => {
+  this.props.loadUser(name);
+}
+
 
   render() {
    
     return <div>
     <NavBar changeRoute={this.changeRoute}/>
-     <Register changeRoute={this.changeRoute}/>
-   }
+     <Register changeRoute={this.changeRoute} loadUser={this.loadUser}/>
+   
     
                       
     </div>;

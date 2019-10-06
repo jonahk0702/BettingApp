@@ -12,13 +12,18 @@ class MyBets extends Component {
 }
 
 changeRoute = (name) =>{
-  this.props.changeRoute(name);
+  this.props.changeRoute(name); 
 }
+
+unloadUser = () => {
+  this.props.unloadUser();
+}
+
   render() {
 
     return (
      <div>
-     <NavbarIn changeRoute={this.changeRoute}/>
+     <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
      <br/><br/><br/>
      <h1 className="tc white i f1 font">My Bets!</h1>
      <br/><br/>

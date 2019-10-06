@@ -19,6 +19,7 @@ export default class NavBar extends Component {
     this.props.changeRoute("groups");
   }
   outies = () => {
+    this.props.unloadUser();
     this.props.changeRoute("home");
   }
 

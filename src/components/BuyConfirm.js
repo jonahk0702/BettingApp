@@ -6,7 +6,7 @@ import "./IndividaulBet/bets.css";
 class BuyConfirm extends Component {
   constructor(props) {
     super();
-    this.state = {
+    this.state = { 
       Price: 0,
       Odds: "",
       Expiry:"",
@@ -22,10 +22,14 @@ class BuyConfirm extends Component {
     //DO some buy code...
   }
 
+unloadUser = () => {
+  this.props.unloadUser();
+}
+
   render() { 
     return (
       <div>
-        <NavbarIn />
+        <NavbarIn unloadUser={this.unloadUser} />
         <br />
         <br />
         <br />

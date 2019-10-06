@@ -1,7 +1,2 @@
-COMPONENTS
-1 - NavBar (Jonah)
-2-  Register (Dan)
-
-STYLING
-1- Background (Jonah)
-2- Genral looks (Dan)
+Just some things I have noticed and never fixed: 
+- when fill in the first page of register and then you leave the page, it takes you to the second page instead of back to begining. Plues no way of getting back to first page

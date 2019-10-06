@@ -17,10 +17,11 @@ changeRoute = (newRoute) => {
 loadUser = (data) =>{
   this.props.loadUser(data);
 }
+
   render() {
     return (
       <div>
-        <NavBar changeRoute={this.changeRoute}/>
+        <NavBar changeRoute={this.changeRoute} />
 
         <div className="tc">
           <br />

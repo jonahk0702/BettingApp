@@ -5,7 +5,7 @@ import IndividaulBet from "./IndividaulBet/IndividaulBet";
 
 class SignInHome extends Component {
   constructor(props) {
-    super();
+    super(); 
     this.state = {};
   }
 
@@ -13,10 +13,29 @@ class SignInHome extends Component {
     this.props.changeRoute(name);
   }
 
+  unloadUser = () => {
+  this.props.unloadUser();
+}
+
+componentDidMount(){
+    fetch('http://localhost:3000/displayBet', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+     // email:this.state.email,
+
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+      console.log(data + " is data");
+   })
+}
+
   render() { 
     return (
       <div>
-        <NavbarIn changeRoute={this.changeRoute} />
+        <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser} />
         <br />
         <br />
         <br />
