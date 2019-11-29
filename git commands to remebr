@@ -13,8 +13,8 @@ How to get the lastest version (Do whenever starting to code)
 
 How to publish your changes (whenever finish coding for that time - you have to do all in order)
 - git status
-- git add . 
-- git commit -m 'Here put in a note on what you change, in a string fromat'
+- git add .
+ - git commit -m 'Here put in a note on what you change, in a string fromat'
 - git push 
 
 how to clone

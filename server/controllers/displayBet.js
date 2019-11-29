@@ -1,13 +1,12 @@
-const handleDisplayBet = (req, res, db) => {  
-	db.select('id').from('bets')
-	.where('id', '!=', '0')
+const handleDisplayBet = (req, res, db) => {   
+	db.select('email', 'hash').from('login')
+	
 	.then(data => {
 		const isValid = true;
 		if(isValid){
-			return db.select('*').from('users')
-			.where('id', '!=', '0')
+			return db('bets').count('*')
 			.then(user => {
-				res.json(user[0].id)
+				res.json(user[0].count)
 
 			})
 			.catch(err => res.status(400).json('unable to get user'))

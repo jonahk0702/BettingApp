@@ -18,7 +18,7 @@ class signIn extends React.Component {
   holder = () =>{
     this.props.changeRoute("Reg");
   }
-
+ 
   goIn = () => {
    this.props.changeRoute("Explore"); 
   }
@@ -47,7 +47,6 @@ class signIn extends React.Component {
    .then(data => {
     if(data.id){
       id = data.id;
-      console.log("id us " + id);
       this.goIn();
       this.loadUser();
     }

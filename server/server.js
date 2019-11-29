@@ -8,6 +8,7 @@ const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const createBet = require('./controllers/createBet');
 const displayBet = require('./controllers/displayBet');
+const returnBets = require('./controllers/returnBets');
 
 const db = knex({
 	client: 'pg',
@@ -42,8 +43,13 @@ app.post('/createBet', (req, res) => {
 })
 
 app.post('/displayBet', (req, res) => {
-	displayBet.handleDisplayBet(req, res, db)
+	displayBet.handleDisplayBet(req, res, db, bcrypt)
 })
+
+app.post('/returnBets', (req, res) => {
+	returnBets.handleReturnBets(req, res, db)
+})
+
 
 /*app.get('/profile/:id', (req, res) => {
 	const { id } = req.params; 

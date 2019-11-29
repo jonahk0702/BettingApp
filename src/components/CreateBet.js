@@ -13,7 +13,7 @@ let ErrorSumbol = "•";
 
 let BetErr = "";
 let ExpiryErr = "";
-let OddsErr = "";
+
 let AmountErr = "";
 
 class CreateBet extends Component {
@@ -298,11 +298,13 @@ changeRoute = (name) => {
                  
                   show={this.state.modalShow}
                   onHide={modalClose}
+                  userid = {this.props.userid}
                   id = {this.state.ID}
                   price = {this.state.Amount}
                   expiry = {this.state.daySet + "/" + this.state.MonthSet + "/" + this.state.YearSet}
                   betdiscription = {this.state.betDiscription}
                   defualtwinner = {this.state.ExpiryChoice}
+
                  // 
                 />
       

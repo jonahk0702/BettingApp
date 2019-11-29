@@ -20,11 +20,11 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-    user: {
+    a : 1,
       email: '',
-      userId: '',
+      userId: 'w000',
       
-    },
+    
     route: 'home',
   };
   }
@@ -44,12 +44,10 @@ class App extends Component {
 
 loadUser = (email, id) => {
 
-  this.setState({user: {
-    email: email,
-    userId: id
-  }})
-  console.log(id + " is ID");
-}
+   this.setState({email: email});
+   this.setState({userId: id});
+   console.log("the id is " + id);
+ } 
 
 unloadUser = () => {
   this.setState({email: ''});
@@ -92,7 +90,8 @@ changeRoute = (newer) =>{
          cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
     }
     if(this.state.route === 'Create'){
-         cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
+         cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
+         userid={this.state.userId}/>
     }
 
 

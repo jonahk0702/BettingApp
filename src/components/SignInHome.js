@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 import {Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 import NavbarIn from "./navbar/NavbarIn";
+import BetManager from "./IndividaulBet/BetManager";
 import IndividaulBet from "./IndividaulBet/IndividaulBet";
+
+
+let amount = 0;
+let betArray;
+let holder; 
 
 class SignInHome extends Component {
   constructor(props) {
     super(); 
-    this.state = {};
+    this.state = {
+      
+    };
   }
+
 
   changeRoute = (name) => {
     this.props.changeRoute(name);
@@ -18,19 +27,36 @@ class SignInHome extends Component {
 }
 
 componentDidMount(){
-    fetch('http://localhost:3000/displayBet', {
+  fetch('http://localhost:3000/displayBet', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-     // email:this.state.email,
-
     })
    })
    .then(response => response.json())
    .then(data => {
+     console.log(data) 
+   });
+
+   fetch('http://localhost:3000/returnBets', {
+     method: 'post',
+     headers: {'Content-Type': 'application/json'},
+     body: JSON.stringify({
+     })
+    })
+    .then(response => response.json())
+    .then(data => {
       console.log(data + " is data");
-   })
+      
+     //  for (var i = 0; i < betArray.length; i++) {
+     //    holder += <IndividaulBet name={betArray[i].description}/>
+     //  this.setState({a:1});
+
+     // }
+    });
+   
 }
+
 
   render() { 
     return (
@@ -85,9 +111,8 @@ componentDidMount(){
               </div>
               <hr/>
               
-              <IndividaulBet name={"I bet that Ramaposa is an Alien"} />
-              <IndividaulBet name={"I bet the Mac Miller faked his death"} />
-              <IndividaulBet name={"I bet that Micheal Obama is "} />
+              {holder}
+              
             </Col>
           </Row>
         </Container>

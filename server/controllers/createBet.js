@@ -1,13 +1,16 @@
 const handleCreateBet = (req, res, db) => {
-	const { description, amountfor, total, expiry, amountagainst } = req.body; 
+	const { description, amountfor, total, expiry, userid } = req.body; 
 	db('bets')
 	.returning('*')
 	.insert({
-		description:description,
+		description: description,
 		amountfor : amountfor,
-		total: total,
+		amountagainst: 0,
+		total: amountfor,
 		expiry:'2018/05/05',
-		amountagainst: amountagainst
+		usersfor: userid + "-",
+		usersagainst: ""
+		
 	})
 	.then(bet => {
 		res.json(bet[0]);

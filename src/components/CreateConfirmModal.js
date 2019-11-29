@@ -8,22 +8,28 @@ class CreateConfirmModal extends Component {
     super();
     this.state = {
       justConfirm: true,
+      userId: '',  
       a:1
     }
   }
 
 
+ componentDidMount(){
+  this.setState({usersId: this.props.userid});
+  console.log(this.props.userid);
+}
 
   buy = () =>{
      fetch('http://localhost:3000/createBet', {
-            method: 'post',
+            method: 'post', 
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify({
               description: this.props.betdiscription,
               amountfor: this.props.price,
               total: this.props.price,
               expiry: this.props.expiry,
-              amountagainst: 0
+              amountagainst: 0,
+              userid: this.props.userid
           })
         })
    .then(response => response.json())
