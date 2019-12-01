@@ -13,7 +13,7 @@ const returnBets = require('./controllers/returnBets');
 const db = knex({
 	client: 'pg',
 	connection : {
-		host : '127.0.0.1', //here it is hosted
+		host : '127.0.0.1',
 		user : 'postgres',
 		password : 'test',
 		database : 'bettingapp'

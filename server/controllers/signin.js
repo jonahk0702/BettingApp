@@ -8,11 +8,10 @@ const handleSignin = (req, res, db, bcrypt) => {
 			.where('email', '=', req.body.email)
 			.then(user => {
 				res.json(user[0])
-
 			})
 			.catch(err => res.status(400).json('unable to get user'))
 		}else{
-			res.status(400).json('wrong credentials');	
+			res.status(400).json('unable to get user');	
 		}
 
 	})
@@ -20,4 +19,4 @@ const handleSignin = (req, res, db, bcrypt) => {
 }
 module.exports = {
 	handleSignin:handleSignin
-}
+} 

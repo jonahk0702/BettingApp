@@ -14,7 +14,7 @@ import CreateAccount from "./components/CreateAccount";
 //import MoreInfo from './components/MoreInfo';
 
 //import BuyConfirm from "./components/BuyConfirm";
-
+ 
 let cur; 
 class App extends Component {
   constructor(props){
@@ -59,9 +59,8 @@ requireAuth = (nextState, replace) => {
     replace({
       pathname: '/sign-In'
     })
-  
-
 }
+
 changeRoute = (newer) =>{
   this.setState({'route' : newer});
 }
@@ -79,75 +78,41 @@ changeRoute = (newer) =>{
     }
   
 
-    if(this.state.route === 'Fees'){
+    if(route === 'Fees'){
              cur =  <Fees changeRoute={this.changeRoute}/>
     }
 
-    if(this.state.route === 'weWork'){
+    if(route === 'weWork'){
         cur =  <HowThisWorks changeRoute={this.changeRoute}/>
     }
-    if(this.state.route === 'Explore'){
+    if(route === 'Explore'){
          cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
     }
-    if(this.state.route === 'Create'){
+    if(route === 'Create'){
          cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
          userid={this.state.userId}/>
     }
 
 
-    if(this.state.route === 'myBets'){
+    if(route === 'myBets'){
          cur =  <MyBets changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
 
     }
    
-    if(this.state.route === 'Profile'){
+    if(route === 'Profile'){
          cur =  <Profile changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
     }
     
-    if(this.state.route === 'SignIn'){ 
+    if(route === 'SignIn'){ 
          cur =  <SignIn 
          changeRoute={this.changeRoute}
             loadUser={this.loadUser}/>
     }
 
-/*
-
-    if(this.state.route === 'moreInfo'){
-             cur =  <MoreInfo changeRoute={this.changeRoute}/>
-    }
-
-    if(this.state.route === 'signIn'){
-             cur =  <signIn changeRoute={this.changeRoute}/>
-    }    
-
-    
-    */
-
     return (
       <div>
         <Particles className="particles" params={this.backgroundOptions} />
-
-        {
-/*          <BrowserRouter>
-            <Switch>
-
-              <Route exact path="/Explore" component={SignInHome} />
-              <Route exact path="/My-Bets" component={MyBets} />
-              <Route exact path="/Create-Bet" component={CreateBet} />
-              <Route exact path="/Profile" component={Profile} />
-              <Route exact path="/" component={Home} />
-              <Route exact path="/MoreInfo" component={MoreInfo} /> 
-              <Route exact path="/sign-In" component={signIn} />
-              <Route exact path="/Create-Account" component={CreateAccount} />
-              <Route exact path="/howWeWork" component={HowThisWorks} />
-              <Route exact path="/Our-Fees" component={Fees} />
-            </Switch>
-          </BrowserRouter>
- */       }
-
-      
-        {cur}
-     
+        {cur}  
       </div>
     );
   }
