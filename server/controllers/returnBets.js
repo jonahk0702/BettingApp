@@ -4,11 +4,25 @@ const handleReturnBets = (req, res, db, amount) => {
 	.then(data => {
 		const isValid = true;
 		if(isValid){
-			return db.select('*').from('bets')
-			.then(user => {
-				res.json(user)
-			})
-			.catch(err => res.status(400).json('unable to get user'))
+			if(req.body.sorter == "total"){
+				return db.select('*').from('bets')
+				.orderBy(req.body.sorter)
+				.then(user => {
+					res.json(user)
+				})
+				.catch(err => res.status(400).json('unable to get user'))
+			}
+			if(req.body.sorter == "odds"){
+				return db.select('*').from('bets')
+				.orderBy('amountfor')
+				.then(user => {
+					res.json(user)
+				})
+				.catch(err => res.status(400).json('unable to get user'))
+			}
+
+			
+			
 		}else{
 			res.status(400).json('wrong credentials');	
 		}

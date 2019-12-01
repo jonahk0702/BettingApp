@@ -7,9 +7,10 @@ const handleCreateBet = (req, res, db) => {
 		amountfor : amountfor,
 		amountagainst: 0,
 		total: amountfor,
-		expiry:'2018/05/05',
+		expiry:expiry,
 		usersfor: userid + "-",
-		usersagainst: ""
+		usersagainst: "",
+		odds: 0.5,
 		
 	})
 	.then(bet => {

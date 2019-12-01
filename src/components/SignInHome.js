@@ -3,8 +3,9 @@ import {Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} fro
 import NavbarIn from "./navbar/NavbarIn";
 import IndividaulBet from "./IndividaulBet/IndividaulBet";
 
-
+ 
 let Holder = <div></div>; 
+let sorter = 'total';
 
 class SignInHome extends Component {
   constructor(props) {
@@ -31,6 +32,11 @@ reload = (num) => {
   this.props.unloadUser();
 }
 
+cheap = () => {
+  this.setState({a:"123"});
+  sorter = 'total';
+}
+
  
 
 componentDidMount(){  
@@ -49,9 +55,9 @@ componentDidMount(){
      method: 'post',
      headers: {'Content-Type': 'application/json'},
      body: JSON.stringify({
-    
+      sorter:sorter
      })
-    })
+    }) 
     .then(response => response.json())
     .then(data => {
       console.log(data);
@@ -93,8 +99,8 @@ componentDidMount(){
                   defaultValue={1}
                 >
 
-                  <ToggleButton className="ma3" value={1}>
-                    Most Popular
+                  <ToggleButton className="ma3" value={1} onClick={this.cheap}>
+                    Cheapest
                   </ToggleButton>
                   <ToggleButton className="ma3" value={2}>
                     Highest odds
