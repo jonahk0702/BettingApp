@@ -45,6 +45,7 @@ class signIn extends React.Component {
    })
    .then(response => response.json())
    .then(data => {
+    console.log(data);
     if(data.id){
       id = data.id;
       this.goIn();
@@ -128,7 +129,6 @@ class signIn extends React.Component {
               <div className="lh-copy mt3">
                 <div
                  onClick={this.holder}
-
                   className="f6 link dim black db pointer">
                   Create an Account
                 </div>

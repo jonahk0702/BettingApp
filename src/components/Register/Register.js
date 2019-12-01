@@ -172,7 +172,6 @@ ValidateFinal = () => {
    .then(response => response.json())
    .then(user => {
     if(user.id){
-      
       this.loadUser(user.email, user.id);
       this.changeRoute("Explore");
     }

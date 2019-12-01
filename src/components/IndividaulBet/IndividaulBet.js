@@ -48,17 +48,7 @@ constructor(props) {
           <hr/>
           <Row className='tc'>
             <Col className='xl'>
-              {//<button className='ma1 blues'>More Info</button> } 
-      }
-                <Button
-                  variant="primary"
-                  onClick={() =>  window.location.href = "/Explore" }
-                  className='ma1 reds tc w-20 h-20'
-                >
-                  More Info
-                </Button>
-
-
+    
                 <Button
                   variant="primary"
                   onClick={() => this.setState({ modalShow: true })}
