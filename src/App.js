@@ -22,7 +22,7 @@ class App extends Component {
     this.state = {
     a : 1,
       email: '',
-      userId: 'w000',
+      userId: '000',
       
     
     route: 'home',
@@ -43,23 +43,26 @@ class App extends Component {
   };
 
 loadUser = (email, id) => {
-
    this.setState({email: email});
    this.setState({userId: id});
-   console.log("the id is " + id);
  } 
+
+
 
 unloadUser = () => {
   this.setState({email: ''});
-  console.log("em" + this.state.email);
 }
 
-
-requireAuth = (nextState, replace) => { 
-    replace({
-      pathname: '/sign-In'
-    })
+reload = (num) => {
+  this.setState({a:num});
 }
+
+// requireAuth = (nextState, replace) => { 
+//     replace({
+//       pathname: '/sign-In'
+//     })
+// }
+
 
 changeRoute = (newer) =>{
   this.setState({'route' : newer});
@@ -67,6 +70,7 @@ changeRoute = (newer) =>{
 
   render() {
     let { route } = this.state;
+
     if(route === 'home'){
          cur =  <Home changeRoute={this.changeRoute} loadUser={this.loadUser}/>
     }
@@ -85,8 +89,9 @@ changeRoute = (newer) =>{
     if(route === 'weWork'){
         cur =  <HowThisWorks changeRoute={this.changeRoute}/>
     }
-    if(route === 'Explore'){
-         cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
+    if(this.state.route === 'Explore'){
+         cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}
+          email={this.state.email} reload={this.reload}/>
     }
     if(route === 'Create'){
          cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
@@ -112,7 +117,7 @@ changeRoute = (newer) =>{
     return (
       <div>
         <Particles className="particles" params={this.backgroundOptions} />
-        {cur}  
+        {cur}
       </div>
     );
   }

@@ -23,7 +23,7 @@ class signIn extends React.Component {
    this.props.changeRoute("Explore"); 
   }
   loadUser = () =>{
-    this.props.loadUser(this.state.email, id);
+    this.props.loadUser(this.state.email);
   }
 
   enterPassword = (newPassword) =>{
@@ -45,10 +45,11 @@ class signIn extends React.Component {
    })
    .then(response => response.json())
    .then(data => {
+     console.log(data);
     if(data.id){
       id = data.id;
       this.goIn();
-      this.loadUser();
+      this.loadUser(data.id);
     }
     if(data === "wrong"){
       this.clearFields("Please enter correct credentials");

@@ -36,7 +36,7 @@ let passwordStyle = stylesHolder;
 
         IdNumber: '',
         num:'', 
-        gender: 'Female'
+        gender: 'Male'
       }
     }
 
@@ -171,8 +171,7 @@ ValidateFinal = () => {
         })
    .then(response => response.json())
    .then(user => {
-    if(user.id){
-      
+    if(user.id){  
       this.loadUser(user.email, user.id);
       this.changeRoute("Explore");
     }

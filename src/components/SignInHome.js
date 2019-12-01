@@ -1,22 +1,27 @@
 import React, { Component } from "react";
 import {Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 import NavbarIn from "./navbar/NavbarIn";
-import BetManager from "./IndividaulBet/BetManager";
 import IndividaulBet from "./IndividaulBet/IndividaulBet";
 
 
-let amount = 0;
-let betArray;
-let holder; 
+let Holder = <div></div>; 
 
 class SignInHome extends Component {
   constructor(props) {
     super(); 
     this.state = {
+      a:'1'
       
     };
   }
 
+loadBets = () => {
+  console.log("s");
+}
+
+reload = (num) => {
+  this.props.reload(num);
+}
 
   changeRoute = (name) => {
     this.props.changeRoute(name);
@@ -26,7 +31,9 @@ class SignInHome extends Component {
   this.props.unloadUser();
 }
 
-componentDidMount(){
+ 
+
+componentDidMount(){  
   fetch('http://localhost:3000/displayBet', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -42,23 +49,29 @@ componentDidMount(){
      method: 'post',
      headers: {'Content-Type': 'application/json'},
      body: JSON.stringify({
+    
      })
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data + " is data");
-      
-     //  for (var i = 0; i < betArray.length; i++) {
-     //    holder += <IndividaulBet name={betArray[i].description}/>
-     //  this.setState({a:1});
+      console.log(data);
+        
+       Holder = data.map((user, i) => {
+          return <IndividaulBet key={i} id={data[i].id} name={data[i].description} amount={data[i].total}
+                  Odds={(((data[i].amountagainst + data[i].total)/(data[i].amountfor + data[i].total) )) + ":" + "1"}
+                  expiry={data[i].expiry} email={this.props.email} reload={this.props.reload}
+          />
 
-     // }
+        }) 
+       console.log("The user id is " + this.props.userId);
+       this.setState({a:"1"});
     });
    
+    
 }
 
 
-  render() { 
+  render() {  
     return (
       <div>
         <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser} />
@@ -111,7 +124,7 @@ componentDidMount(){
               </div>
               <hr/>
               
-              {holder}
+              {Holder} 
               
             </Col>
           </Row>
