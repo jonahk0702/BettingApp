@@ -9,7 +9,7 @@ export default class NavBar extends Component{
 constructor(props) {
     super();
     this.state = {
-      id: 111111,
+      id: 111111, 
       Price: 0,
       Odds: "",
       Expiry:"",
@@ -19,15 +19,17 @@ constructor(props) {
     };
   }
 
-  reload = (num) =>{
-    this.props.reload(num);
+
+
+  changeRoute = (route) => {
+    this.props.changeRoute(route);
   }
 
 
   render(){
     let modalClose = () => {
       this.setState({ modalShow: false });
-      this.reload(7);
+  //    this.reload(7);
     }
   return (
     
@@ -66,6 +68,7 @@ constructor(props) {
                   odds = {this.props.Odds}
                   expiry = {this.props.expiry}
                   email = {this.props.email}
+                  
                 
                 /> 
               

@@ -17,17 +17,16 @@ import Buy from "./components/Buy";
 //import BuyConfirm from "./components/BuyConfirm";
  
 let cur; 
+
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-    a : 1,
+      a : 1,
       email: '',
       userId: '000',
-      
-    
-    route: 'home',
-  };
+      route: 'home'
+    };
   }
 
   backgroundOptions = {
@@ -48,13 +47,12 @@ loadUser = (email, id) => {
  } 
 
 
-
 unloadUser = () => {
   this.setState({email: ''});
 }
 
 reload = (num) => {
-  this.setState({a:num});
+  this.setState({state: this.state});
 }
 
 // requireAuth = (nextState, replace) => { 
@@ -91,7 +89,7 @@ changeRoute = (newer) =>{
     }
     if(this.state.route === 'Explore'){
          cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}
-          email={this.state.email} reload={this.reload}/>
+          email={this.state.email} reload={this.reload} loadData={this.loadData}/>
     }
     if(route === 'Create'){
          cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 

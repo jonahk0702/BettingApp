@@ -5,7 +5,7 @@ import IndividaulBet from "./IndividaulBet/IndividaulBet";
 
  
 let Holder = <div></div>; 
-let sorter = 'odds';
+let sorter = 'total';
 
 class SignInHome extends Component {
   constructor(props) {
@@ -35,10 +35,7 @@ reload = (num) => {
 cheap = () => {
   sorter = 'total';
   this.setState({a:"123"});
-  console.log("I also ran");
-  
-  this.forceUpdate();
-  
+  console.log("I also ran");  
 }
 goodOdds = () => {
   sorter = 'odds';
@@ -74,8 +71,7 @@ componentDidMount(){
        Holder = data.map((user, i) => {
           return <IndividaulBet key={i} id={data[i].id} name={data[i].description} amount={data[i].total}
                   Odds={(((data[i].amountagainst + data[i].total)/(data[i].amountfor + data[i].total) )) + ":" + "1"}
-                  expiry={data[i].expiry} email={this.props.email} reload={this.props.reload}
-          />
+                  expiry={data[i].expiry} email={this.props.email}          />
 
         }) 
        console.log("The user id is " + this.props.userId);
@@ -115,7 +111,7 @@ componentDidMount(){
                     Highest odds
                   </ToggleButton>
                   <ToggleButton className="ma3" value={3}>
-                    Highest Wager
+                    Expire Soonest
                   </ToggleButton>
                   <ToggleButton className="ma3" value={4}>
                     Lowest Wager

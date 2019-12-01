@@ -1,8 +1,7 @@
 import React from "react";
 import "./SignIn.css";
 
-
-let id = '';
+ 
 let errorMsg = '';
 class signIn extends React.Component {
   constructor(props) {
@@ -46,7 +45,6 @@ class signIn extends React.Component {
    .then(response => response.json())
    .then(data => {
     if(data.id){
-      id = data.id;
       this.goIn();
       this.loadUser(data.id);
     }
