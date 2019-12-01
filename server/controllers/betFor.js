@@ -7,7 +7,6 @@ const handleBetFor = (req, res, db) =>{
 	.then(resp => {
 		let have = resp[0].balance;
 		if(have > req.body.price){
-
 			db('users')
 			.where('email', '=', req.body.email)
 			.update({balance : (have - req.body.price)})
@@ -32,10 +31,7 @@ const handleBetFor = (req, res, db) =>{
 					}) 
 				})
 
-			})	
-
-				
-
+			})		
 		}
 		if(have < req.body.price){
 			res.json("too poor");
