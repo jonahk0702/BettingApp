@@ -115,7 +115,7 @@ changeRoute = (newer) =>{
     }
 
     if(route === "buy"){
-      cur = <Buy/>;
+      cur = <Buy changeRoute={this.changeRoute}/>;
     }
 
     return (

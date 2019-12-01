@@ -5,7 +5,7 @@ import IndividaulBet from "./IndividaulBet/IndividaulBet";
 
  
 let Holder = <div></div>; 
-let sorter = 'total';
+let sorter = 'odds';
 
 class SignInHome extends Component {
   constructor(props) {
@@ -33,8 +33,17 @@ reload = (num) => {
 }
 
 cheap = () => {
-  this.setState({a:"123"});
   sorter = 'total';
+  this.setState({a:"123"});
+  console.log("I also ran");
+  
+  this.forceUpdate();
+  
+}
+goodOdds = () => {
+  sorter = 'odds';
+  console.log("I ran");
+  this.setState({a:"1234"});
 }
 
  
@@ -102,7 +111,7 @@ componentDidMount(){
                   <ToggleButton className="ma3" value={1} onClick={this.cheap}>
                     Cheapest
                   </ToggleButton>
-                  <ToggleButton className="ma3" value={2}>
+                  <ToggleButton className="ma3" value={2} onClick={this.goodOdds}>
                     Highest odds
                   </ToggleButton>
                   <ToggleButton className="ma3" value={3}>

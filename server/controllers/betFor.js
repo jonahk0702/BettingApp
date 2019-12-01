@@ -28,15 +28,15 @@ const handleBetFor = (req, res, db) =>{
 
 								db.select('amountfor', 'amountagainst', 'total').from('bets')
 								.where('id', '=', req.body.betid)
-								//.then(data => {
-								//	db('bets')
-								//	.where('id', '=', req.body.betid)
-								//	.update({amountfor :  Math.round( ( (data[0].amountfor + data[0].total)/(data[0].amountagainst + data[0].total) ))})
+								.then(data => {
+									db('bets')
+									.where('id', '=', req.body.betid)
+									.update({odds: (Math.round(( ((data[0].amountfor + data[0].total) / (data[0].amountagainst + data[0].total) )  ) * 1000) / 1000)}) // Math.round( ( (data[0].amountfor + data[0].total)/(data[0].amountagainst + data[0].total) ))})
 
 									.then(user => {
-										res.json(user[0].amountagainst);
+										res.json(user);
 									})
-								//})
+								})
 							})			
 						})
 					}) 
