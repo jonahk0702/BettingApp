@@ -29,7 +29,6 @@ class App extends Component {
   };
   }
 
-
   backgroundOptions = {
     particles: {
       number: {
