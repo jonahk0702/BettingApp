@@ -18,6 +18,9 @@ export default class NavBar extends Component {
   groups = () => {
     this.props.changeRoute("groups");
   }
+  buy = () => {
+    this.props.changeRoute("buy");
+  }
   outies = () => {
     this.props.unloadUser();
     this.props.changeRoute("home");
@@ -33,6 +36,7 @@ export default class NavBar extends Component {
           <Nav.Link onClick={this.mine}>My bets</Nav.Link>
           <Nav.Link onClick={this.profs}>Profile</Nav.Link>
           <Nav.Link onClick={this.groups}>My groups</Nav.Link>
+          <Nav.Link onClick={this.buy}>Get more B</Nav.Link>
         </Nav>
         <Form inline>
           <Nav.Link onClick={this.outies}>Sign out</Nav.Link>

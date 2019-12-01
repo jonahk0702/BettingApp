@@ -29,6 +29,7 @@ let passwordStyle = stylesHolder;
         Country:'',
         
         name:'',
+        surname:'',
         dateOfBirth: '',//Time.now,
         email: '',
         password: '',
@@ -106,7 +107,7 @@ ValidateFirst = () => {
 
 ValidateFinal = () => {
   let success = true;
-  let {Country, password, passwordConfirm, IdNumber, name, email, dateOfBirth, gender} = this.state;
+  let {Country, password, passwordConfirm, IdNumber, name, surname, email, dateOfBirth, gender} = this.state;
   
   if(password === ''){
     passwordStyle += " invalid bw1 ";
@@ -163,9 +164,9 @@ ValidateFinal = () => {
               password: password, 
               country: Country,
               name: name,
-              dateOfBirth: dateOfBirth,
+              surname: surname,
               idnumber: IdNumber,
-              gender: gender,
+              gender: gender, 
               birthday: dateOfBirth  
           })
         })
@@ -202,9 +203,9 @@ enterEmail = (newEmail) =>{
       
   }
 
-  enterSurname = (secondName) =>{
-      this.setState({secondName: secondName.target.value});
-      console.log(secondName.target.value);
+  enterSurname = (surname) =>{
+      this.setState({surname: surname.target.value});
+      console.log(surname.target.value);
     }
 
   enterDateofBirth = (dateBirth) =>{
@@ -252,17 +253,25 @@ enterEmail = (newEmail) =>{
       first = <div>
 
               <div className="mt3">
-                        <label className="db fw6 lh-copy f6">Full Name</label>
+                        <label className="db fw6 lh-copy f6">First Name</label>
                         <input 
-                        placeholder="IE John Smith"
+                        placeholder="IE John"
                         type='name'
                         onChange={this.enterName}
 
                         className={nameStyle}/>
 
               </div>
-             
-                  
+
+              <div className="mt3">
+                <label className="db fw6 lh-copy f6">Surname</label>
+                <input
+                placeholder= "IE Smith"
+                type="surname"
+                onChange={this.enterSurname}
+                className={nameStyle}/>
+              </div>
+
                 <div className="mt3">
                       <label className="db fw6 lh-copy f6">Date of Birth</label>
                       <input

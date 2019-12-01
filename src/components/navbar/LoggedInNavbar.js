@@ -10,12 +10,8 @@ export default class NavBar extends Component{
       <Navbar.Brand href="/">Custom Bets</Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link href="/">Home</Nav.Link>
-        
-    
-       
         <Nav.Link href="/howWeWork">How does this work</Nav.Link>
         <Nav.Link href="/Our-Fees">Our fees</Nav.Link>
-
       </Nav>
       <Form inline>
       
