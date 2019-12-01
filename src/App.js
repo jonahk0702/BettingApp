@@ -14,7 +14,7 @@ import CreateAccount from "./components/CreateAccount";
 //import MoreInfo from './components/MoreInfo';
 
 //import BuyConfirm from "./components/BuyConfirm";
-
+ 
 let cur; 
 class App extends Component {
   constructor(props){
@@ -61,8 +61,6 @@ reload = (num) => {
 //     replace({
 //       pathname: '/sign-In'
 //     })
-  
-
 // }
 
 
@@ -95,22 +93,22 @@ changeRoute = (newer) =>{
          cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}
           email={this.state.email} reload={this.reload}/>
     }
-    if(this.state.route === 'Create'){
+    if(route === 'Create'){
          cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
          userid={this.state.userId}/>
     }
 
 
-    if(this.state.route === 'myBets'){
+    if(route === 'myBets'){
          cur =  <MyBets changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
 
     }
    
-    if(this.state.route === 'Profile'){
+    if(route === 'Profile'){
          cur =  <Profile changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
     }
     
-    if(this.state.route === 'SignIn'){ 
+    if(route === 'SignIn'){ 
          cur =  <SignIn 
          changeRoute={this.changeRoute}
             loadUser={this.loadUser}/>
@@ -119,9 +117,7 @@ changeRoute = (newer) =>{
     return (
       <div>
         <Particles className="particles" params={this.backgroundOptions} />
-      
         {cur}
-     
       </div>
     );
   }

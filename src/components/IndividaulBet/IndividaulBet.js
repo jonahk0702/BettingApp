@@ -48,7 +48,7 @@ constructor(props) {
           <hr/>
           <Row className='tc'>
             <Col className='xl'>
-    
+            
                 <Button
                   variant="primary"
                   onClick={() => this.setState({ modalShow: true })}

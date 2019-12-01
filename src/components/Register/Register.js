@@ -36,7 +36,7 @@ let passwordStyle = stylesHolder;
 
         IdNumber: '',
         num:'', 
-        gender: 'Female'
+        gender: 'Male'
       }
     }
 

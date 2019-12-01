@@ -17,6 +17,8 @@ const db = knex({
 	connection : {
 	host : '127.0.0.1', //here it is hosted
 	user : 'postgres',
+		host : '127.0.0.1',
+		user : 'postgres',
 		password : 'test',
 		database : 'bettingapp'
 	}

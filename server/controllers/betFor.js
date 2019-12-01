@@ -1,4 +1,5 @@
 const handleBetFor = (req, res, db) =>{   
+
 	db.transaction(function(trx) {
 	db('users').transacting(trx)
 	.select("balance").from('users')
@@ -40,6 +41,7 @@ const handleBetFor = (req, res, db) =>{
 	    .then(trx.commit)
 	    .catch(trx.rollback);
 	})
+	
 	.catch(function(err) {
 	  console.error(err);
 	});

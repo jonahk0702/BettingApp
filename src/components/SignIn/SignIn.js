@@ -45,7 +45,6 @@ class signIn extends React.Component {
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data);
     if(data.id){
       id = data.id;
       this.goIn();
