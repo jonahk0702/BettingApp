@@ -22,7 +22,7 @@ class App extends Component {
     this.state = {
     a : 1,
       email: '',
-      userId: 'w000',
+      userId: '000',
       
     
     route: 'home',
@@ -43,31 +43,36 @@ class App extends Component {
   };
 
 loadUser = (email, id) => {
-
    this.setState({email: email});
    this.setState({userId: id});
-   console.log("the id is " + id);
  } 
+
+
 
 unloadUser = () => {
   this.setState({email: ''});
-  console.log("em" + this.state.email);
 }
 
+reload = (num) => {
+  this.setState({a:num});
+}
 
-requireAuth = (nextState, replace) => { 
-    replace({
-      pathname: '/sign-In'
-    })
+// requireAuth = (nextState, replace) => { 
+//     replace({
+//       pathname: '/sign-In'
+//     })
   
 
-}
+// }
+
+
 changeRoute = (newer) =>{
   this.setState({'route' : newer});
 }
 
   render() {
     let { route } = this.state;
+
     if(route === 'home'){
          cur =  <Home changeRoute={this.changeRoute} loadUser={this.loadUser}/>
     }
@@ -79,15 +84,16 @@ changeRoute = (newer) =>{
     }
   
 
-    if(this.state.route === 'Fees'){
+    if(route === 'Fees'){
              cur =  <Fees changeRoute={this.changeRoute}/>
     }
 
-    if(this.state.route === 'weWork'){
+    if(route === 'weWork'){
         cur =  <HowThisWorks changeRoute={this.changeRoute}/>
     }
     if(this.state.route === 'Explore'){
-         cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
+         cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}
+          email={this.state.email} reload={this.reload}/>
     }
     if(this.state.route === 'Create'){
          cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
@@ -110,41 +116,9 @@ changeRoute = (newer) =>{
             loadUser={this.loadUser}/>
     }
 
-/*
-
-    if(this.state.route === 'moreInfo'){
-             cur =  <MoreInfo changeRoute={this.changeRoute}/>
-    }
-
-    if(this.state.route === 'signIn'){
-             cur =  <signIn changeRoute={this.changeRoute}/>
-    }    
-
-    
-    */
-
     return (
       <div>
         <Particles className="particles" params={this.backgroundOptions} />
-
-        {
-/*          <BrowserRouter>
-            <Switch>
-
-              <Route exact path="/Explore" component={SignInHome} />
-              <Route exact path="/My-Bets" component={MyBets} />
-              <Route exact path="/Create-Bet" component={CreateBet} />
-              <Route exact path="/Profile" component={Profile} />
-              <Route exact path="/" component={Home} />
-              <Route exact path="/MoreInfo" component={MoreInfo} /> 
-              <Route exact path="/sign-In" component={signIn} />
-              <Route exact path="/Create-Account" component={CreateAccount} />
-              <Route exact path="/howWeWork" component={HowThisWorks} />
-              <Route exact path="/Our-Fees" component={Fees} />
-            </Switch>
-          </BrowserRouter>
- */       }
-
       
         {cur}
      

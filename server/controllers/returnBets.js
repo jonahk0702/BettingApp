@@ -1,5 +1,5 @@
-const handleReturnBets = (req, res, db) => {   
-	db.select('email', 'hash').from('login')
+const handleReturnBets = (req, res, db, amount) => {   
+	db.select('id').from('login')
 	
 	.then(data => {
 		const isValid = true;

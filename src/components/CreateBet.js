@@ -16,6 +16,7 @@ let ExpiryErr = "";
 
 let AmountErr = "";
 
+
 class CreateBet extends Component {
   constructor(props) {
     super();
@@ -277,7 +278,7 @@ changeRoute = (name) => {
           <Form>
   <Form.Row>
     <Col>
-      The Amount you want to bet is: <b className='red f3'> {AmountErr}</b>
+      Amount bet: <b className='red f3'> {AmountErr}</b>
     </Col>
     <Col className=''>
       <Form.Control onChange={this.handleChangeAmount} placeholder="B" />

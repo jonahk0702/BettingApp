@@ -4,11 +4,12 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./bets.css";
 import MyVerticallyCenteredModal from './MyVerticallyCenteredModal';
 
+
 export default class NavBar extends Component{
 constructor(props) {
     super();
     this.state = {
-      ID: 111111,
+      id: 111111,
       Price: 0,
       Odds: "",
       Expiry:"",
@@ -17,8 +18,17 @@ constructor(props) {
 
     };
   }
+
+  reload = (num) =>{
+    this.props.reload(num);
+  }
+
+
   render(){
-    let modalClose = () => this.setState({ modalShow: false });
+    let modalClose = () => {
+      this.setState({ modalShow: false });
+      this.reload(7);
+    }
   return (
     
 
@@ -31,9 +41,9 @@ constructor(props) {
         <Container>
           <Row>
             <Col md className='f4 tc bt bb ma1'>{this.props.name}</Col>
-            <Col xs={2} className='bb bt ma1'>1:3</Col>
-            <Col xs={2} className='bb bt ma1'>BXX.XX</Col>
-            <Col xs={2} className='bb bt ma1'>01.01.2020</Col>
+            <Col xs={2} className='bb bt ma1'>{ (Math.round(parseFloat(this.props.Odds) * 10000) /10000) }</Col>
+            <Col xs={2} className='bb bt ma1'>B{this.props.amount}</Col>
+            <Col xs={2} className='bb bt ma1'>{this.props.expiry}</Col>
           </Row>
           <hr/>
           <Row className='tc'>
@@ -60,11 +70,14 @@ constructor(props) {
                 <MyVerticallyCenteredModal
                   show={this.state.modalShow}
                   onHide={modalClose}
-                  ID = {this.state.ID}
-                  Price = {this.state.Price}
-                  Odds = {this.state.Odds}
-                  Expiry = {this.state.Expiry}
-                />
+                  id = {this.props.id}
+                  description = {this.props.name}
+                  total = {this.props.amount}
+                  odds = {this.props.Odds}
+                  expiry = {this.props.expiry}
+                  email = {this.props.email}
+                
+                /> 
               
 
             </Col>
