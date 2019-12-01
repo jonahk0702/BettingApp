@@ -11,6 +11,7 @@ import Home from "./components/Home";
 import HowThisWorks from "./components/HowThisWorks";
 import Fees from "./components/Fees";
 import CreateAccount from "./components/CreateAccount";
+import Buy from "./components/Buy";
 //import MoreInfo from './components/MoreInfo';
 
 //import BuyConfirm from "./components/BuyConfirm";
@@ -111,6 +112,10 @@ changeRoute = (newer) =>{
          cur =  <SignIn 
          changeRoute={this.changeRoute}
             loadUser={this.loadUser}/>
+    }
+
+    if(route === "buy"){
+      cur = <Buy/>;
     }
 
     return (

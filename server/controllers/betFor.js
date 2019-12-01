@@ -34,7 +34,7 @@ const handleBetFor = (req, res, db) =>{
 			})		
 		}
 		if(have < req.body.price){
-			res.json("too poor");
+			res.json("Do not have enough Bs");
 		}
 	    })
 

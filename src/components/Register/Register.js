@@ -165,9 +165,8 @@ ValidateFinal = () => {
               country: Country,
               name: name,
               surname: surname,
-              dateOfBirth: dateOfBirth,
               idnumber: IdNumber,
-              gender: gender,
+              gender: gender, 
               birthday: dateOfBirth  
           })
         })
