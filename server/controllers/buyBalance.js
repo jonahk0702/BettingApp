@@ -1,9 +1,15 @@
 const handleBuyBalance = (req, resp, db) =>{  
-    db.where('id', '=', req.body.id)
-      .update({
-          status: 'balance' + 100,
-          thisKeyIsSkipped: undefined
-      })
+    db.select('balance').from('users').where('email', '=', req.body.email)
+
+    .then(data =>{
+        db('users').where('email', '=', req.body.email)
+        .update({
+            balance: data[0].balance + req.body.amount
+        })
+        .then(data =>{
+            resp.json('success')
+        })
+    })
     }
 
 

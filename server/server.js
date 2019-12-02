@@ -11,6 +11,7 @@ const displayBet = require('./controllers/displayBet');
 const returnBets = require('./controllers/returnBets');
 const betAgainst = require('./controllers/betAgainst');
 const betFor = require('./controllers/betFor');
+const buyBalance = require('./controllers/buyBalance');
 
 const db = knex({
 	client: 'pg',
@@ -59,29 +60,11 @@ app.post('/betAgainst', (req, res) => {
 app.post('/betFor', (req, res) => {
 	betFor.handleBetFor(req, res, db)
 })
-<<<<<<< HEAD
 
 app.post('/buyBalance', (req, res) =>{
 	buyBalance.handleBuyBalance(req, res, db)
 })
 
-=======
-/*app.get('/profile/:id', (req, res) => {
-	const { id } = req.params; 
-	let found = false; 
-	database.users.forEach(user => {
-		if (user.id === id) {
-			found = true;
-			return res.json(user);
-			
-		}
-	})
-	if(!found){
-		res.status(400).json("Not found ");
-	}
-})
-*/
->>>>>>> ebc4634295611544ff19891fd5ded83d726296a0
 const PORT = process.env.PORT
 app.listen(3000, () => {
 

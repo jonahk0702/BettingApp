@@ -3,11 +3,12 @@ import NavbarIn from "./navbar/NavbarIn";
 import {Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 
 let id='';
-
+let amount = 0;
 class Buy extends Component{
     constructor(props) {
         super(); 
         this.state = {
+            amount: 0,
             id: ''
         };
       }
@@ -24,20 +25,40 @@ class Buy extends Component{
           this.props.findID();
       }
 
+      buy1 = () =>{
+          this.setState({amount: 100})
+          this.handleTransaction()
+      }
+
+      buy2 = () =>{
+          this.setState({amount: 200})
+          this.handleTransaction()
+      }
+
+      buy3 = () =>{
+        this.setState({amount: 500})
+        this.handleTransaction()
+    }
+
+    buy4 = () =>{
+        this.setState({amount: 1000})
+        this.handleTransaction()
+    }
+
       handleTransaction = () => {
         //this.findID()
         fetch('http://localhost:3000/buyBalance', {
      method: 'post',
      headers: {'Content-Type': 'application/json'},
      body: JSON.stringify({
+         amount: this.state.amount,
+         email: this.props.email
      })
     })
 
     .then(response => response.json())
     .then(data => {
-        if(data.id){
-            id = data.id;
-          }
+        console.log(data)
       })
     }
 
@@ -59,10 +80,10 @@ class Buy extends Component{
                   name="options"
                 >
 
-                  <ToggleButton className="ma3" onClick = {this.handleTransaction}>
+                  <ToggleButton className="ma3" onClick = {this.buy1}>
                     B100 for R50
                   </ToggleButton>
-                  <ToggleButton className="ma3" onClick = {this.handleTransaction}>
+                  <ToggleButton className="ma3" onClick = {this.buy2}>
                     B200 for R100
                   </ToggleButton>
                   </ToggleButtonGroup>
@@ -77,10 +98,10 @@ class Buy extends Component{
                   type="radio"
                   name="options"
                 >
-                  <ToggleButton className="ma3" onClick = {this.handleTransaction}>
+                  <ToggleButton className="ma3" onClick = {this.buy3}>
                     B500 for R250
                   </ToggleButton>
-                  <ToggleButton className="ma3" onClick = {this.handleTransaction}>
+                  <ToggleButton className="ma3" onClick = {this.buy4}>
                     B1000 for R500
                   </ToggleButton>
                   </ToggleButtonGroup>

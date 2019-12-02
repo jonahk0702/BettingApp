@@ -22,19 +22,11 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-<<<<<<< HEAD
     a : 1,
     email: '',
     userId: '000',  
     route: 'home',
   };
-=======
-      a : 1,
-      email: '',
-      userId: '000',
-      route: 'home'
-    };
->>>>>>> ebc4634295611544ff19891fd5ded83d726296a0
   }
 
   backgroundOptions = {
@@ -102,11 +94,7 @@ getID = () =>{
     }
     if(this.state.route === 'Explore'){
          cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}
-<<<<<<< HEAD
           email={this.state.email} reload={this.reload} userId={this.state.userId}/>
-=======
-          email={this.state.email} reload={this.reload} loadData={this.loadData}/>
->>>>>>> ebc4634295611544ff19891fd5ded83d726296a0
     }
     if(route === 'Create'){
          cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
@@ -130,11 +118,8 @@ getID = () =>{
     }
 
     if(route === "buy"){
-<<<<<<< HEAD
-      cur = <Buy changeRoute={this.changeRoute} unloadUser={this.unloadUser} findID = {this.getID}/>;
-=======
-      cur = <Buy changeRoute={this.changeRoute}/>;
->>>>>>> ebc4634295611544ff19891fd5ded83d726296a0
+      cur = <Buy changeRoute={this.changeRoute} unloadUser={this.unloadUser} findID = {this.getID} 
+      email={this.state.email}/>;
     }
 
     return (
