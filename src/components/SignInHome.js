@@ -3,8 +3,9 @@ import {Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} fro
 import NavbarIn from "./navbar/NavbarIn";
 import IndividaulBet from "./IndividaulBet/IndividaulBet";
 
-
+ 
 let Holder = <div></div>; 
+let sorter = 'total';
 
 class SignInHome extends Component {
   constructor(props) {
@@ -31,6 +32,17 @@ reload = (num) => {
   this.props.unloadUser();
 }
 
+cheap = () => {
+  sorter = 'total';
+  this.setState({a:"123"});
+  console.log("I also ran");  
+}
+goodOdds = () => {
+  sorter = 'odds';
+  console.log("I ran");
+  this.setState({a:"1234"});
+}
+
  
 
 componentDidMount(){  
@@ -49,9 +61,9 @@ componentDidMount(){
      method: 'post',
      headers: {'Content-Type': 'application/json'},
      body: JSON.stringify({
-    
+      sorter:sorter
      })
-    })
+    }) 
     .then(response => response.json())
     .then(data => {
       console.log(data);
@@ -59,8 +71,7 @@ componentDidMount(){
        Holder = data.map((user, i) => { 
           return <IndividaulBet key={i} id={data[i].id} name={data[i].description} amount={data[i].total}
                   Odds={(((data[i].amountagainst + data[i].total)/(data[i].amountfor + data[i].total) )) + ":" + "1"}
-                  expiry={data[i].expiry} email={this.props.email} reload={this.props.reload}
-          />
+                  expiry={data[i].expiry} email={this.props.email}          />
 
         }) 
        console.log("The user id is " + this.props.userId);
@@ -93,14 +104,14 @@ componentDidMount(){
                   defaultValue={1}
                 >
 
-                  <ToggleButton className="ma3" value={1}>
-                    Most Popular
+                  <ToggleButton className="ma3" value={1} onClick={this.cheap}>
+                    Cheapest
                   </ToggleButton>
-                  <ToggleButton className="ma3" value={2}>
+                  <ToggleButton className="ma3" value={2} onClick={this.goodOdds}>
                     Highest odds
                   </ToggleButton>
                   <ToggleButton className="ma3" value={3}>
-                    Highest Wager
+                    Expire Soonest
                   </ToggleButton>
                   <ToggleButton className="ma3" value={4}>
                     Lowest Wager

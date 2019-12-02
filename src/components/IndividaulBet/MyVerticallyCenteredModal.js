@@ -23,10 +23,12 @@ class MyVerticallyCenteredModal extends React.Component {
      console.log(data) 
      this.props.onHide();
    });
+
+   this.changeRoute("Explore");
     }
 
     reload = (num) => {
-      this.props.reload(num);
+   //   this.props.reload(num);
     }
 
     buyFor = () =>{
@@ -47,6 +49,10 @@ class MyVerticallyCenteredModal extends React.Component {
      this.props.onHide();
     
    });
+    }
+
+    changeRoute =(route) => {
+      this.props.changeRoute(route);
     }
     
   render() {
