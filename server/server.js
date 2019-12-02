@@ -62,6 +62,10 @@ app.post('/betFor', (req, res) => {
 	betFor.handleBetFor(req, res, db)
 })
 
+app.post('/buyBalance', (req, res) =>{
+	buyBalance.handleBuyBalance(req, res, db)
+})
+
 const PORT = process.env.PORT
 app.listen(3000, () => {
 

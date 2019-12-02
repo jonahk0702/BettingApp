@@ -56,7 +56,7 @@ componentDidMount(){
     .then(data => {
       console.log(data);
         
-       Holder = data.map((user, i) => {
+       Holder = data.map((user, i) => { 
           return <IndividaulBet key={i} id={data[i].id} name={data[i].description} amount={data[i].total}
                   Odds={(((data[i].amountagainst + data[i].total)/(data[i].amountfor + data[i].total) )) + ":" + "1"}
                   expiry={data[i].expiry} email={this.props.email} reload={this.props.reload}

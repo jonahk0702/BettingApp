@@ -22,10 +22,8 @@ class App extends Component {
     super(props);
     this.state = {
     a : 1,
-      email: '',
-      userId: '000',
-      
-    
+    email: '',
+    userId: '000',  
     route: 'home',
   };
   }
@@ -68,6 +66,11 @@ changeRoute = (newer) =>{
   this.setState({'route' : newer});
 }
 
+getID = () =>{
+  console.log(this.state.userId);
+  return this.state.userId;
+}
+
   render() {
     let { route } = this.state;
 
@@ -91,7 +94,7 @@ changeRoute = (newer) =>{
     }
     if(this.state.route === 'Explore'){
          cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}
-          email={this.state.email} reload={this.reload}/>
+          email={this.state.email} reload={this.reload} userId={this.state.userId}/>
     }
     if(route === 'Create'){
          cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
@@ -115,7 +118,7 @@ changeRoute = (newer) =>{
     }
 
     if(route === "buy"){
-      cur = <Buy/>;
+      cur = <Buy changeRoute={this.changeRoute} unloadUser={this.unloadUser} findID = {this.getID}/>;
     }
 
     return (

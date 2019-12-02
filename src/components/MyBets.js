@@ -11,7 +11,7 @@ class MyBets extends Component {
   };
 }
 
-changeRoute = (name) =>{
+changeRoute = (name) =>{ 
   this.props.changeRoute(name); 
 }
 
