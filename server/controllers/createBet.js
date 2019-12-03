@@ -11,6 +11,7 @@ const handleCreateBet = (req, res, db) => {
 		usersfor: userid + "-",
 		usersagainst: "",
 		odds: 0.5,
+		popular: 1
 		
 	})
 	.then(bet => {

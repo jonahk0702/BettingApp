@@ -5,7 +5,6 @@ import IndividaulBet from "./IndividaulBet/IndividaulBet";
 
  
 let Holder = <div></div>; 
-let sorter = 'total';
 
 class SignInHome extends Component {
   constructor(props) {
@@ -33,28 +32,46 @@ reload = (num) => {
 }
 
 cheap = () => {
-  sorter = 'total';
-  this.setState({a:"123"});
-  console.log("I also ran");  
-}
-goodOdds = () => {
-  sorter = 'odds';
-  console.log("I ran");
-  this.setState({a:"1234"});
+  this.makeItEfficieant('total');  
 }
 
+goodOdds = () => {
+  this.makeItEfficieant('odds');  
+}
+
+expires = () => {
+  this.makeItEfficieant('expiry');  
+}
+
+popular = () => {
+  this.makeItEfficieant('popular');
+}
+
+makeItEfficieant = (sortBy) => {
+  Holder = <div></div>; 
+  this.grabbingBets(sortBy);
+  this.setState({a:sortBy});
+
+}
  
 
 componentDidMount(){  
+  this.grabbingBets('total');
+}
+
+grabbingBets = (sorter) => {
+
   fetch('http://localhost:3000/displayBet', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
+      email: this.props.email
     })
    })
    .then(response => response.json())
    .then(data => {
-     console.log(data) 
+    //THis is just used to make sure that a bet was returned
+      //console.log(data) 
    });
 
    fetch('http://localhost:3000/returnBets', {
@@ -66,7 +83,7 @@ componentDidMount(){
     }) 
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+    //  console.log(data);
         
        Holder = data.map((user, i) => { 
           return <IndividaulBet key={i} id={data[i].id} name={data[i].description} amount={data[i].total}
@@ -110,11 +127,11 @@ componentDidMount(){
                   <ToggleButton className="ma3" value={2} onClick={this.goodOdds}>
                     Highest odds
                   </ToggleButton>
-                  <ToggleButton className="ma3" value={3}>
+                  <ToggleButton className="ma3" value={3} onClick={this.expires}>
                     Expire Soonest
                   </ToggleButton>
-                  <ToggleButton className="ma3" value={4}>
-                    Lowest Wager
+                  <ToggleButton className="ma3" value={4} onClick={this.popular}>
+                    Most Popular
                   </ToggleButton>
                 </ToggleButtonGroup>
               </ButtonToolbar> 

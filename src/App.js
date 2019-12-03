@@ -17,6 +17,7 @@ import Buy from "./components/Buy";
 //import BuyConfirm from "./components/BuyConfirm";
  
 let cur; 
+let runOnce = false;
 
 class App extends Component {
   constructor(props){
@@ -43,8 +44,8 @@ class App extends Component {
 
 loadUser = (email, id) => {
    this.setState({email: email});
-   this.setState({userId: id});
- } 
+  this.getId(email);
+ }  
 
 
 unloadUser = () => {
@@ -55,20 +56,29 @@ reload = (num) => {
   this.setState({state: this.state});
 }
 
-// requireAuth = (nextState, replace) => { 
-//     replace({
-//       pathname: '/sign-In'
-//     })
-// }
 
 
 changeRoute = (newer) =>{
   this.setState({'route' : newer});
 }
 
-getID = () =>{
-  console.log(this.state.userId);
-  return this.state.userId;
+getId = (email) => {
+  console.log("when I run email is " + email + " - " + this.state.email );
+    fetch('http://localhost:3000/getId', {
+     method: 'post',
+     headers: {'Content-Type': 'application/json'},
+     body: JSON.stringify({
+        email: email
+     })
+    })
+
+    .then(response => response.json())
+    .then(data => {
+      console.log(data + " is the data");
+      this.setState({userId: data});
+     // console.log("The id is " + this.state.userId);
+       
+      })
 }
 
   render() {
@@ -93,9 +103,17 @@ getID = () =>{
         cur =  <HowThisWorks changeRoute={this.changeRoute}/>
     }
     if(this.state.route === 'Explore'){
-         cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}
+      if(runOnce === false){
+       // console.log("Just know emial is " + this.state.email);
+       // this.getId(this.state.email);
+        runOnce = true;
+
+      }
+        cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}
           email={this.state.email} reload={this.reload} userId={this.state.userId}/>
     }
+
+
     if(route === 'Create'){
          cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
          userid={this.state.userId}/>
@@ -118,7 +136,7 @@ getID = () =>{
     }
 
     if(route === "buy"){
-      cur = <Buy changeRoute={this.changeRoute} unloadUser={this.unloadUser} findID = {this.getID} 
+      cur = <Buy changeRoute={this.changeRoute} unloadUser={this.unloadUser}  
       email={this.state.email}/>;
     }
 

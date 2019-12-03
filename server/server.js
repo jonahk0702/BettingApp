@@ -12,7 +12,8 @@ const returnBets = require('./controllers/returnBets');
 const betAgainst = require('./controllers/betAgainst');
 const betFor = require('./controllers/betFor');
 const buyBalance = require('./controllers/buyBalance');
-
+const getId = require('./controllers/getId');
+ 
 const db = knex({
 	client: 'pg',
 	connection : {
@@ -65,30 +66,12 @@ app.post('/buyBalance', (req, res) =>{
 	buyBalance.handleBuyBalance(req, res, db)
 })
 
+app.post('/getId', (req, res) =>{
+	getId.handleGetId(req, res, db)
+})
+
 const PORT = process.env.PORT
 app.listen(3000, () => {
 
 	console.log("app is running on port 3000");
 });
-//the acutal plan
-/* - Maybe start all the way from the begining 
-   - Maybe just build the array, and move forward on ma, 
-   - 
-*/
-
-
-/*The first thing to make is npm init -m
-Then npm install nodmon --save-dev. this just hekp wheb develoting
-under scripts chahnge test to start and the whole message to nodemon + file name
-npm install express
-I got post man now. it tests server befor connecting to front
-to ever use req.body use body parser. Probs alawys, its npm install body-parser
-some really great Bcrypt options
-- bcrypt.hash("bacon", null,null, function(err, hash){
-	//Store hash in passwrod DB
-});
-- bcrypt.compare("Bacon", hash, function(err, res) {
-	//res == true if matches else fales
-});
-- bcrypt
-*/
