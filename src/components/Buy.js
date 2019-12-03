@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import NavbarIn from "./navbar/NavbarIn";
 import {Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 
-let id='';
-let amount = 0;
 class Buy extends Component{
     constructor(props) {
         super(); 

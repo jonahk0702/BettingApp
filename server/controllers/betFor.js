@@ -34,7 +34,18 @@ const handleBetFor = (req, res, db) =>{
 									.update({odds: (Math.round(( ((data[0].amountfor + data[0].total) / (data[0].amountagainst + data[0].total) )  ) * 1000) / 1000)}) // Math.round( ( (data[0].amountfor + data[0].total)/(data[0].amountagainst + data[0].total) ))})
 
 									.then(user => {
-										res.json(user);
+										db.select('popular').from('bets')
+										.where('id', '=', req.body.betid)
+										.then(data => {
+											db('bets')
+											.where('id', '=', req.body.betid)
+											.update({popular :  (data[0].popular + 1)})
+											.then(user =>{
+												res.json(user);
+											})
+
+										})
+										
 									})
 								})
 							})			

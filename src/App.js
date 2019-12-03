@@ -63,7 +63,6 @@ changeRoute = (newer) =>{
 }
 
 getId = (email) => {
-  console.log("when I run email is " + email + " - " + this.state.email );
     fetch('http://localhost:3000/getId', {
      method: 'post',
      headers: {'Content-Type': 'application/json'},
@@ -74,7 +73,7 @@ getId = (email) => {
 
     .then(response => response.json())
     .then(data => {
-      console.log(data + " is the data");
+      console.log(data + " is users Id! Finnaly");
       this.setState({userId: data});
      // console.log("The id is " + this.state.userId);
        

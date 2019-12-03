@@ -6,13 +6,13 @@ import {Modal, Button} from "react-bootstrap";
 class MyVerticallyCenteredModal extends React.Component {
 
 
-  buyAgainst = () =>{
+ buyAgainst = () =>{
     fetch('http://localhost:3000/betAgainst', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       //Need a bet ID and a User ID
-       email: this.props.email,
+      email: this.props.email,
       price: this.props.total,
       betid: this.props.id
 
@@ -20,11 +20,9 @@ class MyVerticallyCenteredModal extends React.Component {
    })
    .then(response => response.json())
    .then(data => {
-     console.log(data) 
      this.props.onHide();
+    
    });
-
-   this.changeRoute("Explore");
     }
 
     reload = (num) => {
@@ -45,7 +43,6 @@ class MyVerticallyCenteredModal extends React.Component {
    })
    .then(response => response.json())
    .then(data => {
-     console.log(data);
      this.props.onHide();
     
    });

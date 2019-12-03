@@ -10,7 +10,11 @@ class SignInHome extends Component {
   constructor(props) {
     super(); 
     this.state = {
-      a:'1'
+      //I know this is messy but hear me out. To reload a page we need a state change.
+      //SO if I cannt change a (because it is used for sorting as well as reloads)
+      //I will just change B
+      a:'total',
+      b:'1'
       
     };
   }
@@ -53,6 +57,22 @@ makeItEfficieant = (sortBy) => {
   this.setState({a:sortBy});
 
 }
+
+bought = () => {
+  if(this.state.a === 'total'){
+    this.makeItEfficieant('total');
+  }
+  if(this.state.a === 'popular'){
+    this.makeItEfficieant('popular');
+  }
+  if(this.state.a === 'expiry'){
+    this.makeItEfficieant('expiry');
+  }
+  if(this.state.a === 'odds'){
+    this.makeItEfficieant('odds');
+  }
+}
+
  
 
 componentDidMount(){  
@@ -87,12 +107,15 @@ grabbingBets = (sorter) => {
         
        Holder = data.map((user, i) => { 
           return <IndividaulBet key={i} id={data[i].id} name={data[i].description} amount={data[i].total}
-                  Odds={(((data[i].amountagainst + data[i].total)/(data[i].amountfor + data[i].total) )) + ":" + "1"}
-                  expiry={data[i].expiry} email={this.props.email}          />
+                  Odds={(((data[i].amountfor + data[i].total)/(data[i].amountagainst + data[i].total) ))}
+                  expiry={data[i].expiry} email={this.props.email} bought={this.bought}       />
 
         }) 
-       console.log("The user id is " + this.props.userId);
-       this.setState({a:"1"});
+       if(this.state.b === '1'){
+        this.setState({b:'2'});
+       }else{
+        this.setState({b: '1'});
+       }
     });
    
     

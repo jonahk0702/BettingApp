@@ -10,7 +10,7 @@ const handleCreateBet = (req, res, db) => {
 		expiry:expiry,
 		usersfor: userid + "-",
 		usersagainst: "",
-		odds: 0.5,
+		odds: 2,
 		popular: 1
 		
 	})

@@ -16,17 +16,39 @@ const handleBetAgainst = (req, res, db) =>{
 				.then(data => { 
 					db('records')
 					.where('email', '=', req.body.email)
-					.update({betagainst :  data[0].betfor + req.body.betid})
-				.then(resp => {
+					.update({betagainst :  data[0].betagainst + req.body.betid})
+					.then(resp => {
 						db.select('amountagainst').from('bets')
 						.where('id', '=', req.body.betid)
 						.then(data => {
 							db('bets')
 							.where('id', '=', req.body.betid)
-							.update({amountagainst :  data[0].amountfor + req.body.price})
-							.then(user => {
-								res.json("success");
-							})
+							.update({amountagainst :  data[0].amountagainst + req.body.price})
+							.then(resp => {
+
+								db.select('amountfor', 'amountagainst', 'total').from('bets')
+								.where('id', '=', req.body.betid)
+								.then(data => {
+									db('bets')
+									.where('id', '=', req.body.betid)
+									.update({odds: (Math.round(( ((data[0].amountfor + data[0].total) / (data[0].amountagainst + data[0].total) )  ) * 1000) / 1000)}) // Math.round( ( (data[0].amountfor + data[0].total)/(data[0].amountagainst + data[0].total) ))})
+
+									.then(user => {
+										db.select('popular').from('bets')
+										.where('id', '=', req.body.betid)
+										.then(data => {
+											db('bets')
+											.where('id', '=', req.body.betid)
+											.update({popular :  (data[0].popular + 1)})
+											.then(user =>{
+												res.json(user);
+											})
+
+										})
+										
+									})
+								})
+							})			
 						})
 					}) 
 				})
@@ -37,7 +59,7 @@ const handleBetAgainst = (req, res, db) =>{
 
 		}
 		if(have < req.body.price){
-			res.json("too poor");
+			res.json("Do not have enough Bs");
 		}
 	    })
 
@@ -48,7 +70,6 @@ const handleBetAgainst = (req, res, db) =>{
 	  console.error(err);
 	});
 }
-
 
 module.exports = {
 	handleBetAgainst:handleBetAgainst
