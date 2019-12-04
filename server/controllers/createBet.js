@@ -15,7 +15,28 @@ const handleCreateBet = (req, res, db) => {
 		
 	})
 	.then(bet => {
-		res.json(bet[0]);
+		db.select('betfor', 'amount').from('records')
+		.where('email', '=', req.body.email)
+		.then(data => {
+			db('records')
+			.where('email', '=', req.body.email)
+			.update({
+				betfor :  data[0].betfor + req.body.userid + "-",
+				amount: (data[0].amount + 1)
+			})
+			.then(resp => {
+				db('records')
+				.where('email', '=', req.body.email)
+				.update({
+					amountfor :  amountfor,
+					amountagainst : 0000
+				})
+				.then(user => {
+					res.json("Success");
+				})
+			})
+		})
+		
 	})
 	.catch(err => res.status(400).json('Unable to bet here'))
 	

@@ -29,13 +29,14 @@ class CreateConfirmModal extends Component {
               total: this.props.price,
               expiry: this.props.expiry,
               amountagainst: 0,
-              userid: this.props.userid
+              userid: this.props.userid,
+              email: this.props.email
           })
         })
    .then(response => response.json())
    .then(user => {
-    if(user.id){   
-      console.log(user.id);
+    console.log(user);
+    if(user === "Success"){   
       this.setState({justConfirm:false});
    //   this.changeRoute("Explore");
 

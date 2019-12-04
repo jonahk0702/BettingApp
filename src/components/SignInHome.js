@@ -77,6 +77,7 @@ bought = () => {
 
 componentDidMount(){  
   this.grabbingBets('total');
+  console.log("id is " + this.props.userId);
 }
 
 grabbingBets = (sorter) => {
@@ -106,9 +107,9 @@ grabbingBets = (sorter) => {
     //  console.log(data);
         
        Holder = data.map((user, i) => { 
-          return <IndividaulBet key={i} id={data[i].id} name={data[i].description} amount={data[i].total}
+          return <IndividaulBet key={i} betid={data[i].id} name={data[i].description} amount={data[i].total}
                   Odds={(((data[i].amountfor + data[i].total)/(data[i].amountagainst + data[i].total) ))}
-                  expiry={data[i].expiry} email={this.props.email} bought={this.bought}       />
+                  expiry={data[i].expiry} email={this.props.email} bought={this.bought} userId={this.props.userId}      />
 
         }) 
        if(this.state.b === '1'){

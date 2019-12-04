@@ -300,6 +300,7 @@ changeRoute = (name) => {
                   show={this.state.modalShow}
                   onHide={modalClose}
                   userid = {this.props.userid}
+                  email={this.props.email}
                   id = {this.state.ID}
                   price = {this.state.Amount}
                   expiry = {this.state.daySet + "/" + this.state.MonthSet + "/" + this.state.YearSet}

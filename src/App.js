@@ -18,6 +18,7 @@ import Buy from "./components/Buy";
  
 let cur; 
 let runOnce = false;
+let waiter = false;
 
 class App extends Component {
   constructor(props){
@@ -62,7 +63,7 @@ changeRoute = (newer) =>{
   this.setState({'route' : newer});
 }
 
-getId = (email) => {
+getId =  async (email) => {
     fetch('http://localhost:3000/getId', {
      method: 'post',
      headers: {'Content-Type': 'application/json'},
@@ -74,7 +75,9 @@ getId = (email) => {
     .then(response => response.json())
     .then(data => {
       console.log(data + " is users Id! Finnaly");
+      waiter = true; 
       this.setState({userId: data});
+      
      // console.log("The id is " + this.state.userId);
        
       })
@@ -101,13 +104,7 @@ getId = (email) => {
     if(route === 'weWork'){
         cur =  <HowThisWorks changeRoute={this.changeRoute}/>
     }
-    if(this.state.route === 'Explore'){
-      if(runOnce === false){
-       // console.log("Just know emial is " + this.state.email);
-       // this.getId(this.state.email);
-        runOnce = true;
-
-      }
+    if(this.state.route === 'Explore' && waiter === true){
         cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}
           email={this.state.email} reload={this.reload} userId={this.state.userId}/>
     }
@@ -115,12 +112,12 @@ getId = (email) => {
 
     if(route === 'Create'){
          cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
-         userid={this.state.userId}/>
+         userid={this.state.userId} email={this.state.email}/>
     }
 
 
     if(route === 'myBets'){
-         cur =  <MyBets changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
+         cur =  <MyBets changeRoute={this.changeRoute} unloadUser={this.unloadUser} email={this.state.email}/>
 
     }
    

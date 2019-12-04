@@ -13,6 +13,8 @@ const betAgainst = require('./controllers/betAgainst');
 const betFor = require('./controllers/betFor');
 const buyBalance = require('./controllers/buyBalance');
 const getId = require('./controllers/getId');
+const getMyBets = require('./controllers/getMyBets');
+
  
 const db = knex({
 	client: 'pg',
@@ -69,6 +71,11 @@ app.post('/buyBalance', (req, res) =>{
 app.post('/getId', (req, res) =>{
 	getId.handleGetId(req, res, db)
 })
+
+app.post('/getMyBets', (req, res) =>{
+	getMyBets.handleGetMyBets(req, res, db)
+})
+
 
 const PORT = process.env.PORT
 app.listen(3000, () => {

@@ -14,7 +14,9 @@ class MyVerticallyCenteredModal extends React.Component {
       //Need a bet ID and a User ID
       email: this.props.email,
       price: this.props.total,
-      betid: this.props.id
+      betid: this.props.id,
+
+      userId: this.props.userid
 
     })
    })
@@ -37,19 +39,20 @@ class MyVerticallyCenteredModal extends React.Component {
       //Need a bet ID and a User ID
       email: this.props.email,
       price: this.props.total,
-      betid: this.props.id
-
+      betid: this.props.betid,
+      userId: this.props.userid
     })
    })
    .then(response => response.json())
    .then(data => {
+    console.log(data);
      this.props.onHide();
     
    });
     }
 
     changeRoute =(route) => {
-      this.props.changeRoute(route);
+      this.props.changeRoute(route); 
     }
     
   render() {

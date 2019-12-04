@@ -51,7 +51,7 @@ constructor(props) {
           <Row className='tc'>
             <Col className='xl'>
             
-                <Button
+                <Button 
                   variant="primary"
                   onClick={() => this.setState({ modalShow: true })}
                   className='ma1 reds tc w-20 h-20'
@@ -62,13 +62,13 @@ constructor(props) {
                 <MyVerticallyCenteredModal
                   show={this.state.modalShow}
                   onHide={modalClose}
-                  id = {this.props.id}
+                  betid = {this.props.betid}
                   description = {this.props.name}
                   total = {this.props.amount}
                   odds = {this.props.Odds}
                   expiry = {this.props.expiry}
                   email = {this.props.email}
-                  
+                  userid={this.props.userId}
                 
                 /> 
               

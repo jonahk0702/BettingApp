@@ -11,12 +11,16 @@ const handleBetAgainst = (req, res, db) =>{
 			.where('email', '=', req.body.email)
 			.update({balance : (have - req.body.price)})
 			.then(resp => {
-				db.select('betagainst').from("records")
+				db.select('betagainst', 'betfor').from("records")
 				.where('email', '=', req.body.email)
 				.then(data => { 
 					db('records')
 					.where('email', '=', req.body.email)
-					.update({betagainst :  data[0].betagainst + req.body.betid})
+					.update({
+						betagainst :  data[0].betagainst + req.body.userId + "-",
+						betfor: data[0].betfor + 0 + "-" 
+
+					})
 					.then(resp => {
 						db.select('amountagainst').from('bets')
 						.where('id', '=', req.body.betid)
