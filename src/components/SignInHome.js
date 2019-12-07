@@ -5,7 +5,7 @@ import IndividaulBet from "./IndividaulBet/IndividaulBet";
 
  
 let Holder = <div></div>; 
-
+let balance=0;
 class SignInHome extends Component {
   constructor(props) {
     super(); 
@@ -13,15 +13,11 @@ class SignInHome extends Component {
       //I know this is messy but hear me out. To reload a page we need a state change.
       //SO if I cannt change a (because it is used for sorting as well as reloads)
       //I will just change B
-      a:'total',
+      a:'total', 
       b:'1'
       
     };
   }
-
-loadBets = () => {
-  console.log("s");
-}
 
 reload = (num) => {
   this.props.reload(num);
@@ -52,9 +48,12 @@ popular = () => {
 }
 
 makeItEfficieant = (sortBy) => {
+  this.getTotal();
   Holder = <div></div>; 
   this.grabbingBets(sortBy);
+    
   this.setState({a:sortBy});
+
 
 }
 
@@ -77,23 +76,28 @@ bought = () => {
 
 componentDidMount(){  
   this.grabbingBets('total');
-  console.log("id is " + this.props.userId);
+  this.getTotal()
 }
 
-grabbingBets = (sorter) => {
-
-  fetch('http://localhost:3000/displayBet', {
+getTotal = () => {
+  fetch('http://localhost:3000/getBalance', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      email: this.props.email
+      id: this.props.userId
     })
    })
    .then(response => response.json())
    .then(data => {
-    //THis is just used to make sure that a bet was returned
-      //console.log(data) 
+     balance = data;
+     this.setState({b:'5'});
    });
+
+}
+
+grabbingBets = (sorter) => {
+
+  //I dont think I ever use display bets endpoint
 
    fetch('http://localhost:3000/returnBets', {
      method: 'post',
@@ -104,7 +108,6 @@ grabbingBets = (sorter) => {
     }) 
     .then(response => response.json())
     .then(data => {
-    //  console.log(data);
         
        Holder = data.map((user, i) => { 
           return <IndividaulBet key={i} betid={data[i].id} name={data[i].description} amount={data[i].total}
@@ -135,9 +138,14 @@ grabbingBets = (sorter) => {
         <br />
         <Container>
           <Row>
-            <Col className="tc f3 solidBR">
-              How should we order all open Bets?
-              <ButtonToolbar className="center mw5 mw7-ns center bg-light-gray pa3 ph5-ns">
+              <Col className="tc f3 solidBR">
+              <span className=''>
+                <br/>    
+                Your balance is: {balance}
+                <hr/> 
+              </span> 
+              <ButtonToolbar className="center mw5 mw7-ns center bg-light-gray pa2 ma3 ph5-ns">
+              <span className='tc h6 center'>Sort Bets By:</span> 
                 <ToggleButtonGroup
                   className="center "
                   type="radio"
@@ -145,23 +153,22 @@ grabbingBets = (sorter) => {
                   defaultValue={1}
                 >
 
-                  <ToggleButton className="ma3" value={1} onClick={this.cheap}>
+                  <ToggleButton className="ma2" value={1} onClick={this.cheap}>
                     Cheapest
                   </ToggleButton>
-                  <ToggleButton className="ma3" value={2} onClick={this.goodOdds}>
+                  <ToggleButton className="ma2" value={2} onClick={this.goodOdds}>
                     Highest odds
                   </ToggleButton>
-                  <ToggleButton className="ma3" value={3} onClick={this.expires}>
+                  <ToggleButton className="ma2" value={3} onClick={this.expires}>
                     Expire Soonest
                   </ToggleButton>
-                  <ToggleButton className="ma3" value={4} onClick={this.popular}>
+                  <ToggleButton className="ma2" value={4} onClick={this.popular}>
                     Most Popular
                   </ToggleButton>
                 </ToggleButtonGroup>
               </ButtonToolbar> 
 
             
-              <br />
               <hr />
               <br/> 
               <div className='tc'>

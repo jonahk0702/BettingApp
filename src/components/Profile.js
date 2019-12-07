@@ -48,7 +48,7 @@ class Profile extends Component {
               
           <Row>
           <Col className='pa4 ma5 ba'>
-          <br/>
+          <br/> 
             <h3 className='i pointer'>How does __ really work?</h3>
             <hr/>
             <br/>

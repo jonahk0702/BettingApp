@@ -1,10 +1,17 @@
 import React, { Component } from "react";
-import { Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import { Container, Row, Col} from "react-bootstrap";
 import NavbarIn from './navbar/NavbarIn'
 import IndividaulBet from './IndividaulBet/IndividaulBet';
 
 let Holder = <div></div>;
 
+let amountOfBets = 0;
+let betAmount = [];
+//let amountFor = [];
+//let amountAgainst = [];
+let descriptions = [];
+let betForr = [];
+let betIds = [];
 
 class MyBets extends Component {
   constructor(props) {
@@ -24,6 +31,15 @@ unloadUser = () => {
   this.props.unloadUser();
 }
 
+addAmount = (raw) => {
+  let str = '';
+  for(let i = 0; i < raw.length; i++ ){
+      if(raw[i] !== 'o'){
+        str += raw[i];
+      }
+  }
+  betAmount.push(str);//parseInt(str));
+}
 
 makeArray = () => 
 {
@@ -33,6 +49,7 @@ makeArray = () =>
 }
 
 componentDidMount(){  
+ // this.getDiscription();
 
    fetch('http://localhost:3000/getMyBets', {
      method: 'post',
@@ -43,16 +60,72 @@ componentDidMount(){
     }) 
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-        
-       // Holder = data.map((user, i) => { 
-       //    return <IndividaulBet key={i} id={data[i].id} name={data[i].description} amount={data[i].total}
-       //            Odds={(((data[i].amountfor + data[i].total)/(data[i].amountagainst + data[i].total) ))}
-       //            expiry={data[i].expiry} email={this.props.email} bought={this.bought}       />
+      
+      amountOfBets = data.amount;
+      for(let i = 0; i < amountOfBets; i ++){
 
-       //  }) 
+        let start = (i*7) + 5;
+        let end = ((i*7) + 11);
+        if( (data.betfor.substring( start, end)) === '000000' ){
+          betForr.push(false);
+          let rawAmount = data.amountagainst.substring( start, end);
+          this.addAmount(rawAmount);
+          betIds.push( (data.betagainst.substring(start, end))) ;
+        }else{
+          betForr.push(true);
+          let rawAmount = data.amountfor.substring(start, end);
+          betIds.push( (data.betfor.substring(start, end)));
+          this.addAmount(rawAmount);
+        }
+      }
+      this.getDiscription();
      
     });
+}
+
+getDiscription = () => {
+  fetch('http://localhost:3000/getBetDescriptions', {
+     method: 'post',
+     headers: {'Content-Type': 'application/json'},
+     body: JSON.stringify({
+      email:this.props.email
+     })
+    }) 
+    .then(response => response.json())
+    .then(data => {
+        let allBets = data;
+        console.log(data);
+        for(let a = 0; a < amountOfBets; a ++){
+
+          for(let b = 0; b < allBets.length; b ++){
+            if(betIds[a] === allBets[b].id){
+              
+              descriptions.push(allBets[b].description);
+            }
+          }
+        }
+        
+        Holder = betAmount.map((user, i) => {
+          return <IndividaulBet key={i} name={descriptions[i]} amount={betAmount[i]}
+                  // Odds={(((data[i].amountfor + data[i].total)/(data[i].amountagainst + data[i].total) ))}
+                  // expiry={data[i].expiry}
+                          />
+        }) 
+
+        if(betAmount.length === 0){
+          Holder =  <div>
+                      <div>
+                        <span className='h3 i'>You have no current bets. </span>
+                        <br/>
+                        <br/>
+                        <hr/>
+                      </div>
+                    </div>
+        }
+
+         this.setState({b:'1'});
+      });
+
 }
 
   render() {
@@ -70,10 +143,7 @@ componentDidMount(){
 
         
           <hr/><br/>
-          <IndividaulBet name={"I bet that Ramaposa is an Alien"}/>
-           <IndividaulBet name={"I bet the Mac Miller faked his death"}/> 
-           <IndividaulBet name={"I bet that Micheal Obama is "}/>
-
+          {Holder}
  			   </Col>
   		
 			</Row>

@@ -37,7 +37,8 @@ let passwordStyle = stylesHolder;
 
         IdNumber: '',
         num:'', 
-        gender: 'Male'
+        gender: 'Male',
+        userid: ''
       }
     }
 
@@ -49,6 +50,7 @@ let passwordStyle = stylesHolder;
  }
 
  loadUser = (email, id) =>{
+
   this.props.loadUser(email, id);
  }
 
@@ -95,8 +97,9 @@ ValidateFirst = () => {
       && email.includes('.') && email.includes('@')){
         currentPage = 2;
         FirstMSG = '';
-      }
 
+      }
+    this.createId();
 
     this.setState({num: 'a'});
 
@@ -137,54 +140,108 @@ ValidateFinal = () => {
        
   
 
-
-  if (password.length < 8 || password.toUpperCase() === password || password.toLowerCase()
-          === password || (isNaN(parseFloat(password)) && isFinite(password))){
-          passwordMsg = 'Please chose a valid password. Check below for our password guidlines.';
-          success = false;
-        }else{
-          if(password === passwordConfirm){
-            passwordMsg = '';
-            passwordStyle = stylesHolder;
-           }
-           else{
-              passwordMsg = 'Please make sure the passwords match';
-              success = false;
-           }
-        }
+ 
+  // if (password.length < 8 || password.toUpperCase() === password || password.toLowerCase()
+  //         === password || (isNaN(parseFloat(password)) && isFinite(password))){
+  //         passwordMsg = 'Please chose a valid password. Check below for our password guidlines.';
+  //         success = false;
+  //       }else{
+  //         if(password === passwordConfirm){
+  //           passwordMsg = '';
+  //           passwordStyle = stylesHolder;
+  //          }
+  //          else{
+  //             passwordMsg = 'Please make sure the passwords match';
+  //             success = false;
+  //          }
+  //       }
          this.setState({num: 'a'});
 
       if(success){
 
+        this.createId();
+      // Here is some great code but i need to sort out the ID first
         fetch('http://localhost:3000/register', {
+             method: 'post',
+             headers: {'Content-Type': 'application/json'},
+             body:JSON.stringify({
+               email:email,
+               password: password, 
+               country: Country,
+               name: name,
+               surname: surname,
+               idnumber: IdNumber,
+               gender: gender, 
+               birthday: dateOfBirth,
+               id: this.state.userid
+           })
+        })
+         .then(response => response.json())
+         .then(user => {
+          if(user === "Success"){
+            this.loadUser(email, this.state.userid);
+            this.changeRoute("Explore");
+          }
+         })
+       }
+
+  }
+
+// 1111111111Aa
+
+ generate = () => {
+   const first = Math.round(Math.random() * 64);
+   let a;
+   if(first < 10){
+      a = String.fromCharCode(first + 48);
+   }
+   if(first > 9 && first < 38){
+      a = String.fromCharCode(first + 53);
+   }
+   if(first > 37 && first < 64){
+      a = String.fromCharCode(first + 59);
+   }
+   return a;
+  }
+
+  createId = () => {
+    let id = "";
+    for(let a = 0; a < 5; a++){
+      id += this.generate();
+    }
+
+    this.setState({userid: id});
+
+     fetch('http://localhost:3000/checkId', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify({
-              email:email,
-              password: password, 
-              country: Country,
-              name: name,
-              surname: surname,
-              idnumber: IdNumber,
-              gender: gender, 
-              birthday: dateOfBirth  
+              id: id,
+              table: 'users'
           })
         })
-   .then(response => response.json())
-   .then(user => {
-    console.log(user);
-    if(user === "Success"){
-      this.loadUser(user.email, user.id);
-      this.changeRoute("Explore");
-    }
-   })
-      }
+         .then(response => response.json())
+         .then(user => {
+            if(user !== 'Good'){
+                this.redo();
+            }
+         })
+
+
+
   }
         
+
+//Be careful! this is some tough code to really test!
+redo = () => {
+  this.createId();
+}
      
 radioChange = (e) =>{
+  this.createId();
+
     this.setState({
-      gender: e.currentTarget.value
+      gender: e.currentTarget.vallue
     });
   }
 
@@ -206,12 +263,11 @@ enterEmail = (newEmail) =>{
 
   enterSurname = (surname) =>{
       this.setState({surname: surname.target.value});
-      console.log(surname.target.value);
+
     }
 
   enterDateofBirth = (dateBirth) =>{
       this.setState({dateOfBirth: dateBirth.target.value});
-      console.log(dateBirth.target.value);
   }
 
   enterconPassword = (ConfirmPassWord) =>{

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import {Modal, Button} from "react-bootstrap";
 
+let betId = "";
+let cost = "";
 
 class CreateConfirmModal extends Component {
   constructor(props) {
@@ -19,6 +21,55 @@ class CreateConfirmModal extends Component {
   console.log(this.props.userid);
 }
 
+
+createId = () => {
+    let id = "";
+    for(let a = 0; a < 6; a++){
+      id += this.generate();
+    }
+
+  //  this.setState({userid: id});
+
+     fetch('http://localhost:3000/checkId', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify({
+              id: id,
+              table: 'bets'
+          })
+        })
+         .then(response => response.json())
+         .then(user => {
+            if(user !== 'Good'){
+                this.redo();
+            }else{
+              betId = id;
+              this.buy();
+            }
+         })
+
+  }
+
+  redo = () => {
+    this.createId();
+  }
+     
+
+generate = () => {
+   const first = Math.round(Math.random() * 64);
+   let a;
+   if(first < 10){
+      a = String.fromCharCode(first + 48);
+   }
+   if(first > 9 && first < 38){
+      a = String.fromCharCode(first + 53);
+   }
+   if(first > 37 && first < 64){
+      a = String.fromCharCode(first + 59);
+   }
+   return a;
+  }
+
   buy = () =>{
      fetch('http://localhost:3000/createBet', {
             method: 'post', 
@@ -28,9 +79,10 @@ class CreateConfirmModal extends Component {
               amountfor: this.props.price,
               total: this.props.price,
               expiry: this.props.expiry,
-              amountagainst: 0,
+              amountagainst: "000000",
               userid: this.props.userid,
-              email: this.props.email
+              email: this.props.email,
+              id:betId
           })
         })
    .then(response => response.json())
@@ -71,7 +123,7 @@ class CreateConfirmModal extends Component {
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.props.onHide}>Cancel</Button>
-              <Button onClick={this.buy}>Buy!</Button>
+              <Button onClick={this.createId}>Buy!</Button>
             </Modal.Footer>
           </Modal>
           </div>

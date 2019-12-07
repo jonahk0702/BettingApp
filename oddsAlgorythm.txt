@@ -1,0 +1,51 @@
+Lets talk about how we pay when a bet is won:
+
+There is a small problems. We want to show someone the odds as they buy something. Here is an example. A random choice of who buys what. 
+Start 
+pro:con - number increases when you buy this side
+1:1
+2:1
+3:1
+3:2
+3:2
+4:2
+5:2
+
+If the higher side wins we have to pay out 5 people. the amount would be:
+1 - 1
+2 - 0.5
+3 - 0.333
+4 - 0.5
+5 - 0.4
+
+the total would be 2.73333. But we would only collect 2 from those who lost. Hmmmmm we have a problem. 
+
+1) we could divide up the total from the losers and give to winners
+But someone who bought when odds we bad gets same as when odds wer good. Plus so unreliable. They want to know odds when buying.
+
+2) Take all of the money by loses and divide between winners, in the ratio of the odds each winner took when they took the bet. 
+But unreliable odds when paying plus, we could pay out more than we get in.
+
+3) What if we take all of the money from both sides and use it to pay the winners. thus we can guarenttee each user they WILL be paid into thier account, the money that in the odds the saw when buying. Then, we take all the money thats left, and divide it equally between all of the winners. This will be equal when we divide, as everyone buys in with same amount.
+We may also have to add a limit to how high the odds become. so we only let you bet agaisnt a bet saw worse than 5:1 odds, or any mutiple. So we have to limit that. Next, we may need a time that the betting on a bet ends, such as the begining of a footbale game, when betting on the outcome. This means there wont be a run away as the game is about to win. This works well of the users who have lower odds win. which is great. But if they lose, I am just not sure. Let take above example. IF left sides win, payout would be 
+
+so we pay ouit 2.733, but we take in both the pro and con, so 7. minus them leaves 4.2667. then we divide that by winner, so 0.853333 each, added to thier winnings. This may be our best option. But it must be noted that person 3 for example bet 1 at 3:1 odds. then instead of getting back what they bet add 0.333 they only got what they bet + 0.1866. Minus fees. 
+
+I think first we need to find the perfect algorythm which we can never lose money by paing out too much. From there, we can test and optimize.
+
+ALso, what if lower wins? we pay extra
+1 - 1
+2 - 1.5
+
+Yet, we take in 5. so do we just pocket the last 2.5? there must be a more fair way.
+Unless we take much higher fees here, and subsidize the other side, where majority win. 
+
+The main problem is that we never want to pay more then we get in, as people can find the bug and use it against us. 
+
+Honestly, must of my solutions meant splitting in the ratio of odds. But people have to know the odds they are getting when the bet. there must be a way to be better. We can (probably) can afford to make money when minority wins. 
+
+Also I would rather show all bets, rather than hide some. As outrageous odds are pretty cool. 
+
+Can we take on some risks? well yes we can. By letting odds get really high, we are basically betting on the minority to win. We can tell the truth and try get people not to bet when the odds are super in the favour, as the payout is pretty small. 
+
+Maybe I dont know exactly how odds work. I can figure it out

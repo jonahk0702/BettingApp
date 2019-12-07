@@ -8,13 +8,14 @@ const handleCreateBet = (req, res, db) => {
 		amountagainst: 0,
 		total: amountfor,
 		expiry:expiry,
-		usersfor: userid + "-",
+		usersfor: userid,
 		usersagainst: "",
 		odds: 2,
-		popular: 1
+		popular: 1,
+		id: req.body.id
 		
 	})
-	.then(bet => {
+	.then(bet => { 
 		db.select('betfor', 'amount').from('records')
 		.where('email', '=', req.body.email)
 		.then(data => {
@@ -29,7 +30,7 @@ const handleCreateBet = (req, res, db) => {
 				.where('email', '=', req.body.email)
 				.update({
 					amountfor :  amountfor,
-					amountagainst : 0000
+					amountagainst : 000000
 				})
 				.then(user => {
 					res.json("Success");

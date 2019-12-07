@@ -6,39 +6,56 @@ import {Modal, Button} from "react-bootstrap";
 class MyVerticallyCenteredModal extends React.Component {
 
 
- buyAgainst = () =>{
+
+fixPriceFor = () => {
+  let hold = this.props.total;
+  let len = ( "" + hold).length;
+  let str = hold + "";
+  for(let i = len; i < 6 ; i++){
+    str = "o" + str  ;
+  }
+    this.buyFor(str);
+}
+
+fixPriceAgainst = () => {
+  let hold = this.props.total;
+  let len = ( "" + hold).length;
+  let str = hold + "";
+  for(let i = len; i < 6 ; i++){
+    str = "o" + str  ;
+  }
+    this.buyAgainst(str);
+}
+
+ buyAgainst = (price) =>{
     fetch('http://localhost:3000/betAgainst', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      //Need a bet ID and a User ID
       email: this.props.email,
-      price: this.props.total,
-      betid: this.props.id,
-
+      amount: this.props.total,
+      price: price,
+      betid: this.props.betid,
       userId: this.props.userid
-
     })
    })
    .then(response => response.json())
    .then(data => {
+    console.log(data);
      this.props.onHide();
     
    });
-    }
+  }
 
-    reload = (num) => {
-   //   this.props.reload(num);
-    }
-
-    buyFor = () =>{
+  buyFor = (price) =>{
     fetch('http://localhost:3000/betFor', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       //Need a bet ID and a User ID
       email: this.props.email,
-      price: this.props.total,
+      amount: this.props.total,
+      price: price,
       betid: this.props.betid,
       userId: this.props.userid
     })
@@ -80,9 +97,9 @@ class MyVerticallyCenteredModal extends React.Component {
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.buyAgainst}>Bet against!</Button>
+          <Button onClick={this.fixPriceAgainst}>Bet against!</Button>
           <Button onClick={this.props.onHide}>Cancel</Button>
-          <Button onClick={this.buyFor}>Bet for!</Button>
+          <Button onClick={this.fixPriceFor}>Bet for!</Button>
         </Modal.Footer>
       </Modal>
     )

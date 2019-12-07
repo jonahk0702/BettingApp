@@ -30,7 +30,7 @@ class CreateBet extends Component {
       ExpiryChoice: "Those who are for this bet",
       modalShow: false,
       ID:"Aj12",
-      Amount:0
+      price:"0"
 
     };
 
@@ -112,7 +112,15 @@ changeRoute = (name) => {
 
     }
      if(!value.includes(" ")){
-      this.setState({Amount: value});
+        let hold = value;
+        let len = ("" + hold).length;
+        let str = hold + "";
+         for(let i = len; i < 6 ; i++){
+           str = "0" + str  ;
+         }
+    
+      this.setState({Amount: str});
+
     }
   }
 

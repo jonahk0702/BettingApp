@@ -21,6 +21,7 @@ class signIn extends React.Component {
   goIn = () => {
    this.props.changeRoute("Explore"); 
   }
+  
   loadUser = () =>{
     this.props.loadUser(this.state.email);
   }

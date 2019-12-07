@@ -17,7 +17,6 @@ import Buy from "./components/Buy";
 //import BuyConfirm from "./components/BuyConfirm";
  
 let cur; 
-let runOnce = false;
 let waiter = false;
 
 class App extends Component {
@@ -43,9 +42,9 @@ class App extends Component {
     }
   };
 
-loadUser = (email, id) => {
+loadUser = (email) => {
    this.setState({email: email});
-  this.getId(email);
+   this.getId(email);   
  }  
 
 
@@ -74,12 +73,8 @@ getId =  async (email) => {
 
     .then(response => response.json())
     .then(data => {
-      console.log(data + " is users Id! Finnaly");
       waiter = true; 
       this.setState({userId: data});
-      
-     // console.log("The id is " + this.state.userId);
-       
       })
 }
 
@@ -128,12 +123,13 @@ getId =  async (email) => {
     if(route === 'SignIn'){ 
          cur =  <SignIn 
          changeRoute={this.changeRoute}
-            loadUser={this.loadUser}/>
+             loadUser={this.loadUser}/>
     }
 
     if(route === "buy"){
       cur = <Buy changeRoute={this.changeRoute} unloadUser={this.unloadUser}  
-      email={this.state.email}/>;
+      email={this.state.email} userId = {this.state.userId}
+      />;
     }
 
     return (

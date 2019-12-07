@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import NavbarIn from "./navbar/NavbarIn";
 import {Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 
+let balance;
+
+
 class Buy extends Component{
     constructor(props) {
         super(); 
         this.state = {
             amount: 0,
-            id: ''
+            id: '',
+            b:'1'
         };
       }
 
@@ -18,10 +22,6 @@ class Buy extends Component{
       unloadUser = () => {
         this.props.unloadUser();
       } 
-
-      findID = () =>{
-          this.props.findID();
-      }
 
       buy1 = () =>{
           this.setState({amount: 100})
@@ -43,6 +43,26 @@ class Buy extends Component{
         this.handleTransaction()
     }
 
+    componentDidMount(){  
+      this.getTotal();
+    }
+
+    getTotal = () => {
+  fetch('http://localhost:3000/getBalance', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      id: this.props.userId
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+     balance = data;
+     this.setState({b:'5'});
+   });
+
+}
+
       handleTransaction = () => {
         //this.findID()
         fetch('http://localhost:3000/buyBalance', {
@@ -57,6 +77,7 @@ class Buy extends Component{
     .then(response => response.json())
     .then(data => {
         console.log(data)
+        this.getTotal();
       })
     }
 
@@ -65,7 +86,8 @@ class Buy extends Component{
               <div>
                   <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
                   <br/><br/><br/>
-                  <div className="tc f3 solidBR">
+                  <div className="tc f3 solidBR ma4"> 
+                  <span>You have B {balance} </span>
                   <Container>
                   <Row>
             <Col>

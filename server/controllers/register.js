@@ -1,5 +1,5 @@
 const handleRegister = (req, res, db, bcrypt) => {
-	const {email, name, password, country, gender, idnumber, birthday, surname } = req.body;
+	const {email, name, password, country, gender, idnumber, birthday, surname, id } = req.body;
 	const hash = bcrypt.hashSync(password);
 
 	db.transaction(function(trx) {
@@ -9,7 +9,8 @@ const handleRegister = (req, res, db, bcrypt) => {
 		db('login')
 		.insert({
 			hash:hash,
-			email: email
+			email: email,
+			id: id
 		})
 		.then(data => {
 			db('users')
@@ -23,6 +24,7 @@ const handleRegister = (req, res, db, bcrypt) => {
 	 			birthday: birthday,
 				joined: new Date(),
 				balance:0,
+				id: id
 			
 			})
 			.then(data => {
