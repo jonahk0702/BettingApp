@@ -1,12 +1,14 @@
-const handleReturnBets = (req, res, db, amount) => {   
+const handleReturnBets = (req, res, db, amount) => {
+	const {sorter, } = req.body;
+
 	db.select('id').from('login')
 	
 	.then(data => {
 		const isValid = true;
 		if(isValid){
-			if(req.body.sorter == "expiry"){
+			if(sorter == "expiry"){
 				return db.select('*').from('bets')
-				.orderBy(req.body.sorter, 'desc')
+				.orderBy(sorter, 'desc')
 				.then(user => {
 					res.json(user)
 				})
@@ -14,7 +16,7 @@ const handleReturnBets = (req, res, db, amount) => {
 			}
 			else{
 				return db.select('*').from('bets')
-				.orderBy(req.body.sorter)
+				.orderBy(sorter)
 				.then(user => {
 					res.json(user)
 				})

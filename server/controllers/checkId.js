@@ -1,6 +1,7 @@
 const handleCheckId = (req, res, db) => {   
-	return db.select('id').from(req.body.table)
-	.where('id', '=', req.body.id)
+	const {table, id} = req.body;
+	return db.select('id').from(table)
+	.where('id', '=', id)
 	.then(user => { 
 		if(user[0].id){
 			res.json("reject")

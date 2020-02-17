@@ -1,3 +1,5 @@
+//Defs need to be rewritten with change to bet stroarge
+
 import React, { Component } from "react";
 import { Container, Row, Col} from "react-bootstrap";
 import NavbarIn from './navbar/NavbarIn'

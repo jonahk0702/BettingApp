@@ -6,7 +6,7 @@ import {Modal, Button} from "react-bootstrap";
 class MyVerticallyCenteredModal extends React.Component {
 
 
-
+//THis is so dumb! new method of stroing bets is better. 
 fixPriceFor = () => {
   let hold = this.props.total;
   let len = ( "" + hold).length;

@@ -28,15 +28,7 @@ const handleRegister = (req, res, db, bcrypt) => {
 			
 			})
 			.then(data => {
-				db('records')
-				.insert({
-					email:email,
-					amount:0
-				})
-				.then(data => {
-					res.json("Success");
-
-				})
+				res.json("Success");
 			})
 		})
 	})

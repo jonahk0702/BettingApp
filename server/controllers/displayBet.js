@@ -1,4 +1,4 @@
-const handleDisplayBet = (req, res, db) => {   
+const handleDisplayBet = (req, res, db) => {
 	db.select('email', 'hash').from('login')
 	
 	.then(data => {

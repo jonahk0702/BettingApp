@@ -1,3 +1,5 @@
+just before I start. the first iteration made all of the bets added into one row in records. this isnt smart. I am rewrting it so that each new bet is a new row. This may explain wierdness in code.
+
 Lets talk about how we pay when a bet is won:
 
 There is a small problems. We want to show someone the odds as they buy something. Here is an example. A random choice of who buys what. 
@@ -6,7 +8,7 @@ pro:con - number increases when you buy this side
 1:1
 2:1
 3:1
-3:2
+3:2 
 3:2
 4:2
 5:2

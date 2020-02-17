@@ -1,8 +1,8 @@
 const handleGetBalance = (req, res, db) => {   
-
+	const { id } = req.body;
 	return db('users')
 	.select('balance')
-	.where('id', '=', req.body.id)
+	.where('id', '=', id)
 	.then(user => {
 		res.json(user[0].balance)
 	})	

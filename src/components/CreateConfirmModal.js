@@ -3,8 +3,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import {Modal, Button} from "react-bootstrap";
 
 let betId = "";
-let cost = "";
-
 class CreateConfirmModal extends Component {
   constructor(props) {
     super();

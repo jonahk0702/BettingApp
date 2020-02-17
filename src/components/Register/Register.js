@@ -226,9 +226,6 @@ ValidateFinal = () => {
                 this.redo();
             }
          })
-
-
-
   }
         
 

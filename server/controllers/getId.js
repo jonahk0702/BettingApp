@@ -1,6 +1,7 @@
-const handleGetId = (req, res, db) => {   
+const handleGetId = (req, res, db) => { 
+	const {email} = req.body;  
 	return db.select('*').from('users')
-	.where('email', '=', req.body.email)
+	.where('email', '=', email)
 	.then(user => { 
 		res.json(user[0].id)
 	})

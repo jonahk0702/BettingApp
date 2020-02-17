@@ -1,6 +1,7 @@
  const handleGetMyBets = (req, res, db) => {   
-	db.select('*').from('records')
-	.where('email', '=', req.body.email)
+ 	const { email } = req.body;
+	db.select('*').from('transactions')
+	.where('email', '=', email)
 	
 	.then(data => {
 		res.json(data[0])

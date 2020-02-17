@@ -8,37 +8,28 @@ const handleCreateBet = (req, res, db) => {
 		amountagainst: 0,
 		total: amountfor,
 		expiry:expiry,
-		usersfor: userid,
-		usersagainst: "",
 		odds: 2,
 		popular: 1,
 		id: req.body.id
 		
 	})
 	.then(bet => { 
-		db.select('betfor', 'amount').from('records')
-		.where('email', '=', req.body.email)
-		.then(data => {
-			db('records')
-			.where('email', '=', req.body.email)
-			.update({
-				betfor :  data[0].betfor + req.body.userid + "-",
-				amount: (data[0].amount + 1)
+		db('transactions')
+			.insert({
+				betid: 'a',//req.body.betid,
+				userid: req.body.userId,
+				amount: req.body.amount,
+				//odds:  (Math.round( (data[0].amountagainst + req.body.amount) / (data[0].amountfor + req.body.amount) * 10000) / 10000 ),
+				date: new Date(),
+				type: 'for'
 			})
-			.then(resp => {
-				db('records')
-				.where('email', '=', req.body.email)
-				.update({
-					amountfor :  amountfor,
-					amountagainst : 000000
-				})
-				.then(user => {
-					res.json("Success");
-				})
+			.then(user => {
+				res.json("Success");
 			})
+			
 		})
 		
-	})
+	
 	.catch(err => res.status(400).json('Unable to bet here'))
 	
 }

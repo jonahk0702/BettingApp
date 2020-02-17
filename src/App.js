@@ -12,6 +12,10 @@ import HowThisWorks from "./components/HowThisWorks";
 import Fees from "./components/Fees";
 import CreateAccount from "./components/CreateAccount";
 import Buy from "./components/Buy";
+import BetInfo from './components/learn/BetInfo';
+import TsAndCs from  './components/tsAndCs/TermsAndConditions';
+import Groups from './components/myGroups/Groups';
+
 //import MoreInfo from './components/MoreInfo';
 
 //import BuyConfirm from "./components/BuyConfirm";
@@ -58,7 +62,10 @@ reload = (num) => {
 
 
 
+
 changeRoute = (newer) =>{
+  console.log("recieced : " + newer );
+
   this.setState({'route' : newer});
 }
 
@@ -78,6 +85,7 @@ getId =  async (email) => {
       })
 }
 
+
   render() {
     let { route } = this.state;
 
@@ -96,18 +104,30 @@ getId =  async (email) => {
              cur =  <Fees changeRoute={this.changeRoute}/>
     }
 
+    if(route === 'betInfo'){ 
+             cur =  <BetInfo changeRoute={this.changeRoute}/>
+    }
+
     if(route === 'weWork'){
         cur =  <HowThisWorks changeRoute={this.changeRoute}/>
     }
     if(this.state.route === 'Explore' && waiter === true){
         cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}
           email={this.state.email} reload={this.reload} userId={this.state.userId}/>
+    } 
+
+
+   if(route === 'Create'){ 
+   
+         cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
+         userid={this.state.userId} email={this.state.email}/>
     }
 
 
-    if(route === 'Create'){
-         cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
+    if(route === 'groups'){
+      cur =  <Groups changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
          userid={this.state.userId} email={this.state.email}/>
+
     }
 
 
@@ -116,6 +136,11 @@ getId =  async (email) => {
 
     }
    
+   if(route === 'TermsAndConditions'){
+        cur =  <TsAndCs changeRoute={this.changeRoute} unloadUser={this.unloadUser} />
+
+    }
+
     if(route === 'Profile'){
          cur =  <Profile changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
     }
@@ -123,8 +148,16 @@ getId =  async (email) => {
     if(route === 'SignIn'){ 
          cur =  <SignIn 
          changeRoute={this.changeRoute}
-             loadUser={this.loadUser}/>
+          loadUser={this.loadUser}/>
     }
+
+
+
+
+
+
+
+
 
     if(route === "buy"){
       cur = <Buy changeRoute={this.changeRoute} unloadUser={this.unloadUser}  
@@ -134,8 +167,10 @@ getId =  async (email) => {
 
     return (
       <div>
+        <title>Costume bets </title>
         <Particles className="particles" params={this.backgroundOptions} />
         {cur}
+
       </div>
     );
   }

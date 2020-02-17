@@ -1,10 +1,11 @@
 const handleBuyBalance = (req, resp, db) =>{  
-    db.select('balance').from('users').where('email', '=', req.body.email)
+    const {email, amount} = req.body;
+    db.select('balance').from('users').where('email', '=', email)
 
     .then(data =>{
-        db('users').where('email', '=', req.body.email)
+        db('users').where('email', '=', email)
         .update({
-            balance: data[0].balance + req.body.amount
+            balance: data[0].balance + amount
         })
         .then(data =>{
             resp.json('success')
