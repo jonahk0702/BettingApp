@@ -50,7 +50,7 @@ unloadUser = () => {
                     <Col className='f4 tc bl ma1'>
                       You are about to take the bet that, {this.state.BetDiscription}.
                       You are betting with {this.state.Odds}.
-                      You are betting B{this.state.Price}.
+                      You are betting B{this.state.Price} and the other person will be at B{this.state.Price} 
                       The bet will expire if terms or not already reached by {this.state.Expiry}
                      Buy clicking "Buy" you are accepting our <a href="/Terms">terms of service</a>. 
                       

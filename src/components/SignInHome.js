@@ -3,6 +3,10 @@ import {Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} fro
 import NavbarIn from "./navbar/NavbarIn";
 import IndividaulBet from "./IndividaulBet/IndividaulBet";
 
+ //TO do
+
+ // Alot of descructeering, especcially in the mapping (search for 'map')
+// What happends when the bet descrpio is too long? Test it and make a method that displays the first like 20 charactrs when longer
  
 let Holder = <div></div>; 
 let balance=0;
@@ -98,34 +102,66 @@ getTotal = () => {
 grabbingBets = (sorter) => {
 
   //I dont think I ever use display bets endpoint
-
+ 
    fetch('http://localhost:3000/returnBets', {
      method: 'post',
      headers: {'Content-Type': 'application/json'},
      body: JSON.stringify({
-      sorter:sorter
      })
     }) 
     .then(response => response.json())
     .then(data => {
-        
        Holder = data.map((user, i) => { 
-          return <IndividaulBet key={i} betid={data[i].id} name={data[i].description} amount={data[i].total}
-                  Odds={(((data[i].amountfor + data[i].total)/(data[i].amountagainst + data[i].total) ))}
-                  expiry={data[i].expiry} email={this.props.email} bought={this.bought} userId={this.props.userId}      />
+          return <IndividaulBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
+                  expiry={data[i].expires} userId={this.props.creator} price={data[i].amount} email={this.props.email}     />
 
-        }) 
+        })
+
+       //This is used for the pile ones
+        // return <IndividaulBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
+        //           Odds={(((data[i].amountfor + data[i].total)/(data[i].amountagainst + data[i].total) ))}
+        //           expiry={data[i].expiry} email={this.props.email} bought={this.bought} userId={this.props.userId}      />
+
+        // })
+
        if(this.state.b === '1'){
         this.setState({b:'2'});
        }else{
         this.setState({b: '1'});
        }
     });
-   
-    
+
+    this.getExpiredBets();
 }
 
+getExpiredBets = () => {
+  fetch('http://localhost:3000/expireBets', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+    console.log(data);
+   });
+}
 
+swapExpireds = (data) => {
+  fetch('http://localhost:3000/swapExpireds', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      bets: data
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+     console.log(data);
+   });
+
+}
   render() {  
     return (
       <div>

@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import {Modal, Button} from "react-bootstrap";
 
+
+// To do
+
+//Destructor all the this.props...
+//Make this message meaningful, it is bearly readable. 
+
 let betId = "";
 class CreateConfirmModal extends Component {
   constructor(props) {
@@ -42,6 +48,7 @@ createId = () => {
                 this.redo();
             }else{
               betId = id;
+              console.log("Good idea of " + id)
               this.buy();
             }
          })
@@ -74,13 +81,13 @@ generate = () => {
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify({
               description: this.props.betdiscription,
-              amountfor: this.props.price,
               total: this.props.price,
               expiry: this.props.expiry,
-              amountagainst: "000000",
               userid: this.props.userid,
               email: this.props.email,
-              id:betId
+              id:betId,
+              bettype:this.props.bettype,
+              hour: this.props.hour
           })
         })
    .then(response => response.json())
@@ -116,7 +123,8 @@ generate = () => {
                 Are you sure you want to bet {this.props.betdiscription}.
                 You will bet B{this.props.price}. This bet will expire 
                 on {this.props.expiry} and the default winner will be {this.props.defualtwinner}.
-                
+                Is this bet friendly? Well it is {this.props.isfriendly}.
+                ALso the bet type is {this.props.bettype}
                 </p>
             </Modal.Body>
             <Modal.Footer>

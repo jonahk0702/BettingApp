@@ -1,10 +1,11 @@
  const handleGetMyBets = (req, res, db) => {   
- 	const { email } = req.body;
-	db.select('*').from('transactions')
-	.where('email', '=', email)
+ 	const { userId } = req.body;
+	db.select('*').from('matchedbets')
+	.where('better', '=', userId)
+	.orWhere('creator', '=', userId)
 	
 	.then(data => {
-		res.json(data[0])
+		res.json(data)
  
 	})
 	.catch(err => res.status(400).json('wrong'))

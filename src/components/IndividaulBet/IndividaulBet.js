@@ -29,7 +29,7 @@ constructor(props) {
   render(){
     let modalClose = () => {
       this.setState({ modalShow: false });
-      this.props.bought();
+        
     }
   return (
     
@@ -43,8 +43,9 @@ constructor(props) {
         <Container>
           <Row>
             <Col md className='f4 tc bt bb ma1'>{this.props.name}</Col>
-            <Col xs={2} className='bb bt ma1'>{ (Math.round(parseFloat(this.props.Odds) * 10000) /10000) + ":1" }</Col>
-            <Col xs={2} className='bb bt ma1'>B{this.props.amount}</Col>
+            <Col xs={2} className='bb bt ma1'>-</Col>
+            <Col xs={2} className='bb bt ma1'>{ this.props.price }</Col>
+            
             <Col xs={2} className='bb bt ma1'>{this.props.expiry}</Col>
           </Row>
           <hr/>
@@ -64,11 +65,9 @@ constructor(props) {
                   onHide={modalClose}
                   betid = {this.props.betid}
                   description = {this.props.name}
-                  total = {this.props.amount}
-                  odds = {this.props.Odds}
+                  total = {this.props.price}
                   expiry = {this.props.expiry}
                   email = {this.props.email}
-                  userid={this.props.userId}
                 
                 /> 
               

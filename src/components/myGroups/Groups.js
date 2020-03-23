@@ -228,7 +228,6 @@ swapRight = (id) => {
 }
 
 getGroups = (id) => {
-  console.log(id + " is id");
   fetch('http://localhost:3000/getGroups', {
        method: 'post', 
        headers: {'Content-Type': 'application/json'},
@@ -242,21 +241,19 @@ getGroups = (id) => {
         console.log(data);
         myGroupArray = data;
     console.log(myGroupArray)
-       //     Holder = data.map((user, i) => { 
-       //        return <IndividualGroup key={i} name={data[i].name} amount={data[i].size}//name={data[i].description} amount={data[i].total}
-       //                swapRight={this.swapRight} code={data[i].id} />
+            Holder = data.map((user, i) => { 
+               return <IndividualGroup key={i} name={data[i].groupid} amount={data[i].size}//name={data[i].description} amount={data[i].total}
+                       swapRight={this.swapRight} code={data[i].id} />
 
 
-       //    })
-       //  if(this.state.a === '1'){
-       //  this.setState({a:'2'});
-       // }else{
-       //  this.setState({a: '1'});
-       // }
-      });
-
-}
-
+           })
+         if(this.state.a === '1'){
+         this.setState({a:'2'});
+        }else{
+         this.setState({a: '1'});
+        }
+      })
+    }
 
 createId = () => {
     let id = "";

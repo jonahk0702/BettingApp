@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex')
+const schedule = require('node-schedule');
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
@@ -20,6 +21,8 @@ const getBalance = require('./controllers/getBalance');
 const makeGroup = require('./controllers/makeGroup');
 const joinGroup = require('./controllers/joinGroup');
 const getGroups = require('./controllers/getGroups');
+const buyMatch = require('./controllers/buyMatch');
+const expireBets = require('./controllers/expireBets');
 
 const db = knex({
 	client: 'pg',
@@ -103,10 +106,23 @@ app.post('/joinGroup', (req, res) =>{
 app.post('/getGroups', (req, res) =>{
 	getGroups.handleGetGroups(req, res, db)
 })
+app.post('/buyMatch', (req, res) =>{
+	buyMatch.handleBuyMatch(req, res, db)
+})
+
+app.post('/expireBets', (req, res) =>{
+	expireBets.handleExpireBets(req, res, db)
+})
+
+
 
 
 const PORT = process.env.PORT
 app.listen(3000, () => {
+	
+	var j = schedule.scheduleJob('30 * * * *', function(){
+		console.log("This may work one day");
+	});
 
 	console.log("app is running on port 3000");
 });

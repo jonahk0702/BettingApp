@@ -132,7 +132,8 @@ getId =  async (email) => {
 
 
     if(route === 'myBets'){
-         cur =  <MyBets changeRoute={this.changeRoute} unloadUser={this.unloadUser} email={this.state.email}/>
+         cur =  <MyBets changeRoute={this.changeRoute} unloadUser={this.unloadUser}
+         userId={this.state.userId} email={this.state.email}/>
 
     }
    

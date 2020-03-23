@@ -2,68 +2,73 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
 import {Modal, Button} from "react-bootstrap";
+let myId = "";
 
+// TO do Make the messge mean something
 class MyVerticallyCenteredModal extends React.Component {
 
 
-//THis is so dumb! new method of stroing bets is better. 
-fixPriceFor = () => {
-  let hold = this.props.total;
-  let len = ( "" + hold).length;
-  let str = hold + "";
-  for(let i = len; i < 6 ; i++){
-    str = "o" + str  ;
-  }
-    this.buyFor(str);
+componentDidMount(){  
+
+  this.getUserId();
 }
 
-fixPriceAgainst = () => {
-  let hold = this.props.total;
-  let len = ( "" + hold).length;
-  let str = hold + "";
-  for(let i = len; i < 6 ; i++){
-    str = "o" + str  ;
-  }
-    this.buyAgainst(str);
-}
 
- buyAgainst = (price) =>{
-    fetch('http://localhost:3000/betAgainst', {
+getUserId = () => {
+  fetch('http://localhost:3000/getId', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      email: this.props.email,
-      amount: this.props.total,
-      price: price,
-      betid: this.props.betid,
-      userId: this.props.userid
+      email: this.props.email
     })
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data);
-     this.props.onHide();
+    myId = data;
+   }); 
+
+}
+//this one is for pile on later.
+ // buyAgainst = (price) =>{
+ //    fetch('http://localhost:3000/betAgainst', {
+ //    method: 'post',
+ //    headers: {'Content-Type': 'application/json'},
+ //    body: JSON.stringify({
+ //      email: this.props.email,
+ //      amount: this.props.total,
+ //      price: price,
+ //      betid: this.props.betid,
+ //      userId: this.props.userid
+ //    })
+ //   })
+ //   .then(response => response.json())
+ //   .then(data => {
+ //    console.log(data);
+ //     this.props.onHide();
     
-   });
-  }
+ //   });
+ //  }
 
-  buyFor = (price) =>{
-    fetch('http://localhost:3000/betFor', {
+  buyFor = () =>{
+    console.log("request sent");
+    console.log("I run");
+    fetch('http://localhost:3000/buyMatch', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      //Need a bet ID and a User ID
+      betid: this.props.betid,
       email: this.props.email,
       amount: this.props.total,
-      price: price,
-      betid: this.props.betid,
-      userId: this.props.userid
+      expiry: this.props.expiry,
+      userId: myId,
+      description: this.props.description,
+
     })
    })
    .then(response => response.json())
    .then(data => {
     console.log(data);
-     this.props.onHide();
+   this.props.onHide();
     
    });
     }
@@ -88,7 +93,7 @@ fixPriceAgainst = () => {
         <Modal.Body className='tc'>
           <h4 className='tc'>You are about to: </h4>
           <p>
-          my ID is {this.props.id}
+          my ID is {this.props.betid}
             Bet B{this.props.total} <br/>
             You are user ID {this.props.email}
             You are betting {this.props.description} with odds of {this.props.odds}
@@ -96,10 +101,10 @@ fixPriceAgainst = () => {
              {this.props.Odds}. The Exipiry is {this.props.expiry}
           </p>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={this.fixPriceAgainst}>Bet against!</Button>
+        <Modal.Footer> 
+
           <Button onClick={this.props.onHide}>Cancel</Button>
-          <Button onClick={this.fixPriceFor}>Bet for!</Button>
+          <Button onClick={this.buyFor}>Bet for!</Button>
         </Modal.Footer>
       </Modal>
     )
