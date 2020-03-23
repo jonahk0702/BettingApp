@@ -5,6 +5,7 @@ const handleReturnBets = (req, res, db, amount) => {
 	
 	.then(data => {
 		return db.select('*').from('matchingoffers')
+		.whereNot('creator', '=', req.body.userId)
 		.then(user => {
 			res.json(user)
 		})

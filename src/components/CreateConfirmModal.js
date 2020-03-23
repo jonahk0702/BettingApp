@@ -76,6 +76,8 @@ generate = () => {
   }
 
   buy = () =>{
+    let date = new Date();
+    let properDate = date.getFullYear() + "/" + (date.getMonth() + 1);
      fetch('http://localhost:3000/createBet', {
             method: 'post', 
             headers: {'Content-Type': 'application/json'},
@@ -86,6 +88,7 @@ generate = () => {
               userid: this.props.userid,
               email: this.props.email,
               id:betId,
+              exDate: properDate,
               bettype:this.props.bettype,
               hour: this.props.hour
           })

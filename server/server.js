@@ -23,6 +23,7 @@ const joinGroup = require('./controllers/joinGroup');
 const getGroups = require('./controllers/getGroups');
 const buyMatch = require('./controllers/buyMatch');
 const expireBets = require('./controllers/expireBets');
+const getMyBetOffers = require('./controllers/getMyBetOffers');
 
 const db = knex({
 	client: 'pg',
@@ -115,6 +116,9 @@ app.post('/expireBets', (req, res) =>{
 })
 
 
+app.post('/getMyBetOffers', (req, res) =>{
+	getMyBetOffers.handleGetMyBetOffers(req, res, db)
+})
 
 
 const PORT = process.env.PORT

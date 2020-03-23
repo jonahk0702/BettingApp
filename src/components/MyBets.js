@@ -34,44 +34,82 @@ unloadUser = () => {
 }
 
 componentDidMount(){
-  this.starter();
-
-   this.starter();
+  this.starter("matchedbets");
 
 }
  
- starter = () =>{
-    fetch('http://localhost:3000/getMyBets ', {
+
+ expiredBets = () =>{
+  this.starter("expiredmatched");
+ }
+untaken = () => {
+  fetch('http://localhost:3000/getMyBetOffers', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      userId: this.props.userId
+      userId: this.props.userId,
+      database: "matchingoffers"
     })
    })
    .then(response => response.json())
    .then(data => {
-    console.log("phase 1");
-    for (var i = 0; i < data.length; i++) {
-      if(data[i].better === this.props.userId){
-        data[i].side = "for";
-        console.log("phase 2");
-      }else{
-        data[i].side = "against";
-        console.log("phase 3");
-      } 
-    }
+    console.log(data)
+    
+     Holder = data.map((user, i) => { 
+           return <MyIndividaulBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
+                   expiry={data[i].expires} userId={this.props.creator} price={data[i].amount} email={this.props.email} 
+                   side={data[i].side}    />
+
+         })
+
      this.setState({a:1254});
 
-    Holder = data.map((user, i) => { 
-          return <MyIndividaulBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
-                  expiry={data[i].expires} userId={this.props.creator} price={data[i].amount} email={this.props.email} 
-                  side={data[i].side}    />
-
-        })
      
      });
 
-   this.setState({a:124});
+
+}
+ activeBets = () =>{
+  this.starter("matchedbets");
+ }
+
+ starter = (database) =>{ 
+    fetch('http://localhost:3000/getMyBets', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      userId: this.props.userId,
+      database: database
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+    console.log(data)
+    console.log("phase 1");
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].better){
+        if(data[i].better === this.props.userId){
+          data[i].side = "for";
+          console.log("phase 2");
+        }else{
+          data[i].side = "against";
+          console.log("phase 3");
+        } 
+      }
+    }
+
+     Holder = data.map((user, i) => { 
+           return <MyIndividaulBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
+                   expiry={data[i].expires} userId={this.props.creator} price={data[i].amount} email={this.props.email} 
+                   side={data[i].side}    />
+
+         })
+
+     this.setState({a:1254});
+
+     
+     });
+
 }
 
 
@@ -101,13 +139,13 @@ componentDidMount(){
                   defaultValue={1}
                 >
 
-                  <ToggleButton className="ma2" size='lg' value={1} onClick={this.cheap}>
+                  <ToggleButton className="ma2" size='lg' value={1} onClick={this.activeBets}>
                     Active Bets
                   </ToggleButton>
-                  <ToggleButton className="ma2" size='lg' value={2} onClick={this.goodOdds}>
+                  <ToggleButton className="ma2" size='lg' value={2} onClick={this.expiredBets}>
                     Expired
                   </ToggleButton>
-                  <ToggleButton className="ma2" size='lg' value={3} onClick={this.expires}>
+                  <ToggleButton className="ma2" size='lg' value={3} onClick={this.untaken}>
                     Pending
                   </ToggleButton>
                 </ToggleButtonGroup>

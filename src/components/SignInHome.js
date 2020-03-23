@@ -107,6 +107,7 @@ grabbingBets = (sorter) => {
      method: 'post',
      headers: {'Content-Type': 'application/json'},
      body: JSON.stringify({
+      userId: this.props.userId
      })
     }) 
     .then(response => response.json())
@@ -145,8 +146,8 @@ getExpiredBets = () => {
    .then(response => response.json())
    .then(data => {
     console.log(data);
-   });
-}
+   })
+ } 
 
 swapExpireds = (data) => {
   fetch('http://localhost:3000/swapExpireds', {

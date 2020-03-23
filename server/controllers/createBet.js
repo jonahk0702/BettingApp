@@ -1,5 +1,5 @@
 const handleCreateBet = (req, res, db) => {
-	const { description, total, expiry, userid, bettype, hour } = req.body; 
+	const { description, total, expiry, userid, bettype, hour, exDate } = req.body; 
 	db.select('balance')
 	.from('users')
 	.where('id', '=', userid)

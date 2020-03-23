@@ -134,11 +134,6 @@ componentDidMount(){
       } 
     }
 
-    changeRoute = () => {
-      
-      this.props.changeRoute('betInfo');
-    }
-
     terms = () => {
       this.props.changeRoute('TermsAndConditions');
     }
