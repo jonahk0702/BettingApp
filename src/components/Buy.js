@@ -84,7 +84,7 @@ class Buy extends Component{
       render(){
           return(
               <div>
-                  <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
+                  <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser} userId={this.props.userId}/>
                   <br/><br/><br/>
                   <div className="tc f3 solidBR ma4"> 
                   <span>You have B {balance} </span>

@@ -207,7 +207,7 @@ componentDidMount(){
     
     return (
      <div>
-     <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
+     <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser} userId={this.props.userId}/>
      <br/><br/><br/>
      <h1 className="tc white i f1 font">Create a bet!</h1>
      <br/><br/>
@@ -431,7 +431,7 @@ componentDidMount(){
                  
                   show={this.state.modalShow}
                   onHide={modalClose}
-                  userid = {this.props.userid}
+                  userid = {this.props.userId}
                   email={this.props.email}
                   id = {this.state.ID}
                   price = {this.state.Amount}

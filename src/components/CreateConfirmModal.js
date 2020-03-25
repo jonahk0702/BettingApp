@@ -77,7 +77,8 @@ generate = () => {
 
   buy = () =>{
     let date = new Date();
-    let properDate = date.getFullYear() + "/" + (date.getMonth() + 1);
+    let properDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+    console.log(new Date());
      fetch('http://localhost:3000/createBet', {
             method: 'post', 
             headers: {'Content-Type': 'application/json'},

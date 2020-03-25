@@ -343,7 +343,7 @@ createId = () => {
     return (
       <div>
         
-        <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
+        <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser} userId={this.props.userId}/>
          <br />
         <br />
         <h1 className="tc i f1 font white">My Groups</h1>

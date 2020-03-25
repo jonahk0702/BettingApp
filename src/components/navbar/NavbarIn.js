@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Nav, Navbar, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
+let balance =0;
+let id;
 export default class NavBar extends Component {
   ex = () => {
     this.props.changeRoute("Explore");
@@ -25,8 +27,24 @@ export default class NavBar extends Component {
     this.props.unloadUser();
     this.props.changeRoute("home");
   }
+  getTotal = () => {
+    fetch('http://localhost:3000/getBalance', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        id: this.props.userId
+      })
+     })
+     .then(response => response.json())
+     .then(data => {
+       balance = data;
+     });
+  
+  }
 
   render() {
+    id = this.props.userId;
+    this.getTotal();
     return (
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="/Explore">Custom Bets</Navbar.Brand>
@@ -37,7 +55,7 @@ export default class NavBar extends Component {
           <Nav.Link onClick={this.profs}>Profile</Nav.Link>
           <Nav.Link onClick={this.groups}>My groups</Nav.Link>
           <Nav.Link onClick={this.buy}>Get more B</Nav.Link>
-          <Nav.Link className='white'>Balance:</Nav.Link>
+          <Nav.Link className='white'>Balance: B{balance}</Nav.Link>
         </Nav>
         <Form inline>
           <Nav.Link onClick={this.outies}>Sign out</Nav.Link>

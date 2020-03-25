@@ -13,7 +13,7 @@ const handleCreateBet = (req, res, db) => {
 					description: description,
 					creator: userid,
 					amount : total,
-					date: new Date(),
+					date: exDate,
 					betid: req.body.id, 
 					expires: expiry+ "/" + hour
 				})

@@ -118,7 +118,7 @@ untaken = () => {
 
     return (
      <div>
-     <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
+     <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser} userId={this.props.userId}/>
      <br/><br/><br/>
      <h1 className="tc white i f1 font">My Bets!</h1>
      <br/><br/>
