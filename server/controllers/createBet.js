@@ -1,5 +1,7 @@
 const handleCreateBet = (req, res, db) => {
+	let dater = new Date();
 	const { description, total, expiry, userid, bettype, hour, exDate } = req.body; 
+
 	db.select('balance')
 	.from('users')
 	.where('id', '=', userid)
@@ -13,7 +15,7 @@ const handleCreateBet = (req, res, db) => {
 					description: description,
 					creator: userid,
 					amount : total,
-					date: new Date(),
+					date: exDate,
 					betid: req.body.id, 
 					expires: expiry+ "/" + hour
 				})

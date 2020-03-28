@@ -24,6 +24,10 @@ const getGroups = require('./controllers/getGroups');
 const buyMatch = require('./controllers/buyMatch');
 const expireBets = require('./controllers/expireBets');
 const getMyBetOffers = require('./controllers/getMyBetOffers');
+const chooseMatchWin = require('./controllers/chooseMatchWin');
+const chooseMatchWinp2 = require('./controllers/chooseMatchWinp2');
+const chooseMatchWinpTaken = require('./controllers/chooseMatchWinpTaken');
+
 
 const db = knex({
 	client: 'pg',
@@ -118,6 +122,18 @@ app.post('/expireBets', (req, res) =>{
 
 app.post('/getMyBetOffers', (req, res) =>{
 	getMyBetOffers.handleGetMyBetOffers(req, res, db)
+})
+
+app.post('/chooseMatchWin', (req, res) =>{
+	chooseMatchWin.handleChooseMatchWin(req, res, db)
+})
+
+app.post('/chooseMatchWinp2', (req, res) =>{
+	chooseMatchWinp2.handleChooseMatchWinp2(req, res, db)
+})
+
+app.post('/chooseMatchWinpTaken', (req, res) =>{
+	chooseMatchWinTaken.handleChooseMatchWinTaken(req, res, db)
 })
 
 
