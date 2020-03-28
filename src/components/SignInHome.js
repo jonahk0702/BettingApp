@@ -10,6 +10,7 @@ import IndividaulBet from "./IndividaulBet/IndividaulBet";
  
 let Holder = <div></div>; 
 let balance=0;
+let id="";
 class SignInHome extends Component {
   constructor(props) {
     super(); 
@@ -60,6 +61,7 @@ makeItEfficieant = (sortBy) => {
 
 
 }
+
 
 bought = () => {
   if(this.state.a === 'total'){
@@ -166,7 +168,7 @@ swapExpireds = (data) => {
   render() {  
     return (
       <div>
-        <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser} />
+        <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser} userId={this.props.userId} />
         <br />
         <br />
         <br />

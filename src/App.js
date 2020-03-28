@@ -120,13 +120,13 @@ getId =  async (email) => {
    if(route === 'Create'){ 
    
          cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
-         userid={this.state.userId} email={this.state.email}/>
+         userId={this.state.userId} email={this.state.email}/>
     }
 
 
     if(route === 'groups'){
       cur =  <Groups changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
-         userid={this.state.userId} email={this.state.email}/>
+         userId={this.state.userId} email={this.state.email}/>
 
     }
 
@@ -143,7 +143,7 @@ getId =  async (email) => {
     }
 
     if(route === 'Profile'){
-         cur =  <Profile changeRoute={this.changeRoute} unloadUser={this.unloadUser}/>
+         cur =  <Profile changeRoute={this.changeRoute} unloadUser={this.unloadUser} userId={this.state.userId}/>
     }
     
     if(route === 'SignIn'){ 
