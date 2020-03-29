@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Nav, Navbar, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
-let balance =0;
-let id;
+let balance = 0;
 export default class NavBar extends Component {
   ex = () => {
     this.props.changeRoute("Explore");
@@ -26,6 +25,7 @@ export default class NavBar extends Component {
   outies = () => {
     this.props.unloadUser();
     this.props.changeRoute("home");
+    window.location.reload(false);
   }
   getTotal = () => {
     fetch('http://localhost:3000/getBalance', {
@@ -43,8 +43,7 @@ export default class NavBar extends Component {
   }
 
   render() {
-    id = this.props.userId;
-    this.getTotal();
+        this.getTotal();
     return (
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="/Explore">Custom Bets</Navbar.Brand>

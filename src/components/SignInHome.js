@@ -10,7 +10,8 @@ import IndividaulBet from "./IndividaulBet/IndividaulBet";
  
 let Holder = <div></div>; 
 let balance=0;
-let id="";
+
+
 class SignInHome extends Component {
   constructor(props) {
     super(); 
@@ -135,7 +136,7 @@ grabbingBets = (sorter) => {
     });
 
     this.getExpiredBets();
-}
+} 
 
 getExpiredBets = () => {
   fetch('http://localhost:3000/expireBets', {

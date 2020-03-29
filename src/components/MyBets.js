@@ -1,5 +1,3 @@
-//Defs need to be rewritten with change to bet stroarge
-
 import React, { Component } from "react";
 import { Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 import NavbarIn from './navbar/NavbarIn'
@@ -9,13 +7,13 @@ import ExpiredIndiBet from './IndividaulBet/ExpiredIndiBet';
 
 let Holder = <div></div>;
 
-let amountOfBets = 0;
-let betAmount = [];
-//let amountFor = [];
-//let amountAgainst = [];
-let descriptions = [];
-let betForr = [];
-let betIds = [];
+// let amountOfBets = 0;
+// let betAmount = [];
+// //let amountFor = [];
+// //let amountAgainst = [];
+// let descriptions = [];
+// let betForr = [];
+// let betIds = [];
 
 class MyBets extends Component {
   constructor(props) {
@@ -52,23 +50,20 @@ componentDidMount(){
    .then(response => response.json())
    .then(data => {
     console.log(data)
-    console.log("phase 1");
     for (var i = 0; i < data.length; i++) {
       if(data[i].better){
         if(data[i].better === this.props.userId){
           data[i].side = "for";
-          console.log("phase 2");
         }else{
           data[i].side = "against";
-          console.log("phase 3");
         } 
       }
     }
 
      Holder = data.map((user, i) => { 
            return <ExpiredIndiBet key={i} betid={data[i].betid} name={data[i].description} 
-                   expiry={data[i].expires} creator={this.props.creator} amount={data[i].amount}  
-                   side={data[i].side}  better={this.props.better}  />
+                   expiry={data[i].expires} creator={data[i].creator} amount={data[i].amount}  
+                   side={data[i].side}  better={this.props.better}  userId={this.props.userId}/>
 
          })
 
@@ -94,7 +89,7 @@ untaken = () => {
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data)
+
     
      Holder = data.map((user, i) => { 
            return <MyIndividaulBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].amount}
@@ -120,21 +115,20 @@ untaken = () => {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       userId: this.props.userId,
-      database: database
+      database: database,
+      expiredBets: 'false'
     })
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data)
-    console.log("phase 1");
+
+  if(data.length > 0){    
     for (var i = 0; i < data.length; i++) {
       if(data[i].better){
         if(data[i].better === this.props.userId){
           data[i].side = "for";
-          console.log("phase 2");
         }else{
           data[i].side = "against";
-          console.log("phase 3");
         } 
       }
     }
@@ -145,6 +139,7 @@ untaken = () => {
                    side={data[i].side}    />
 
          })
+     }
 
      this.setState({a:1254});
 

@@ -1,4 +1,4 @@
-const handleChooseMatchWinp2 = (req, resp, db) =>{  
+ const handleChooseMatchWinp2 = (req, resp, db) =>{  
     const {creator, amount, betid, side, sideWon, better} = req.body;
     let amCreator = "";
     if(side == "creator"){
@@ -8,25 +8,18 @@ const handleChooseMatchWinp2 = (req, resp, db) =>{
     }
     // I am assuming that there is no record for this bet yet...
     if(amCreator == 'true'){
-        db('matchpending')
-        .insert({
-            betid: betid,
-            creator:creator,
-            better: "better",
-            amount: amount,
-            creatorside: sideWon
-
+        db('expiredmatched')
+        .where('betid', '=', betid)
+        .update({
+            creatorside:sideWon
         })
         .then(data => {
             resp.json("All done");
         })
     }else{
-        db('matchpending')
-        .insert({
-            betid: betid,
-            creator:creator,
-            better: better,
-            amount: amount,
+        db('expiredmatched')
+        .where('betid', '=', betid)
+        .update({
             betterside : sideWon
 
         })

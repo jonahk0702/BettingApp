@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row, Container, Button} from "react-bootstrap";
+import { Col, Row, Container} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "./bets.css";
 
@@ -25,10 +25,7 @@ constructor(props) {
 
 
   render(){
-    let modalClose = () => {
-      this.setState({ modalShow: false });
-        
-    }
+   
   return (
     
 
