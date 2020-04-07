@@ -1,4 +1,4 @@
- const handleGetMyBets = (req, res, db) => {   
+ const handleGetMyBets	 = (req, res, db) => {   
 
  	const { userId, database, expiredBets } = req.body;
  	let expiredRet = [];

@@ -1,9 +1,9 @@
 const handleCreateBet = (req, res, db) => {
 	let dater = new Date();
-	const { description, total, expiry, userid, bettype, hour, exDate } = req.body; 
+	const { description, total, expiry, userid, bettype, hour, exDate, id } = req.body; 
 
 	db.select('balance')
-	.from('users')
+	.from('users') 
 	.where('id', '=', userid)
 	.then(date => {
 		let balance = date[0].balance; 
@@ -16,7 +16,7 @@ const handleCreateBet = (req, res, db) => {
 					creator: userid,
 					amount : total,
 					date: exDate,
-					betid: req.body.id, 
+					betid: id, 
 					expires: expiry+ "/" + hour
 				})
 				.then(user => {
@@ -32,6 +32,35 @@ const handleCreateBet = (req, res, db) => {
 					
 				
 				.catch(err => res.status(400).json('Unable to bet here'))
+
+			}
+
+			if(bettype === 'pile'){
+				db('pileons')
+				.returning('*')
+				.insert({
+					description: description,
+					minimum: total,
+					date: exDate,
+					betid: id, 
+					expires: expiry+ "/" + hour,
+					currentfor: total,
+					currentagainst: 0
+				})
+				.then(data => {
+					db('pilestransactions')
+					.returning('*')
+					.insert({
+						betid: id,
+						userid: userid,
+						side: 'cr',
+						amount: total,
+					 	date: exDate 
+					})
+					.then(data => {
+						res.json("well done mate");
+					})
+				})
 
 			}
 		}

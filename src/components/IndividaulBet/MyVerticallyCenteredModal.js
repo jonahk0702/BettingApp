@@ -2,54 +2,100 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
 import {Modal, Button} from "react-bootstrap";
-let myId = "";
 
+
+let holder;
+let buttons;
 // TO do Make the messge mean something
-class MyVerticallyCenteredModal extends React.Component {
+export default class MyVerticallyCenteredModal extends React.Component {
 
 
 componentDidMount(){  
+  console.log("reremder with " + this.props.mystate.betid)
+  console.log(this.props.mystate);
+  console.log("my bet id is " + this.props.betid);
+  let {bettype} = this.props;
 
-  this.getUserId();
+  if(bettype === 'pile'){
+    holder = <div>
+      Current Bets For: {this.props.betfor}
+      <br/>
+      Current Bets Against: {this.props.betagainst}
+    </div>;
+
+      buttons = <div>
+      <Button className='ma2' onClick={this.hideme}>Cancel</Button>
+      <Button className='ma2' onClick={this.buyFor}>Bet for!</Button>
+      <Button className='ma2' onClick={this.buyAgainst}>Bet Against!</Button>
+
+      </div>;  
+    }
+
+  if(bettype === 'match'){
+    buttons = <div>
+      <Button className='ma2' onClick={this.hideme}>Cancel</Button>
+      <Button className='ma2' onClick={this.buy}>Bet Against!</Button>  
+    </div>;
+
+  }
+
+  
+    
 }
 
 
-getUserId = () => {
-  fetch('http://localhost:3000/getId', {
+//this one is for pile on later.
+ buyAgainst = () =>{
+    let date = new Date();
+    let properDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+    
+    fetch('http://localhost:3000/betAgainst', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      email: this.props.email
+      amount: this.props.total,
+      betid: this.props.betid,
+      userId: this.props.userid,
+      date: properDate,
+
     })
    })
    .then(response => response.json())
    .then(data => {
-    myId = data;
-   }); 
+    console.log(data);
+     this.hideme();
+    
+   });
+  }
+
+buyFor = () =>{
+    let date = new Date();
+    let properDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+    console.log("bet id hee is " + this.props.betid);
+    fetch('http://localhost:3000/betFor', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      amount: this.props.total,
+      betid: this.props.betid,
+      userId: this.props.userid,
+      date: properDate,
+
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+    console.log(data);
+     this.props.onHide();
+    
+   });
+  }  
+hideme = () => {
+     this.props.onHide();
+     console.log("hiddne");
 
 }
-//this one is for pile on later.
- // buyAgainst = (price) =>{
- //    fetch('http://localhost:3000/betAgainst', {
- //    method: 'post',
- //    headers: {'Content-Type': 'application/json'},
- //    body: JSON.stringify({
- //      email: this.props.email,
- //      amount: this.props.total,
- //      price: price,
- //      betid: this.props.betid,
- //      userId: this.props.userid
- //    })
- //   })
- //   .then(response => response.json())
- //   .then(data => {
- //    console.log(data);
- //     this.props.onHide();
-    
- //   });
- //  }
-
-  buyFor = () =>{
+  buy = () =>{
     console.log("request sent");
     console.log("I run");
     fetch('http://localhost:3000/buyMatch', {
@@ -60,7 +106,7 @@ getUserId = () => {
       email: this.props.email,
       amount: this.props.total,
       expiry: this.props.expiry,
-      userId: myId,
+      userId: this.props.userid,
       description: this.props.description,
 
     })
@@ -68,7 +114,7 @@ getUserId = () => {
    .then(response => response.json())
    .then(data => {
     console.log(data);
-   this.props.onHide();
+   this.props.closemo();
     
    });
     }
@@ -90,25 +136,23 @@ getUserId = () => {
         <Modal.Header closeButton>
           
         </Modal.Header>
-        <Modal.Body className='tc'>
-          <h4 className='tc'>You are about to: </h4>
-          <p>
-          my ID is {this.props.betid}
-            Bet B{this.props.total} <br/>
-            You are user ID {this.props.email}
-            You are betting {this.props.description} with odds of {this.props.odds}
-             Well you ID shoud be {this.props.id}. The price is {this.props.total}. The odds are 
-             {this.props.Odds}. The Exipiry is {this.props.expiry}
-          </p>
+        <Modal.Body className='total'>
+          <h4 className='tc'>A summary of the bet: </h4>
+          <div>
+          Bet Description: {this.props.description}
+          <br/>
+          Amount: B{this.props.total} 
+          <br/>
+          {holder}
+          
+          </div>
         </Modal.Body>
         <Modal.Footer> 
-
-          <Button onClick={this.props.onHide}>Cancel</Button>
-          <Button onClick={this.buyFor}>Bet for!</Button>
+        {buttons}
         </Modal.Footer>
       </Modal>
     )
   }
 }
 
-export default MyVerticallyCenteredModal;
+//export default MyVerticallyCenteredModal;

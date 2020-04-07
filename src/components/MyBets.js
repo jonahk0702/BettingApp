@@ -3,10 +3,12 @@ import { Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} fr
 import NavbarIn from './navbar/NavbarIn'
 import MyIndividaulBet from './IndividaulBet/MyIndividaulBet';
 import ExpiredIndiBet from './IndividaulBet/ExpiredIndiBet';
+import PileIndiBet from './IndividaulBet/PileIndiBet';
+import ExpiredPileBet from './IndividaulBet/ExpiredPileBet';
 
 
 let Holder = <div></div>;
-
+let secHolder = <div></div>;
 // let amountOfBets = 0;
 // let betAmount = [];
 // //let amountFor = [];
@@ -37,19 +39,17 @@ componentDidMount(){
 
 }
  
-
  expiredBets = () =>{
  fetch('http://localhost:3000/getMyBets', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       userId: this.props.userId,
-      database: 'expiredmatched '
+      database: 'expiredmatched'
     })
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data)
     for (var i = 0; i < data.length; i++) {
       if(data[i].better){
         if(data[i].better === this.props.userId){
@@ -62,6 +62,30 @@ componentDidMount(){
 
      Holder = data.map((user, i) => { 
            return <ExpiredIndiBet key={i} betid={data[i].betid} name={data[i].description} 
+                   expiry={data[i].expires} creator={data[i].creator} amount={data[i].amount}  
+                   side={data[i].side}  better={this.props.better}  userId={this.props.userId}/>
+
+         })
+
+     this.setState({a:1254});
+
+     
+     });
+
+   fetch('http://localhost:3000/getPileBets', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      userId: this.props.userId,
+      database: 'expiredmatched',
+      setting: 'dones'
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+
+     Holder = data.map((user, i) => { 
+           return <ExpiredPileBet key={i} betid={data[i].betid} name={data[i].description} 
                    expiry={data[i].expires} creator={data[i].creator} amount={data[i].amount}  
                    side={data[i].side}  better={this.props.better}  userId={this.props.userId}/>
 
@@ -95,6 +119,34 @@ untaken = () => {
            return <MyIndividaulBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].amount}
                    expiry={data[i].expires} creator={data[i].creator} price={data[i].amount} 
                    side='for'  better={data[i].better}  userId={this.props.userId}/>
+
+         })
+
+     this.setState({a:1254});
+
+     
+     });
+   //this is quite cool
+   //I need to find all his transations, then find all the ones where the other side is 0 
+
+   fetch('http://localhost:3000/getPileBets', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      userId: this.props.userId,
+      database: "matchingoffers" ,
+      setting: 'untaken'
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+    console.log("Will desplay data");
+    console.log(data) ;
+    
+     Holder = data.map((user, i) => { 
+           return <PileIndiBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].amount}
+                   expiry={data[i].expires} creator={data[i].creator} haveB='true' 
+                   userId={this.props.userId} currentFor={data[i].currentfor} currentAgainst={data[i].currentagainst}/>
 
          })
 
@@ -146,6 +198,43 @@ untaken = () => {
      
      });
 
+  fetch('http://localhost:3000/getPileBets', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      userId: this.props.userId,
+      database: 'pilestransactions',
+      setting: 'starts'
+    })
+   })
+   .then(response => response.json())
+     .then(data => {
+
+  if(data.length > 0){    
+    for (var i = 0; i < data.length; i++) {
+      if(data[i].better){
+        if(data[i].better === this.props.userId){
+          data[i].side = "for";
+        }else{
+          data[i].side = "against";
+        } 
+      }
+    }
+
+     Holder = data.map((user, i) => { 
+           return <PileIndiBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
+                   expiry={data[i].expires} userId={this.props.creator} price={data[i].amount} currentFor={data[i].currentfor}  
+                   side={data[i].side}  currentAgainst={data[i].currentagainst} haveB='nope' />
+
+         })
+     }
+
+     this.setState({a:1254});
+
+     
+     });
+
+
 }
 
 
@@ -192,6 +281,7 @@ untaken = () => {
               <br/>
 
           {Holder}
+          <ExpiredIndiBet/>
  			   </Col>
   		
 			</Row>

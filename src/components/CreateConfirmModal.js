@@ -73,9 +73,10 @@ generate = () => {
       a = String.fromCharCode(first + 59);
    }
    return a;
-  }
+  } 
 
   buy = () =>{
+    
     let date = new Date();
     let properDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
     console.log(new Date());

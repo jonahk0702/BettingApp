@@ -68,7 +68,8 @@ constructor(props) {
                   total = {this.props.price}
                   expiry = {this.props.expiry}
                   email = {this.props.email}
-                
+                  userid = {this.props.userId}
+                  bettype = 'match'
                 /> 
               
 

@@ -15,7 +15,7 @@ let DateErrer = "";
 
 let AmountError = "";
 
-let ErrorSumbol = "•"; 
+let ErrorSumbol = "•";  
 
 let BetErr = "";
 let ExpiryErr = "";

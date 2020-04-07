@@ -1,56 +1,49 @@
 const handleBetFor = (req, res, db) =>{   
-	const {email, amount, betid, userId, price} = req.body;
+	const {amount, betid, userId, date} = req.body;
 	db.transaction(function(trx) {
 	db('users').transacting(trx)
-	.select("balance").from('users')
-	.where('email', '=', email)
+	
+	.select('balance').from('users')
+	.where('id', '=', userId)
 	.then(resp => {
 		let have = resp[0].balance; 
 		if(have > amount){
- 		
 			db('users')
-			.where('email', '=', email)
+			.where('id', '=', userId)
 			.update({balance : (have - amount)})
 			.then(resp => {
-				db.select('amountfor', 'amountagainst').from('bets')
-				.where('id', '=', 'HSalwn')
-				.then(data => {				
-
-				//STart here 
-					db('transactions')
-					.insert({
-
-						betid: betid,
-						userid: userId,
-						amount: amount,
-						odds:  (Math.round( (data[0].amountagainst + amount) / (data[0].amountfor + amount) * 10000) / 10000 ),
-						date: new Date(),
-						type: 'for'
-					})
-					.then(resp => {
-						db.select('amountfor', 'amountagainst', 'total', 'amountfor', 'popular').from('bets')
-						.where('id', '=', betid)
-						.then(data => {
-							db('bets')
-							.where('id', '=', betid)
-							.update({
-								popular :  (data[0].popular + 1),
-								amountfor:(data[0].amountfor + (amount)) ,
-								odds: (Math.round(( ((data[0].amountfor + data[0].total) / (data[0].amountagainst + data[0].total) )  ) * 1000) / 1000), 	
-							})
-							.then(users => {
-								res.json(price);
-							}).catch(err => res.status(400).json('fail 1'))
-						}).catch(err => res.status(400).json('fail 2'))
-					}).catch(err => res.status(400).json('fail 3'))
+				db('pilestransactions')
+				.insert({
+					betid: betid,
+					userid: userId, 
+					side: 'cr',
+					amount: amount,
+					date: date,
 				})
-			})	
+				.then(data => {
+					db.select('*').from('pileons')
+					.where('betid', '=', betid)
+					.then(data => {
+						db('pileons')
+						.where('betid', '=', betid)
+						.update({
+							currentfor: (data[0].currentfor + amount)
+						})
+						.then(data => {
+							res.json("Sucess!");
+						}).catch(err => res.status(400).json('fail 3'))
+					}).catch(err => res.status(400).json('fail 403'))
+				}).catch(err => res.status(400).json('fail 5'))
+			}).catch(err => res.status(400).json('fail 1'))
 		}
-
 		if(have < amount){
 			res.json("Do not have enough Bs");
 		}
-	})
+
+	}).catch(err => res.status(400).json('fail 222'))
+		
+
+		
 	.then(trx.commit)
 	.catch(trx.rollback);
 	})
@@ -58,6 +51,7 @@ const handleBetFor = (req, res, db) =>{
 	  console.error(err);
 	});
 }
+
 
 
 module.exports = {

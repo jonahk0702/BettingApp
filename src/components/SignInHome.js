@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 import NavbarIn from "./navbar/NavbarIn";
 import IndividaulBet from "./IndividaulBet/IndividaulBet";
+import PileIndiBet from "./IndividaulBet/PileIndiBet";
 
  //TO do
 
@@ -9,6 +10,7 @@ import IndividaulBet from "./IndividaulBet/IndividaulBet";
 // What happends when the bet descrpio is too long? Test it and make a method that displays the first like 20 charactrs when longer
  
 let Holder = <div></div>; 
+let PilesHold = <div></div>; 
 let balance=0;
 
 
@@ -102,6 +104,7 @@ getTotal = () => {
 
 }
 
+
 grabbingBets = (sorter) => {
 
   //I dont think I ever use display bets endpoint
@@ -110,23 +113,41 @@ grabbingBets = (sorter) => {
      method: 'post',
      headers: {'Content-Type': 'application/json'},
      body: JSON.stringify({
-      userId: this.props.userId
+      userId: this.props.userId 
      })
     }) 
     .then(response => response.json())
     .then(data => {
        Holder = data.map((user, i) => { 
           return <IndividaulBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
-                  expiry={data[i].expires} userId={this.props.creator} price={data[i].amount} email={this.props.email}     />
+                  expiry={data[i].expires} userId={this.props.userId} price={data[i].amount} email={this.props.email}     />
 
         })
 
-       //This is used for the pile ones
-        // return <IndividaulBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
-        //           Odds={(((data[i].amountfor + data[i].total)/(data[i].amountagainst + data[i].total) ))}
-        //           expiry={data[i].expiry} email={this.props.email} bought={this.bought} userId={this.props.userId}      />
 
-        // })
+       if(this.state.b === '1'){
+        this.setState({b:'2'});
+       }else{
+        this.setState({b: '1'});
+       }
+    }); 
+
+      fetch('http://localhost:3000/returnPileBets', {
+     method: 'post',
+     headers: {'Content-Type': 'application/json'},
+     body: JSON.stringify({ 
+      userId: this.props.userId 
+     })
+    }) 
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+       Holder = data.map((user, i) => { 
+          return <PileIndiBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
+                  expiry={data[i].expires} currentFor={data[i].currentfor} currentAgainst={data[i].currentagainst}
+                  userId={this.props.userId} price={data[i].minimum} email={this.props.email} haveB='no'    />
+
+        })
 
        if(this.state.b === '1'){
         this.setState({b:'2'});
@@ -134,6 +155,7 @@ grabbingBets = (sorter) => {
         this.setState({b: '1'});
        }
     });
+
 
     this.getExpiredBets();
 } 
@@ -224,6 +246,7 @@ swapExpireds = (data) => {
               <hr/>
               
               {Holder} 
+              {PilesHold}
               
             </Col>
           </Row>
