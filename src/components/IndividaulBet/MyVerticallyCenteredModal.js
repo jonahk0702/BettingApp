@@ -5,15 +5,13 @@ import {Modal, Button} from "react-bootstrap";
 
 
 let holder;
-let buttons;
+let buttons; 
 // TO do Make the messge mean something
 export default class MyVerticallyCenteredModal extends React.Component {
 
 
 componentDidMount(){  
-  console.log("reremder with " + this.props.mystate.betid)
-  console.log(this.props.mystate);
-  console.log("my bet id is " + this.props.betid);
+  
   let {bettype} = this.props;
 
   if(bettype === 'pile'){
@@ -56,7 +54,7 @@ componentDidMount(){
       amount: this.props.total,
       betid: this.props.betid,
       userId: this.props.userid,
-      date: properDate,
+      date: properDate, 
 
     })
    })
@@ -114,7 +112,7 @@ hideme = () => {
    .then(response => response.json())
    .then(data => {
     console.log(data);
-   this.props.closemo();
+   this.props.onHide();
     
    });
     }

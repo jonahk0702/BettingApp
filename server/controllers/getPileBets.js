@@ -1,6 +1,8 @@
  const handleGetPileBets = (req, res, db) => {   
  	let emptyBet = [];
  	let betIds = []; 
+ 	let fakeHolds = [];
+ 	let realHolds = [];
  	const { userId, database, expiredBets, setting } = req.body;
  		if(setting === 'starts'){
 			db(database)
@@ -37,21 +39,52 @@
 	}
 	if(setting === 'dones'){
 		db('expiredpiletrans')
-		.select('*')
-		.where('userid', '=', userId)
-		.then(data => {
-			for(let i = 0; i < data.length; i ++){
-				betIds.push(data[i].betid)
-			}
-
-			db('exiredpiles')
 			.select('*')
-			.whereIn('betid', betIds)
+			.innerJoin('exiredpiles', 'exiredpiles.betid', '=', 'expiredpiletrans.betid')
 			.then(data => {
-				res.json(data);
+				fakeHolds = data;
+
+				db('pilevotetrans')
+				.select('betid')
+				.then(data => {
+					numsA =[];
+
+					for (var j = 0; j < data.length; j++) {
+							numsA.push(data[j].betid)
+						}	
+					for (let i = 0; i < fakeHolds.length; i++) {
+						if(numsA.includes(fakeHolds[i].betid)) {
+							let a = 1;
+						}else{
+							realHolds.push(fakeHolds[i])
+
+						}					
+					}
+					//if([1,2,3,4].includes(3)){
+					res.json(realHolds);
+
+
+				})
+		 
 			})
 
-		})			
+
+		// db('expiredpiletrans')
+		// .select('*')
+		// .where('userid', '=', userId)
+		// .then(data => {
+		// 	for(let i = 0; i < data.length; i ++){
+		// 		betIds.push(data[i].betid)
+		// 	}
+
+		// 	db('exiredpiles')
+		// 	.select('*')
+		// 	.whereIn('betid', betIds)
+		// 	.then(data => {
+		// 		res.json(data);
+		// 	})
+
+//		})			
 	}
 	
 }

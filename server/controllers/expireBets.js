@@ -17,6 +17,7 @@
  	let expiredPiles = [];
  	let expiredPileBetIds = [];
  	let expiredPileTrans = [];
+ 	let expiredPileVotes = [];
 
 	db.select('*').from('matchedbets')
 	.then(data => {
@@ -85,7 +86,7 @@
 
 				db.select('*').from('matchingoffers')
 				.then(data => {
-					message = data;
+					message = data; 
 					for (let i = 0; i < data.length; i++) {
 			 			expired = false;
 			 		 	currentDate = data[i].expires;
@@ -186,9 +187,10 @@
 							}
 						}
 
+						//Here is some super dumb and repeated code. But i really dont care. 
+						if(expiredPiles.length > 0){
 						db('exiredpiles')
-						.insert(expiredPiles
-						)
+						.insert(expiredPiles)
 						.then(data => {
 							db("pileons")
 							.whereIn('betid', expiredPileBetIds)
@@ -204,16 +206,40 @@
 										.whereIn('betid', expiredPileBetIds)
 										.del()
 										.then(data => {
-											res.json("noice");
+											res.json(expiredPiles);
 
-										})
+										})	
 									})
 
 								})
  
-							})	
+								})	
 						})	
+						}else{
+						
+							db("pileons")
+							.whereIn('betid', expiredPileBetIds)
+							.del()
+							.then(data => {
+								db.select('*').from("pilestransactions")
+								.whereIn('betid', expiredPileBetIds)
+								.then(data => {
+									db('expiredpiletrans')
+									.insert(data) 		
+									.then(data => {
+										db("pilestransactions")
+										.whereIn('betid', expiredPileBetIds)
+										.del()
+										.then(data => {
+											
+											res.json(expiredPileBetIds);
+											
 
+										})	
+									})
+								})
+							})	
+						}
 					})
 				})
 			})

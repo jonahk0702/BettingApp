@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import {Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
+import {Button, Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 import NavbarIn from "./navbar/NavbarIn";
 import IndividaulBet from "./IndividaulBet/IndividaulBet";
 import PileIndiBet from "./IndividaulBet/PileIndiBet";
+import MyVerticallyCenteredModal from './IndividaulBet/MyVerticallyCenteredModal';
 
  //TO do
 
@@ -10,6 +11,7 @@ import PileIndiBet from "./IndividaulBet/PileIndiBet";
 // What happends when the bet descrpio is too long? Test it and make a method that displays the first like 20 charactrs when longer
  
 let Holder = <div></div>; 
+let Holderer = <div></div>; 
 let PilesHold = <div></div>; 
 let balance=0;
 
@@ -22,7 +24,7 @@ class SignInHome extends Component {
       //SO if I cannt change a (because it is used for sorting as well as reloads)
       //I will just change B
       a:'total', 
-      b:'1'
+      b:'1' 
       
     };
   }
@@ -84,9 +86,11 @@ bought = () => {
  
 
 componentDidMount(){  
-  this.grabbingBets('total');
-  this.getTotal()
+  this.grabbingBetsM('total');
+  this.getTotal();
+
 }
+
 
 getTotal = () => {
   fetch('http://localhost:3000/getBalance', {
@@ -105,7 +109,7 @@ getTotal = () => {
 }
 
 
-grabbingBets = (sorter) => {
+grabbingBetsM = () => {
 
   //I dont think I ever use display bets endpoint
  
@@ -115,7 +119,7 @@ grabbingBets = (sorter) => {
      body: JSON.stringify({
       userId: this.props.userId 
      })
-    }) 
+    })  
     .then(response => response.json())
     .then(data => {
        Holder = data.map((user, i) => { 
@@ -130,8 +134,9 @@ grabbingBets = (sorter) => {
        }else{
         this.setState({b: '1'});
        }
-    }); 
-
+    });
+    } 
+grabbingBetsP = () => {
       fetch('http://localhost:3000/returnPileBets', {
      method: 'post',
      headers: {'Content-Type': 'application/json'},
@@ -145,7 +150,7 @@ grabbingBets = (sorter) => {
        Holder = data.map((user, i) => { 
           return <PileIndiBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
                   expiry={data[i].expires} currentFor={data[i].currentfor} currentAgainst={data[i].currentagainst}
-                  userId={this.props.userId} price={data[i].minimum} email={this.props.email} haveB='no'    />
+                  userId={this.props.userId} price={data[i].minimum} email={this.props.email} haveB='no' moveUp={this.moveUp}   />
 
         })
 
@@ -160,6 +165,24 @@ grabbingBets = (sorter) => {
     this.getExpiredBets();
 } 
 
+moveUp = (a,des) => {
+  if(a){
+  console.log(des);
+}}
+createPileEntry = (data) => {
+  fetch('http://localhost:3000/createEntry', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      data:data
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+    console.log(data);
+   
+  })
+}
 getExpiredBets = () => {
   fetch('http://localhost:3000/expireBets', {
     method: 'post',
@@ -171,6 +194,11 @@ getExpiredBets = () => {
    .then(response => response.json())
    .then(data => {
     console.log(data);
+    console.log(data.length);
+    if(data.length>0){
+      this.createPileEntry(data);
+    }
+ //   console.log("Prev is the resp");
    })
  } 
 
@@ -184,7 +212,7 @@ swapExpireds = (data) => {
    })
    .then(response => response.json())
    .then(data => {
-     console.log(data);
+ //    console.log(data);
    });
 
 }
@@ -206,28 +234,13 @@ swapExpireds = (data) => {
                 Your balance is: {balance}
                 <hr/> 
               </span> 
+            
+                <br/>
               <ButtonToolbar className="center mw5 mw7-ns center bg-light-gray pa2 ma3 ph5-ns">
-              <span className='tc h6 center'>Sort Bets By:</span> 
-                <ToggleButtonGroup
-                  className="center "
-                  type="radio"
-                  name="options"
-                  defaultValue={1}
-                >
 
-                  <ToggleButton className="ma2" value={1} onClick={this.cheap}>
-                    Cheapest
-                  </ToggleButton>
-                  <ToggleButton className="ma2" value={2} onClick={this.goodOdds}>
-                    Highest odds
-                  </ToggleButton>
-                  <ToggleButton className="ma2" value={3} onClick={this.expires}>
-                    Expire Soonest
-                  </ToggleButton>
-                  <ToggleButton className="ma2" value={4} onClick={this.popular}>
-                    Most Popular
-                  </ToggleButton>
-                </ToggleButtonGroup>
+                <Button variant="outline-info" className='center' onClick={this.grabbingBetsM}>One-on-One</Button>{' '}
+                 
+                <Button variant="outline-danger" className='center' onClick={this.grabbingBetsP}>Pile-ons</Button>{' '}
               </ButtonToolbar> 
 
             

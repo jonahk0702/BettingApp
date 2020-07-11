@@ -90,6 +90,7 @@ getId =  async (email) => {
     let { route } = this.state;
 
     if(route === 'home'){
+
          cur =  <Home changeRoute={this.changeRoute} loadUser={this.loadUser}/>
     }
     if(route === 'Reg'){

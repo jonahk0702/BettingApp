@@ -41,7 +41,7 @@ class CreateBet extends Component {
       ID:"Aj12",
       price:"0",
       isFriendly: "false",
-      betType: ""
+      betType: "pile"
 
     };
 
@@ -325,31 +325,6 @@ componentDidMount(){
       </Form.Group>
     </fieldset>
 </Form>
-    <br/>
-    <br/>
-    <fieldset>
-      <Form.Group as={Row}>
-        <Form.Label as="legend" column sm={2}>
-          Make this a friendly bet?
-        </Form.Label>
-        <Col sm={10} className='bl'>
-          <Form.Check
-          inline
-          defaultChecked 
-            type="radio"
-            label=""
-            name="formHorizontalRadios"
-            id="formHorizontalRadios1"
-            onChange={() => this.setState({isfriendly:"true"})}
-          />
-
-          <a href="/">What does this mean</a>{/*This must not be a a!! Change it like a 'p' and link off to another page with intructions*/}
-          <br/>         
-
-        </Col>
-
-      </Form.Group>
-    </fieldset>
 
     <br/>
     <br/>

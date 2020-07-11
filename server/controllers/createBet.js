@@ -45,7 +45,8 @@ const handleCreateBet = (req, res, db) => {
 					betid: id, 
 					expires: expiry+ "/" + hour,
 					currentfor: total,
-					currentagainst: 0
+					currentagainst: 0,
+					population: 1
 				})
 				.then(data => {
 					db('pilestransactions')
@@ -57,8 +58,15 @@ const handleCreateBet = (req, res, db) => {
 						amount: total,
 					 	date: exDate 
 					})
-					.then(data => {
-						res.json("well done mate");
+					.then(user => {
+						db('users')
+						.where('id', '=', userid)
+						.update({
+							balance: (balance - total)
+						})
+						.then(data => {
+							res.json("Success");
+						})
 					})
 				})
 

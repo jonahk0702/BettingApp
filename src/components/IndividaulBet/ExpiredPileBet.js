@@ -10,58 +10,65 @@ export default class ExpiredPileBet extends Component{
 constructor(props) {
     super();
     this.state = {
-      id: 111111, 
-      Price: 0,
-      Odds: "",
-      Expiry:"",
-      BetDiscription:"XXX",
-      modalShow: false,
 
     };
   }
-  modalClose = () => {
-    mods = <div></div>;      
 
-      this.setState({ modalShow: false });
-    }
-
-
-modalMade = () => {
-  mods = <div>
-  <MyVerticallyCenteredModal
-                  show={this.state.modalShow}
-                  onHide={this.modalClose}
-                  betid = {this.props.betid}
-                  description = {this.props.name}
-                  total = {this.props.price}
-                  expiry = {this.props.expiry}
-                  email = {this.props.email}
-                  userid = {this.props.userId}
-                  bettype = 'pile'
-                  betfor = {this.props.currentFor}
-                  betagainst = {this.props.currentAgainst}
-                  mystate = {this.state}
-                  closemo = {this.modalScrew}
-                /> 
-                </div>;
-
-  this.setState({betid: this.props.betid});
-  this.setState({ modalShow: true });
-  this.setState({a: 145});
+notMe = () => {
+  this.submit('be');
 }
+meWon = () => {
+  
+  this.submit('cr');
+}
+submit = (winner) => {
+  console.log(this.props.betid);
+    let date = new Date(); 
+    let properDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+     fetch('http://localhost:3000/pileVote', {
+    method: 'post', 
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      userid: this.props.userId,
+      id: this.props.betid,
+      vote: winner,
+      side: this.props.side,
+      amount: this.props.amount,
+      exDate: properDate,
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+    console.log(data.substring(0, 1));
+    if(data.substring(0, 1) === 'O'){
+      this.distibutePiles(data);
 
-  changeRoute = (route) => {
+    }
+    })
+} 
+
+
+  changeRoute = (route) => { 
     this.props.changeRoute(route);
   }
 
-  modacall = () => {
-    this.modalMade();
-    setTimeout(function () {
-    this.modalMade();
 
-    }.bind(this), 250);
-    this.modalMade();
-  }
+distibutePiles = (data) => { 
+  console.log("on the move");
+  fetch('http://localhost:3000/disPiles', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+     data:data
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+    console.log(data);
+   });  
+}
+
+
 
   render(){
     
@@ -70,17 +77,14 @@ modalMade = () => {
 
     <div >
 
-
-    
-
-      <div className='bl br tc' href="">
+      <div className='bl br tc red' href="">
         <Container>
           <Row>
             <Col md className='f4 tc bt bb ma1'>{this.props.name}</Col>
               <Col xs={2} className='bb bt ma1'>{this.props.currentFor}</Col>
               <Col xs={2} className='bb bt ma1'>{this.props.currentAgainst}</Col>            
-              <Col xs={2} className='bb bt ma1'>{ this.props.price }</Col>        
-              <Col xs={2} className='bb bt ma1'>{this.props.expiry}</Col>
+             {// <Col xs={2} className='bb bt ma1'>{ this.props.price }</Col>        
+              }<Col xs={2} className='bb bt ma1'>{this.props.expiry}</Col>
           </Row>
           <hr/>
           <Row className='tc'>
@@ -89,7 +93,7 @@ modalMade = () => {
           <Button 
                   variant="primary"
                   onClick={
-                    this.modacall
+                    this.meWon
                    
                   }
                   className='ma1 reds tc w-20 h-20'
@@ -100,7 +104,7 @@ modalMade = () => {
               <Button 
                   variant="primary"
                   onClick={
-                    this.modacall
+                    this.notMe
                    
                   }
                   className='ma1 reds tc w-20 h-20'

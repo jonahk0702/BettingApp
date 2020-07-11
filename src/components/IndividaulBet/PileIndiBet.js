@@ -1,23 +1,31 @@
 import React, { Component } from "react";
-import { Col, Row, Container, Button} from "react-bootstrap";
+import {Modal, Col, Row, Container, Button} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "./bets.css";
 import MyVerticallyCenteredModal from './MyVerticallyCenteredModal';
 
 let mods;
-
+let show;
+ 
 let bHolds;
-export default class NavBar extends Component{
+ 
+
+//Local varibles 
+//Key inside
+
+
+export default class PileIndiBet extends Component{
 constructor(props) {
     super();
     this.state = {
       id: 111111, 
       Price: 0,
-      Odds: "",
+      description:"",
       Expiry:"",
       BetDiscription:"XXX",
       modalShow: false,
-
+      p:false
+      
     };
   }
   modalClose = () => {
@@ -25,26 +33,30 @@ constructor(props) {
 
       this.setState({ modalShow: false });
     }
-
-componentDidMount(){  
-  if(this.props.haveB === 'true'){
-    bHolds = <div>
-      
-    </div>
-  }else{
-    bHolds = <div>
-      <Button 
-                  variant="primary"
-                  onClick={
-                    this.modacall
-                   
-                  }
-                  className='ma1 reds tc w-20 h-20'
-                >
-                  Pick a side and take bet
-                </Button>
-    </div>
+handleShow = () => {
+    show = true;
+    this.setState({a:4})
   }
+handleClose = () => {
+    show = false;
+    this.setState({a:4})
+  }
+
+  clicked = () => {
+    this.modacall();
+  }
+
+moveUp = () => {
+
+  this.props.moveUp(this.state.p, this.state.description);
+}
+
+
+componentDidMount(){ 
+  this.setState({description:this.props.name})
+    bHolds = <div>
+    </div>
+
   this.setState({b:299});
 }
 
@@ -78,7 +90,8 @@ modalMade = () => {
   }
 
   modacall = () => {
-    this.modalMade();
+    console.log()
+    //this.modalMade();
     setTimeout(function () {
     this.modalMade();
 
@@ -96,12 +109,12 @@ modalMade = () => {
 
     
 
-      <div className='bl br tc' href="">
+      <div className='bl br tc red' >
         <Container>
           <Row>
-            <Col md className='f4 tc bt bb ma1'>{this.props.name}</Col>
-              <Col xs={2} className='bb bt ma1'>{this.props.currentFor}</Col>
-              <Col xs={2} className='bb bt ma1'>{this.props.currentAgainst}</Col>            
+            <Col md className='f4 tc bt bb ma1' onClick={this.clicked}>{this.props.name}</Col>
+              <Col xs={2} className='bb bt ma1' onClick={this.clicked}>{this.props.currentFor}</Col>
+              <Col xs={2} className='bb bt ma1' onClick={this.clicked}>{this.props.currentAgainst}</Col>            
               <Col xs={2} className='bb bt ma1'>{ this.props.price }</Col>        
               <Col xs={2} className='bb bt ma1'>{this.props.expiry}</Col>
           </Row>
@@ -120,6 +133,23 @@ modalMade = () => {
         {mods}
       </div>
       <br/>
+
+      <Modal show={show} onHide={this.handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{this.state.description}<br/>{this.props.increm}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={this.handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </div>
   );
 }

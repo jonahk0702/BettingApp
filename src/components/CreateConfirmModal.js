@@ -61,8 +61,8 @@ createId = () => {
      
 
 generate = () => {
-   const first = Math.round(Math.random() * 64);
-   let a;
+   const first = Math.round(Math.random() * 63);
+   let a; 
    if(first < 10){
       a = String.fromCharCode(first + 48);
    }
@@ -98,7 +98,7 @@ generate = () => {
    .then(response => response.json())
    .then(user => {
     console.log(user);
-    if(user === "Success"){   
+    if(user === "Success" || user === "wellDone"){   
       this.setState({justConfirm:false});
    //   this.changeRoute("Explore");
 

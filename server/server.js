@@ -11,8 +11,7 @@ const createBet = require('./controllers/createBet');
 const displayBet = require('./controllers/displayBet');
 const returnBets = require('./controllers/returnBets');
 const returnPileBets = require('./controllers/returnPileBets');
-
-
+ 
 const betAgainst = require('./controllers/betAgainst');
 const betFor = require('./controllers/betFor');
 const buyBalance = require('./controllers/buyBalance');
@@ -31,7 +30,11 @@ const chooseMatchWin = require('./controllers/chooseMatchWin');
 const chooseMatchWinp2 = require('./controllers/chooseMatchWinp2');
 const chooseMatchWinTaken = require('./controllers/chooseMatchWinTaken');
 const getPileBets = require('./controllers/getPileBets');
+const pileVote = require('./controllers/pileVote');
+const createEntry = require('./controllers/createEntry');
+const disPiles = require('./controllers/disPiles');
 
+const getMyBetVotes = require('./controllers/getMyBetVotes');
 
 const db = knex({
 	client: 'pg',
@@ -147,7 +150,24 @@ app.post('/chooseMatchWinTaken', (req, res) =>{
 
 app.post('/getPileBets', (req, res) =>{
 	getPileBets.handleGetPileBets(req, res, db)
-})				
+})	
+
+app.post('/pileVote', (req, res) =>{
+	pileVote.handlePileVote(req, res, db)
+})
+
+app.post('/createEntry', (req, res) =>{
+	createEntry.handleCreateEntry(req, res, db)
+})
+
+app.post('/disPiles', (req, res) =>{
+	disPiles.handleDisPiles(req, res, db)
+})
+
+app.post('/getMyBetVotes', (req, res) =>{
+	getMyBetVotes.handleGetMyBetVotes(req, res, db)
+})
+
 
 const PORT = process.env.PORT
 app.listen(3000, () => {

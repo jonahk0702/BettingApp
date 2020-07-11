@@ -148,7 +148,7 @@ secondSide = () => {
 
     
 
-      <div className='bl br tc' href="">
+      <div className='bl br tc blue' href="">
         <Container>
           <Row>
             <Col md className='f4 tc bt bb ma1'>{this.props.name}</Col>

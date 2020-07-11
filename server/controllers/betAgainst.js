@@ -27,7 +27,8 @@ const handleBetAgainst = (req, res, db) =>{
 						db('pileons')
 						.where('betid', '=', betid)
 						.update({
-							currentagainst: (data[0].currentagainst + amount)
+							currentagainst: (data[0].currentagainst + amount),
+							population: (data[0].population + 1),
 						})
 						.then(data => {
 							res.json("Sucess!");
