@@ -44,18 +44,18 @@ create = () => {
         createSuccess = "";
       }else{
         this.createId();
-        createError = "";    
+        createError = ""; 
+        createSuccess = "Group successfully created";   
       }
-
     }
-
-  }else{
+  }
+  else{
     createError = "You must fill all fields.";
     createSuccess = "";
-
   }
   this.setState({a:11});
 }
+
 commit = (id) => {
   fetch('http://localhost:3000/makeGroup', {
              method: 'post',
@@ -106,7 +106,7 @@ handleChangeCode = (newer) => {
   potCode = newer.target.value;
 }
 componentDidMount(){  
-  this.getGroups();
+  this.getGroups('QtYYi');
   this.setRight();
 }
 
@@ -237,15 +237,13 @@ getGroups = (id) => {
        })
       })   
       .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        myGroupArray = data;
-    console.log(myGroupArray)
-            Holder = data.map((user, i) => { 
-               return <IndividualGroup key={i} name={data[i].groupid} amount={data[i].size}//name={data[i].description} amount={data[i].total}
-                       swapRight={this.swapRight} code={data[i].id} />
-
-
+      .then(group => {
+        console.log(group);
+        myGroupArray = group;
+        Holder = group.map((group, i) => { 
+          console.log(group[i].groupid)
+            return <IndividualGroup key={i} name={group[i].name} amount={group[i].size} 
+                    swapRight={this.swapRight} code={group[i].id} />
            })
          if(this.state.a === '1'){
          this.setState({a:'2'});
@@ -260,7 +258,6 @@ createId = () => {
     for(let a = 0; a < 5; a++){
       id += this.generate();
     }
- 
     fetch('http://localhost:3000/checkId', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -341,8 +338,7 @@ createId = () => {
 
   render() {
     return (
-      <div>
-        
+      <div>  
         <NavbarIn changeRoute={this.changeRoute} unloadUser={this.unloadUser} userId={this.props.userId}/>
          <br />
         <br />

@@ -3,7 +3,7 @@ import {Button, Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGr
 import NavbarIn from './navbar/NavbarIn'
 import MyIndividaulBet from './IndividaulBet/MyIndividaulBet';
 import IndividaulBet from './IndividaulBet/IndividaulBet';
-import ExpiredIndiBet from './IndividaulBet/ExpiredIndiBet';
+import ExpiredIndiBet from './IndividaulBet/expiredIndiBet';
 import PileIndiBet from './IndividaulBet/PileIndiBet';
 import ExpiredPileBet from './IndividaulBet/ExpiredPileBet';
 

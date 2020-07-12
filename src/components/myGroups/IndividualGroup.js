@@ -26,7 +26,6 @@ constructor(props) {
           </Row>
           <Row className='tc'>
             <Col className='xl'>
-            
                 <Button 
                   variant="primary"
                   onClick={this.swapRight}
