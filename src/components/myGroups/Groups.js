@@ -8,13 +8,11 @@ let subject = "";
 let potCode = "";
 let joinError;
 let joinSucces = "woo"; 
-let Holder; 
+let Holder = <div></div>; 
 let createError = "";
 let createSuccess = "";
 let myGroupArray = []; 
-let rightSide = <div>
-
-</div>;
+let rightSide = <div></div>;
 class Groups extends Component {
   constructor(props) {
     super(props);
@@ -44,8 +42,7 @@ create = () => {
         createSuccess = "";
       }else{
         this.createId();
-        createError = ""; 
-        createSuccess = "Group successfully created";   
+        createError = "";   
       }
     }
   }
@@ -53,7 +50,7 @@ create = () => {
     createError = "You must fill all fields.";
     createSuccess = "";
   }
-  this.setState({a:11});
+  this.setState({a:this.state.a +1});
 }
 
 commit = (id) => {
@@ -64,16 +61,15 @@ commit = (id) => {
                id: id,
                name: name,
                subject: subject,
-               email: 'j@gmail.com'
+               userid: this.props.userId
            })
         })
          .then(response => response.json())
          .then(user => {
-          if(user === "Success"){
-            
+          if(user === "Success"){            
             window.scrollTo(0, 0); 
-            createSuccess = "Success";
-            this.stateSetter();
+            createSuccess = "Group Successfully Created";
+            this.setState({a:this.state.a +1});
        }
        if(user === "Too many"){
         createError = "You are a part of the maximum amount of groups. Consider leaving one.";
@@ -83,18 +79,6 @@ commit = (id) => {
          })
 
        }
-
-stateSetter = () => {
-  console.log("I guess i ran");
-  this.setState({a:129});
-  //this.setState({toSet:setTo});
-  if(this.state.a === '1'){
-    this.setState({a:25});
-  }else{
-    this.setState({a: 1});
-  }
-}
-
 
 handleChange = (newer) => {
   name = newer.target.value.toLowerCase();
@@ -106,12 +90,11 @@ handleChangeCode = (newer) => {
   potCode = newer.target.value;
 }
 componentDidMount(){  
-  this.getGroups('QtYYi');
+  this.getGroups(this.props.userId);
   this.setRight();
 }
 
  join = () => {
-
     fetch('http://localhost:3000/joinGroup', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -132,18 +115,17 @@ componentDidMount(){
                 console.log("success happened");
                 joinSucces = "success";
                 joinError = "";
-                this.stateSetter();
+                this.setState({a:this.state.a +1});
                 this.setState({b:155});
               
               }
               console.log(user);
-         })
-         
+         })   
   }
 
 setRight = () => {
- rightSide = <div>
-<h3 className='i pointer'>Join a group</h3>
+rightSide = <div>
+            <h3 className='i pointer'>Join a group</h3>
             <hr/>
             <br/>
               <span className = 'f4'>
@@ -158,11 +140,10 @@ setRight = () => {
                 <Form.Control onChange={this.handleChangeCode} placeholder="XXXXXXX" />
               </Col>
             </Form.Row>
-
           </Form>
-              </span>
-              <br/>
-           <Button className='pa5' variant="outline-secondary" size='lg' block onClick={this.tryJoin}>Join Group</Button>
+          </span>
+          <br/>
+          <Button className='pa5' variant="outline-secondary" size='lg' block onClick={this.tryJoin}>Join Group</Button>
               <br/>
               <span className='red i f4'> {joinError} </span>
               <span className='green i f4'> {joinSucces}</span>
@@ -177,9 +158,8 @@ setRight = () => {
               Each normal user will be able to join up to 10 groups. If you want 
               to join more groups, please consider getting premium.   
               </span>
-  
 </div>;
-this.setState({a:43});
+this.setState({a:this.state.a +1});
 
 }
 
@@ -187,8 +167,7 @@ leave = () => {
 
 }
 
-swapRight = (id) => {
-
+  refresh = (id) => {
   window.scrollTo(0, 0); 
   let name = "";
   let subject = "";
@@ -196,7 +175,6 @@ swapRight = (id) => {
     if(myGroupArray[i].id === id){
       name = myGroupArray[i].name;
       subject = myGroupArray[i].subject;
-       
     }
   }
   rightSide = <div>
@@ -224,7 +202,7 @@ swapRight = (id) => {
  
 
   </div>
-  this.setState({a:29});
+  this.setState({a:this.state.a +1});
 }
 
 getGroups = (id) => {
@@ -232,25 +210,19 @@ getGroups = (id) => {
        method: 'post', 
        headers: {'Content-Type': 'application/json'},
        body: JSON.stringify({ 
-        email:'j@gmail.com',
         id: id
        })
       })   
       .then(response => response.json())
-      .then(group => {
-        console.log(group);
-        myGroupArray = group;
-        Holder = group.map((group, i) => { 
-          console.log(group[i].groupid)
-            return <IndividualGroup key={i} name={group[i].name} amount={group[i].size} 
-                    swapRight={this.swapRight} code={group[i].id} />
-           })
-         if(this.state.a === '1'){
-         this.setState({a:'2'});
-        }else{
-         this.setState({a: '1'});
-        }
-      })
+      .then(groups => {
+        console.log(groups);
+        myGroupArray = groups;
+        //Holder = groups.map((groups, i) => { 
+          Holder =<IndividualGroup name={groups[0].name} amount={groups[0].size} 
+                  refresh={this.refresh} code={groups[0].id}/>
+      //})
+    })
+         this.setState({a:this.state.a +1});
     }
 
 createId = () => {
@@ -291,27 +263,18 @@ createId = () => {
         .then(response => response.json())
         .then(user => {
           if(user === 'Good'){
-            joinError = "Incorrect code"; 
-            
-            this.setState({a:23});
+            joinError = "Incorrect code";            
+            this.setState({a:this.state.a +1});
           }else{
             this.join();
           }
        })
-
     }else{
-      joinError = "Incorrect code";
-      
-      console.log("I am about to run");
-       this.setState({a:274});
+      joinError = "Incorrect code";    
+       this.setState({a:this.state.a +1});
       }
     }
-    
-     if(this.state.a === '1'){
-        this.setState({a:'23'});
-       }else{
-        this.setState({a: '13'});
-       }
+     this.setState({a:this.state.a +1})
   }
 
  
@@ -365,24 +328,16 @@ createId = () => {
                   users
                 </Col>
               </Row>
-            </Container> 
-            {Holder}
-            
+            </Container>
+            <Row>{Holder}</Row>           
           </Col>       
 
             <Col className='pa3 ma3 ba'>
             <br/>
             {rightSide}
           </Col>
-
-
-
           </Row>
-              
-       
-      
         <Row>
-          
           <Col className='pa3 ma3 ba'>
             <h3 className='i pointer'>Create a group</h3>
             <br/>
@@ -402,9 +357,6 @@ createId = () => {
 
             </Form>
             <br/>
-  
-
-
               </Col>
               <Col className='pa3'>
                 <Form>
@@ -421,22 +373,17 @@ createId = () => {
               </Col>
                 <Button className='ma2' variant="outline-secondary" size='lg' block onClick={this.create}>Create Group!</Button>
             </Row>
-
             <span className='red ma2 f4 i '>{createError}</span>
             <span className='green ma2 f4 i '>{createSuccess}</span>
           </Container>
           <br/>
-            
-              <span className='f6 black bt bb pa1' onClick={this.terms}>Our Terms of Service and stuff</span>   
+            <span className='f6 black bt bb pa1' onClick={this.terms}>Our Terms of Service and stuff</span>   
           </Col>    
-
           </Row> 
           <br/>
-        
         </Container>
         <br/>
         <br/>
-         
         </div>
     );
   }

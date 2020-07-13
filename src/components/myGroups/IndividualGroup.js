@@ -11,8 +11,8 @@ constructor(props) {
   }
 
 
-  swapRight = () => {
-    this.props.swapRight(this.props.code);
+  refresh = () => {
+    this.props.refresh(this.props.code);
   }
 
   render(){ 
@@ -28,7 +28,7 @@ constructor(props) {
             <Col className='xl'>
                 <Button 
                   variant="primary"
-                  onClick={this.swapRight}
+                  onClick={this.refresh}
                   className='ma1 reds tc w-20 h-20'
                 >
                   Group Info

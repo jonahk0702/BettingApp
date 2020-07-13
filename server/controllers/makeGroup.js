@@ -1,6 +1,6 @@
 const handleMakeGroup = (req, res, db) => {
 	
-	const {id, name, subject, email} = req.body;
+	const {id, name, subject, userid} = req.body;
 		db('groups').returning('*').insert({
 			id: id,
 			name: name,
@@ -10,7 +10,7 @@ const handleMakeGroup = (req, res, db) => {
 		.then(data => {
 			db('groupseps').returning('*').insert({
 				groupid: id,
-				email: email
+				userid: userid
 				})
 			.then(data => {
 				res.json("Success")
