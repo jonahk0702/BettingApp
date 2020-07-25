@@ -141,20 +141,20 @@ ValidateFinal = () => {
   
 
  
-  // if (password.length < 8 || password.toUpperCase() === password || password.toLowerCase()
-  //         === password || (isNaN(parseFloat(password)) && isFinite(password))){
-  //         passwordMsg = 'Please chose a valid password. Check below for our password guidlines.';
-  //         success = false;
-  //       }else{
-  //         if(password === passwordConfirm){
-  //           passwordMsg = '';
-  //           passwordStyle = stylesHolder;
-  //          }
-  //          else{
-  //             passwordMsg = 'Please make sure the passwords match';
-  //             success = false;
-  //          }
-  //       }
+  if (password.length < 8 || password.toUpperCase() === password || password.toLowerCase()
+          === password || (isNaN(parseFloat(password)) && isFinite(password))){
+          passwordMsg = 'Please chose a valid password. Check below for our password guidlines.';
+          success = false;
+        }else{
+          if(password === passwordConfirm){
+            passwordMsg = '';
+            passwordStyle = stylesHolder;
+           }
+           else{
+              passwordMsg = 'Please make sure the passwords match';
+              success = false;
+           }
+        }
          this.setState({num: 'a'});
 
       if(success){
@@ -429,16 +429,17 @@ enterEmail = (newEmail) =>{
                             onChange={(val) => this.selectCountry(val)} />
                       </div>
 
-                      <div className="mt3">
-                          <label className="db fw6 lh-copy f6">{country} Idenitifaction Number</label>
-                          <input 
-                          type='text'
-                          className={idStyles}
-                          onChange={this.enterIDNum}
-                         />
-                         <br/>
-                         {idNumberMessage}
-                      </div>
+{                      // <div className="mt3">
+                      //     <label className="db fw6 lh-copy f6">{country} Idenitifaction Number</label>
+                      //     <input 
+                      //     type='text'
+                      //     className={idStyles}
+                      //     onChange={this.enterIDNum}
+                      //    />
+                      //    <br/>
+                      //    {idNumberMessage}
+                      // </div>
+                    }
 
                       <div className="mt3">
                         <input

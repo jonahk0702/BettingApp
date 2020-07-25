@@ -182,8 +182,6 @@ if(true){
   })
    .then(response => response.json())
    .then(data => {
-    console.log("Will desplay data");
-    console.log(data) ;
     
     redPending = data.map((user, i) => { 
      return <PileIndiBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].amount}
@@ -271,8 +269,7 @@ if(1 === 2){
   })
    .then(response => response.json())
    .then(data => {
-    console.log("Will desplay data");
-    console.log(data) ;
+
     
     redVoted = data.map((user, i) => { 
      return <PileIndiBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].amount}
@@ -291,7 +288,7 @@ if(1 === 2){
 }
 
 expiredBets = () => {
- console.log('runnins')
+  
   this.setState({tab:'expired'});
 }
 

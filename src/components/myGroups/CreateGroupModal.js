@@ -9,7 +9,7 @@ class CreateGroupModal extends React.Component{
     }
 
 render(){
-    console.log("This has loaded");
+
     return(
         <Modal
          {...this.props}

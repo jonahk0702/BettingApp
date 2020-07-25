@@ -76,7 +76,6 @@ class Buy extends Component{
 
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         this.getTotal();
       })
     }

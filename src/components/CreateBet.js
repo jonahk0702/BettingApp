@@ -140,7 +140,7 @@ componentDidMount(){
 
 
   handleChangeAmount = (e) => {
-    console.log("Something runs");
+    
      let {n, value} = e.target;
     if(n === 0){
 
@@ -219,11 +219,11 @@ componentDidMount(){
      <Row>
      <Col>
      
-      <br/>
-       <Button  variant="outline-secondary" block size='lg' onClick={this.changeRoute}>
-          First time? Or not exactly sure how to make the perfect bet? Here is a fast guide
-       </Button>
-     </Col>
+       <br/>
+      {//  <Button  variant="outline-secondary" block size='lg' onClick={this.changeRoute}>
+      //     First time? Or not exactly sure how to make the perfect bet? Here is a fast guide
+      //  </Button>
+     }</Col>
 
    
      

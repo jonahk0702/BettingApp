@@ -85,7 +85,7 @@ modalMade = () => {
   }
 
   modacall = () => {
-    console.log()
+    
     //this.modalMade();
     setTimeout(function () {
     this.modalMade();

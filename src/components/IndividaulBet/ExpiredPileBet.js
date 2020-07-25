@@ -42,7 +42,7 @@ submit = (winner) => {
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data.substring(0, 1));
+
     if(data.substring(0, 1) === 'O'){
       this.distibutePiles(data);
 
@@ -57,7 +57,7 @@ submit = (winner) => {
 
 
 distibutePiles = (data) => { 
-  console.log("on the move");
+
   fetch('http://localhost:3000/disPiles', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -67,7 +67,6 @@ distibutePiles = (data) => {
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data);
    });  
 }
 

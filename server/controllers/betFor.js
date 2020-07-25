@@ -49,7 +49,7 @@ const handleBetFor = (req, res, db) =>{
 	.catch(trx.rollback);
 	})
 	.catch(function(err) {
-	  console.error(err);
+
 	});
 }
 

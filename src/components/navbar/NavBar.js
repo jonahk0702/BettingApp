@@ -33,8 +33,8 @@ Credits = () => {
         <Nav className="mr-auto">
           <Nav.Link onClick={this.homer}>Home</Nav.Link>
            <Nav.Link onClick={this.HWW}>How does this work</Nav.Link>
-          <Nav.Link onClick={this.feess}>Our fees</Nav.Link>
-
+      {//    <Nav.Link onClick={this.feess}>Our fees</Nav.Link>
+}
 }
     
           

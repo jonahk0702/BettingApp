@@ -60,7 +60,7 @@ componentDidMount(){
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data);
+
      this.hideme();
     
    });
@@ -69,7 +69,7 @@ componentDidMount(){
 buyFor = () =>{
     let date = new Date();
     let properDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
-    console.log("bet id hee is " + this.props.betid);
+    
     fetch('http://localhost:3000/betFor', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -83,19 +83,17 @@ buyFor = () =>{
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data);
+
      this.props.onHide();
     
    });
   }  
 hideme = () => {
      this.props.onHide();
-     console.log("hiddne");
 
 }
   buy = () =>{
-    console.log("request sent");
-    console.log("I run");
+
     fetch('http://localhost:3000/buyMatch', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -111,7 +109,7 @@ hideme = () => {
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data);
+    
    this.props.onHide();
     
    });

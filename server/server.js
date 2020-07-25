@@ -36,6 +36,9 @@ const disPiles = require('./controllers/disPiles');
 
 const getMyBetVotes = require('./controllers/getMyBetVotes');
 
+const getVisit = require('./controllers/getVisit');
+
+
 const db = knex({
 	client: 'pg',
 	connection : {
@@ -53,7 +56,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res)=>{
-	res.send(database.users);
+	res.send("Its's working!");
 })
 
 app.post('/signin', (req, res) => {
@@ -169,12 +172,12 @@ app.post('/getMyBetVotes', (req, res) =>{
 })
 
 
-const PORT = process.env.PORT
-app.listen(3000, () => {
+app.post('/getVisit', (req, res) =>{
+	getVisit.handleGetVisit(req, res, db)
+})
+
+app.listen(process.env.PORT || 3000, () => {
 	
-	var j = schedule.scheduleJob('30 * * * *', function(){
-		console.log("This may work one day");
-	});
 
 	console.log("app is running on port 3000");
 });

@@ -12,17 +12,17 @@ constructor(props) {
 
 
   refresh = () => {
-    this.props.refresh(this.props.code);
+    this.props.refresh(this.props.code, this.props.name,this.props.subject);
   }
 
   render(){ 
   return (   
-    <div >
-      <div className='bl br tc' href="">
-        <Container> 
+    <div className='w-100'>
+      <div className='bl br tc green w-100'>
+        <Container>  
           <Row>
-            <Col md className='f4 tc bt bb ma1'>{this.props.name}</Col>
-            <Col xs={3} className='bb bt ma1'>{this.props.amount}</Col>
+            <Col md className='f4 tc bt bb ma1 w-75'>{this.props.name}</Col>
+              <Col xs={2} className='bb bt ma1'>{this.props.amount}</Col>
           </Row>
           <Row className='tc'>
             <Col className='xl'>
@@ -37,6 +37,7 @@ constructor(props) {
           </Row>
         </Container>
       </div>
+
       <br/>
     </div>
   );

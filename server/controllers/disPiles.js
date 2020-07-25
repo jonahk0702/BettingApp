@@ -25,11 +25,11 @@
 		.then(data => {
 			total = data[0].currentfor + data[0].currentagainst;
 			winnings = (total) / winArray.length;
-			console.log(winnings);
+			
 			if(winners === 'cr'){ 
 				for (var i = 0; i < winArray.length; i++) {
 					let holds = winArray[i].balance + winnings;
-					console.log(holds)
+					
 					rewrites.push({
 						name: winArray[i].name,
 						surname: winArray[i].surname,

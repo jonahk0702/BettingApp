@@ -40,7 +40,7 @@ constructor(props) {
     side = ""; 
     winner = "";
     if(this.props.userId === this.props.creator){
-      console.log("I am the creator");
+      
       side = "creator";
       if(outcome === 'lose'){
         winner = 'be';
@@ -48,8 +48,6 @@ constructor(props) {
         winner = 'cr';
       }
     }else{
-      console.log(this.props.userId + " my ID");
-      console.log(this.props.creator + " - creatorid")
       side = "better";
       if(outcome === 'lose'){
         winner = 'cr';
@@ -68,7 +66,7 @@ constructor(props) {
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data)
+
     if(data == null){
       this.firstSide();            
     }else{
@@ -80,7 +78,7 @@ constructor(props) {
  }
 
 firstSide = () =>{
-  console.log("side: " + this.props.side)
+
     fetch('http://localhost:3000/chooseMatchWinp2', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -97,7 +95,6 @@ firstSide = () =>{
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data)
   
     
 
@@ -107,7 +104,8 @@ firstSide = () =>{
 }
 
 secondSide = () => {
-  console.log("So i Start");
+
+
    fetch('http://localhost:3000/chooseMatchWinTaken', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -124,7 +122,6 @@ secondSide = () => {
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data)
 
   })
 

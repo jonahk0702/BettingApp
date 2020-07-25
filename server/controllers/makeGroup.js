@@ -23,5 +23,3 @@ const handleMakeGroup = (req, res, db) => {
 module.exports = {
 	handleMakeGroup:handleMakeGroup
 }
-
-//null, VAnZt, 4l?Wt, vgo3n, l7pu1, fDEYV, kydqE, G@iZU, qUhIJ, Y86P@, 4JG

@@ -85,6 +85,7 @@ bought = () => {
  
 
 componentDidMount(){  
+  window.scrollTo(0, 0); 
   this.grabBets('total');
   this.getTotal();
   
@@ -147,8 +148,8 @@ grabbingBetsP = () => {
     }) 
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-      Holder = data.map((user, i) => { 
+
+      PilesHold = data.map((user, i) => { 
                 return <PileIndiBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
                 expiry={data[i].expires} currentFor={data[i].currentfor} currentAgainst={data[i].currentagainst}
                 userId={this.props.userId} price={data[i].minimum} email={this.props.email} haveB='no' moveUp={this.moveUp}   />
@@ -167,7 +168,7 @@ grabbingBetsP = () => {
 
 moveUp = (a,des) => {
   if(a){
-  console.log(des);
+
 }}
 createPileEntry = (data) => {
   fetch('http://localhost:3000/createEntry', {
@@ -179,8 +180,8 @@ createPileEntry = (data) => {
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data);
    
+
   })
 }
 getExpiredBets = () => {
@@ -193,8 +194,7 @@ getExpiredBets = () => {
    })
    .then(response => response.json())
    .then(data => {
-    console.log(data);
-    console.log(data.length);
+
     if(data.length>0){ 
       this.createPileEntry(data);
     }
@@ -237,8 +237,8 @@ swapExpireds = (data) => {
             
                 <br/>
               <ButtonToolbar className="center mw5 mw7-ns center bg-light-gray pa2 ma3 ph5-ns">
-                <Button variant="outline-secondary" className='center' onClick={this.grabBets}>All Bets</Button>
-                <Button variant="outline-info" className='center' onClick={this.grabbingBetsM}>One-on-One</Button>{' '}
+                {//<Button variant="outline-secondary" className='center' onClick={this.grabBets}>All Bets</Button>
+                }<Button variant="outline-info" className='center' onClick={this.grabbingBetsM}>One-on-One</Button>{' '}
                 <Button variant="outline-danger" className='center' onClick={this.grabbingBetsP}>Pile-ons</Button>{' '}
               </ButtonToolbar> 
 

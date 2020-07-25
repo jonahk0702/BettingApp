@@ -36,11 +36,11 @@
 
 				if(currentMonth < (today.getMonth() + 1)){
 					expired = true;
-					console.log("right");
+
 					message += "-1-";
 
 				}
-				else{console.log("wrong")}
+				else{}
 				if(currentMonth == (today.getMonth() + 1)){
 					currentDay = parseInt((currentDate.substring(0, 3)));
 

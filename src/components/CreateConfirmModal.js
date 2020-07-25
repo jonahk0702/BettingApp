@@ -22,7 +22,7 @@ class CreateConfirmModal extends Component {
 
  componentDidMount(){
   this.setState({usersId: this.props.userid});
-  console.log(this.props.userid);
+  
 }
 
 
@@ -48,7 +48,6 @@ createId = () => {
                 this.redo();
             }else{
               betId = id;
-              console.log("Good idea of " + id)
               this.buy();
             }
          })
@@ -79,7 +78,7 @@ generate = () => {
     
     let date = new Date();
     let properDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
-    console.log(new Date());
+
      fetch('http://localhost:3000/createBet', {
             method: 'post', 
             headers: {'Content-Type': 'application/json'},
@@ -97,7 +96,7 @@ generate = () => {
         })
    .then(response => response.json())
    .then(user => {
-    console.log(user);
+
     if(user === "Success" || user === "wellDone"){   
       this.setState({justConfirm:false});
    //   this.changeRoute("Explore");

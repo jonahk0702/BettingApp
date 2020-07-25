@@ -10,7 +10,7 @@ class BetInfo extends Component {
 
   changeRoute = (name) => { 
     this.props.changeRoute(name); 
-    console.log("sent");
+  
   }
 
   unloadUser = () => {

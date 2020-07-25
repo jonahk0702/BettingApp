@@ -7,11 +7,11 @@ let name = "";
 let subject = "";
 let potCode = "";
 let joinError;
-let joinSucces = "woo"; 
-let Holder = <div></div>; 
+let joinSucces = " "; 
+let Holder = <div><IndividualGroup/></div>; 
 let createError = "";
 let createSuccess = "";
-let myGroupArray = []; 
+let myGroupArray = <div></div>; 
 let rightSide = <div></div>;
 class Groups extends Component {
   constructor(props) {
@@ -52,7 +52,7 @@ create = () => {
   }
   this.setState({a:this.state.a +1});
 }
-
+ 
 commit = (id) => {
   fetch('http://localhost:3000/makeGroup', {
              method: 'post',
@@ -68,15 +68,20 @@ commit = (id) => {
          .then(user => {
           if(user === "Success"){            
             window.scrollTo(0, 0); 
+              this.getGroups(this.props.userId);
             createSuccess = "Group Successfully Created";
             this.setState({a:this.state.a +1});
        }
        if(user === "Too many"){
         createError = "You are a part of the maximum amount of groups. Consider leaving one.";
        }
-          console.log(user);
          
          })
+          if(this.state.c === '1'){
+        this.setState({c:'2'});
+       }else{
+        this.setState({c: '1'});
+}
 
        }
 
@@ -99,27 +104,27 @@ componentDidMount(){
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify({
-              userid: 'Ht?tq',
+              userid: this.props.userId,
               code:potCode,
-              email: 'j@gmail.com'
-          })
+           })
         })
          .then(response => response.json())
          .then(user => {
+          
               if(user === 'Already in'){
-                console.log("Is it run");
+               
                 joinError = "You have already joined this group.";
                 
               }
               if(user === 'Success'){
-                console.log("success happened");
+
                 joinSucces = "success";
                 joinError = "";
-                this.setState({a:this.state.a +1});
+                this.getGroups(this.props.userId);
                 this.setState({b:155});
               
               }
-              console.log(user);
+
          })   
   }
 
@@ -167,16 +172,17 @@ leave = () => {
 
 }
 
-  refresh = (id) => {
-  window.scrollTo(0, 0); 
-  let name = "";
-  let subject = "";
-  for(let i = 0; i < myGroupArray.length; i ++){
-    if(myGroupArray[i].id === id){
-      name = myGroupArray[i].name;
-      subject = myGroupArray[i].subject;
-    }
-  }
+  refresh = (id, name, subject) => {
+//  window.scrollTo(0, 0); 
+//  let name = "";
+  //console.log(id);
+  //let subject = "";
+  // for(let i = 0; i < myGroupArray.length; i ++){
+  //   if(myGroupArray[i].id === id){
+  //     name = myGroupArray[i].name;
+  //     subject = myGroupArray[i].subject;
+  //   }
+  // }
   rightSide = <div>
     <h3 className='i pointer'>Group Infomation</h3>
             <hr/>
@@ -186,8 +192,6 @@ leave = () => {
               <br/>
               Group subject: {subject}
               <br/>
-              Group members: Find members
-              <br/>
               Join code: {id}              
               </span>
               <br/>
@@ -195,8 +199,8 @@ leave = () => {
               <hr/>
               Are you sure? Although the members will not be notified, your name
               will no longer appear on the members list.
-              <Button className='ma2' variant="outline-secondary" size='lg' block onClick={this.leave}>Leave Group</Button>
-              <hr/>
+ { //            <Button className='ma2' variant="outline-secondary" size='lg' block onClick={this.leave}>Leave Group</Button>
+  }            <hr/>
               <Button className='ma2' variant="outline-secondary" size='lg' block onClick={this.setRight}>Back</Button>
               
  
@@ -206,23 +210,29 @@ leave = () => {
 }
 
 getGroups = (id) => {
+
   fetch('http://localhost:3000/getGroups', {
        method: 'post', 
        headers: {'Content-Type': 'application/json'},
        body: JSON.stringify({ 
-        id: id
+        id: id 
        })
-      })   
+      })    
       .then(response => response.json())
-      .then(groups => {
-        console.log(groups);
-        myGroupArray = groups;
-        //Holder = groups.map((groups, i) => { 
-          Holder =<IndividualGroup name={groups[0].name} amount={groups[0].size} 
-                  refresh={this.refresh} code={groups[0].id}/>
-      //})
-    })
-         this.setState({a:this.state.a +1});
+      .then(data => {
+
+        Holder = data.map((user, i) => { 
+          return <IndividualGroup key={i} name={data[i].name} amount={data[i].size} 
+                  refresh={this.refresh} code={data[i].id} subject={data[i].subject}
+                  />
+        })
+       if(this.state.b === '1'){
+        this.setState({b:'2'});
+       }else{
+        this.setState({b: '1'});
+}
+    });
+         
     }
 
 createId = () => {
@@ -262,7 +272,7 @@ createId = () => {
         }) 
         .then(response => response.json())
         .then(user => {
-          if(user === 'Good'){
+          if(user === 'Good'){  
             joinError = "Incorrect code";            
             this.setState({a:this.state.a +1});
           }else{
@@ -328,6 +338,7 @@ createId = () => {
                   users
                 </Col>
               </Row>
+            
             </Container>
             <Row>{Holder}</Row>           
           </Col>       

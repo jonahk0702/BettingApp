@@ -149,7 +149,6 @@ const handleChooseMatchWinTaken = (req, resp, db) =>{
                             }
                             if(data[0].winner == 'cr' ){
                                 
-                                    console.log('Its true')
                                     db.select('balance').from('users')
                                     .where('id', '=', othersId)
                                     .then(data => {

@@ -14,6 +14,22 @@ class Home extends Component {
 changeRoute = (newRoute) => {
   this.props.changeRoute(newRoute);
 }
+
+componentDidMount(){  
+  
+    fetch('http://localhost:3000/getVisit', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+    })
+   })
+   .then(response => response.json())
+   .then(data => {
+
+   });
+ 
+}
+
 loadUser = (data) =>{
   this.props.loadUser(data);
 }
@@ -35,16 +51,19 @@ loadUser = (data) =>{
               <Col className="tc f3 solidBR">
                 What is Custom bets? 
                 <hr />
-                <div className="tl f4">
-                  Custom Bets is the first ever online casino where the bets,
-                  odds and time period depends on you. Think that we'll land on
-                  Mars before Man United wins a Premier League championship?
-                  Make a bet! We post all the bets for anybody to see and take
-                  either side! Or do you just want to look for a riduculous bet
-                  to take up and make some real money? Just browse our current
-                  bets. You can bet as little as 1$! And you're not betting
-                  against the house! You are betting other peole, just like you!
-                  There is always a winner! Why not have fun in the porcess?
+                <div className="tl f3">
+                  Custom Bets is an online (mock) casino where the bets,
+                  odds and time period depends fully on the users. Users can 
+                  bet on absolutely anything and they create the bets.
+                  All available bets are displayed for anybody to see and take.
+                  Bets can either be made one against one, simply matching two people,
+                  or Pile-Ons meaning any number of people can take either side
+                  and the winnings are distributed amonst the side that won. 
+                  The amount bet is also set by the bet creator.
+
+                  <hr/>
+                                    Just BTWs, this is not gambling, no real money can be bet or made,
+                  currently using a free currency we call B.
                 </div>
               </Col>
               <Col>

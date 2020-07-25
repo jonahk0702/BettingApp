@@ -64,8 +64,7 @@ reload = (num) => {
 
 
 changeRoute = (newer) =>{
-  console.log("recieced : " + newer );
-
+  
   this.setState({'route' : newer});
 }
 

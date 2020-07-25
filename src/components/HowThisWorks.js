@@ -31,7 +31,7 @@ class HowThisWorks extends Component {
                 <h3 className='pa3 i f2'>Wait, so what are we really?  </h3>
                 <hr />
                 <div className=" f4">
-                  Okay, Costume bets is a betting service that facilitates any type of bet.
+                  Okay, Custom Bets is a betting service that facilitates any type of bet.
                   We do this not by simply oppsing any bet but by matching people who have different
                   opinions on a particualr topic.  <hr />
                  </div>
@@ -43,18 +43,23 @@ class HowThisWorks extends Component {
             <h3 className='i'>Who Decides The Winner?</h3>
             <hr/>
             <br/>
-            <p>We use a three person system, where any two out of the
-            folowing are needed to end the bet and authorize the payout. It can be the person
-             on the postive side if the bet, the person on the negetive side or our adminsistartion.</p>  
+            <p>
+            Currently, a form of honour system has been used. When the bet expires, both
+            sides, or every person who has taken the bet (depending on bet type) are asked
+            who won. The money is distributed to the sides with most votes. 
+             </p>  
             
           </Col>
           <Col className='pa4 ma5 ba'>
             <h3 className='i'>How do our odds work? </h3>
             <hr/>
             <br/>
-            <p>Whoever creates the bet will decide the odds associated with
-            specific bet. All odds are phrases Number:Number ie 1:2. The numbers indicate the 
-            ratio of the amount each side will put forward. The bet winner wins the entire sum. </p> 
+            <p>
+            On the simple matching bets between two people, the winner simply takes all.
+            On the Pile-Ons all money bet is totaled up and distributed amongst all
+            those who took the side of the bet that won.
+
+             </p> 
           </Col>    
           </Row>
           <Row>
@@ -63,10 +68,7 @@ class HowThisWorks extends Component {
             <hr/>
             <br/>
             <p>
-              We prefer to keep our intervention to a minimum, and thus do not regulate odds or 
-              amounts per bet. However if we feel a bet is offensive we will intervin. We will also
-              answer all queries of the winner. If there is a clear winner we'll award the bet to 
-              that side. However if it is unclear, bot sides will be refunded.
+              Nothing Yet. Watch this space.
             </p>  
             
           </Col>
@@ -74,7 +76,9 @@ class HowThisWorks extends Component {
             <h3 className='i'>Blank</h3>
             <hr/>
             <br/>
-            <p>Lorem  Ipsum </p> 
+            <p>
+            Nothing Yet. Watch this space.
+            </p> 
           </Col>    
           </Row>
           </Container>
