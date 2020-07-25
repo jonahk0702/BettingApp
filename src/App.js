@@ -90,8 +90,7 @@ getId =  async (email) => {
     let { route } = this.state;
 
     if(route === 'home'){
-
-         cur =  <Home changeRoute={this.changeRoute} loadUser={this.loadUser}/>
+      cur =  <Home changeRoute={this.changeRoute} loadUser={this.loadUser}/>
     }
     if(route === 'Reg'){
          cur =  <CreateAccount 
@@ -99,10 +98,8 @@ getId =  async (email) => {
          loadUser={this.loadUser}
          />
     }
-  
-
     if(route === 'Fees'){
-             cur =  <Fees changeRoute={this.changeRoute}/>
+         cur =  <Fees changeRoute={this.changeRoute}/>
     }
 
     if(route === 'betInfo'){ 
@@ -116,18 +113,13 @@ getId =  async (email) => {
         cur =  <SignInHome changeRoute={this.changeRoute} unloadUser={this.unloadUser}
           email={this.state.email} reload={this.reload} userId={this.state.userId}/>
     } 
-
-
    if(route === 'Create'){ 
-   
          cur =  <CreateBet changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
          userId={this.state.userId} email={this.state.email}/>
     }
-
-
     if(route === 'groups'){
       cur =  <Groups changeRoute={this.changeRoute} unloadUser={this.unloadUser} 
-         userId={this.state.userId} email={this.state.email}/>
+      userId={this.state.userId} email={this.state.email}/>
 
     }
 

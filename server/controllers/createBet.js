@@ -10,7 +10,7 @@ const handleCreateBet = (req, res, db) => {
 		if(balance >= total){
 			if(bettype === "match"){
 				db('matchingoffers')
-				.returning('*')
+				.returning('*') 
 				.insert({
 					description: description,
 					creator: userid,
@@ -29,10 +29,7 @@ const handleCreateBet = (req, res, db) => {
 						res.json("Success");
 					})
 				})
-					
-				
 				.catch(err => res.status(400).json('Unable to bet here'))
-
 			}
 
 			if(bettype === 'pile'){

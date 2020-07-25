@@ -32,9 +32,9 @@ reload = (num) => {
   this.props.reload(num);
 }
 
-  changeRoute = (name) => {
-    this.props.changeRoute(name);
-  }
+changeRoute = (name) => {
+  this.props.changeRoute(name);
+}
 
   unloadUser = () => {
   this.props.unloadUser();
@@ -85,7 +85,7 @@ bought = () => {
  
 
 componentDidMount(){  
-  this.grabbingBetsM('total');
+  this.grabBets('total');
   this.getTotal();
   
   this.getExpiredBets();
@@ -109,16 +109,17 @@ getTotal = () => {
 
 }
 
+grabBets = () => {
+  //Display individual and pile on bets
+}
 
 grabbingBetsM = () => {
-
   //I dont think I ever use display bets endpoint
- 
    fetch('http://localhost:3000/returnBets', {
      method: 'post',
      headers: {'Content-Type': 'application/json'},
      body: JSON.stringify({
-      userId: this.props.userId 
+     userId: this.props.userId 
      })
     })  
     .then(response => response.json())
@@ -126,9 +127,7 @@ grabbingBetsM = () => {
        Holder = data.map((user, i) => { 
           return <IndividaulBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
                   expiry={data[i].expires} userId={this.props.userId} price={data[i].amount} email={this.props.email}     />
-
         })
-
 
        if(this.state.b === '1'){
         this.setState({b:'2'});
@@ -137,21 +136,22 @@ grabbingBetsM = () => {
        }
     });
     } 
+
 grabbingBetsP = () => {
-      fetch('http://localhost:3000/returnPileBets', {
-     method: 'post',
-     headers: {'Content-Type': 'application/json'},
-     body: JSON.stringify({ 
-      userId: this.props.userId 
+    fetch('http://localhost:3000/returnPileBets', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ 
+    userId: this.props.userId 
      })
     }) 
     .then(response => response.json())
     .then(data => {
       console.log(data);
-       Holder = data.map((user, i) => { 
-          return <PileIndiBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
-                  expiry={data[i].expires} currentFor={data[i].currentfor} currentAgainst={data[i].currentagainst}
-                  userId={this.props.userId} price={data[i].minimum} email={this.props.email} haveB='no' moveUp={this.moveUp}   />
+      Holder = data.map((user, i) => { 
+                return <PileIndiBet key={i} betid={data[i].betid} name={data[i].description} amount={data[i].total}
+                expiry={data[i].expires} currentFor={data[i].currentfor} currentAgainst={data[i].currentagainst}
+                userId={this.props.userId} price={data[i].minimum} email={this.props.email} haveB='no' moveUp={this.moveUp}   />
 
         })
 
@@ -237,9 +237,8 @@ swapExpireds = (data) => {
             
                 <br/>
               <ButtonToolbar className="center mw5 mw7-ns center bg-light-gray pa2 ma3 ph5-ns">
-
+                <Button variant="outline-secondary" className='center' onClick={this.grabBets}>All Bets</Button>
                 <Button variant="outline-info" className='center' onClick={this.grabbingBetsM}>One-on-One</Button>{' '}
-                 
                 <Button variant="outline-danger" className='center' onClick={this.grabbingBetsP}>Pile-ons</Button>{' '}
               </ButtonToolbar> 
 
