@@ -23,7 +23,7 @@
 		
 		.then(data => {
 
-			for(let i = 0; i < data.length; i ++){
+		 	for(let i = 0; i < data.length; i ++){
 				if(data[i].creator == userId){
 						if(data[i].creatorside == null){
 						expiredRet.push(data[i])	

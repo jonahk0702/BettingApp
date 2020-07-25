@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import {Button, Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
+import {Button, Container, Row, Col, ButtonToolbar} from "react-bootstrap";
 import NavbarIn from "./navbar/NavbarIn";
 import IndividaulBet from "./IndividaulBet/IndividaulBet";
 import PileIndiBet from "./IndividaulBet/PileIndiBet";
-import MyVerticallyCenteredModal from './IndividaulBet/MyVerticallyCenteredModal';
+//import MyVerticallyCenteredModal from './IndividaulBet/MyVerticallyCenteredModal';
 
  //TO do
 
@@ -11,7 +11,6 @@ import MyVerticallyCenteredModal from './IndividaulBet/MyVerticallyCenteredModal
 // What happends when the bet descrpio is too long? Test it and make a method that displays the first like 20 charactrs when longer
  
 let Holder = <div></div>; 
-let Holderer = <div></div>; 
 let PilesHold = <div></div>; 
 let balance=0;
 
@@ -88,6 +87,8 @@ bought = () => {
 componentDidMount(){  
   this.grabbingBetsM('total');
   this.getTotal();
+  
+  this.getExpiredBets();
 
 }
 
@@ -162,7 +163,6 @@ grabbingBetsP = () => {
     });
 
 
-    this.getExpiredBets();
 } 
 
 moveUp = (a,des) => {
@@ -195,7 +195,7 @@ getExpiredBets = () => {
    .then(data => {
     console.log(data);
     console.log(data.length);
-    if(data.length>0){
+    if(data.length>0){ 
       this.createPileEntry(data);
     }
  //   console.log("Prev is the resp");

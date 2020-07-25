@@ -92,6 +92,7 @@ class Buy extends Component{
                   <Row>
             <Col>
               How many Bs would you like to buy?
+              <br/> P.S. they are still free
               <br/><br/><br/>
               <ButtonToolbar className="center mw5 mw7-ns center bg-light-gray pa3 ph5-ns">
                 <ToggleButtonGroup
@@ -131,6 +132,7 @@ class Buy extends Component{
               </Container>
               <br/><br/><br/>
               <h3>Information on payment:</h3>
+              <p className='red'>STILL UNDER CONSTRUCTION</p>
               <p className="f3">Here at Custom Bets, we believe that security comes first. That's why we use a secure paypal server
                   for all transactions. This paypal server is a registered SSL and ensures the highest standard of security
                   for all transactions that will take place.

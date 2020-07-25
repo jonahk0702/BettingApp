@@ -14,7 +14,7 @@ const handleCreateBet = (req, res, db) => {
 				.insert({
 					description: description,
 					creator: userid,
-					amount : total,
+					amount : total, 
 					date: exDate,
 					betid: id, 
 					expires: expiry+ "/" + hour

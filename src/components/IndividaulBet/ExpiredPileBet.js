@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Col, Row, Container, Button} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "./bets.css";
-import MyVerticallyCenteredModal from './MyVerticallyCenteredModal';
 
 let mods;
 
@@ -17,12 +16,16 @@ constructor(props) {
 notMe = () => {
   this.submit('be');
 }
+
+chosen = () => {
+  this.props.chosen();
+}
 meWon = () => {
   
   this.submit('cr');
 }
 submit = (winner) => {
-  console.log(this.props.betid);
+  this.chosen();
     let date = new Date(); 
     let properDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
      fetch('http://localhost:3000/pileVote', {

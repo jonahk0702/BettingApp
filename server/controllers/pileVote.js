@@ -29,11 +29,11 @@ const handlePileVote = (req, res, db) => {
 				 		.where('betid', '=', id)
 				 		.increment(vote,1)
 				
-				.then(data => { 
+				.then(data => {  
 				db('pilevotesum')
 					.select('*')
 					.where('betid', '=', id) 
-					.then(data => { 
+					.then(data => {  
 						if(data[0].population < ( data[0].totalvotes * 1.35)){
 							
 							

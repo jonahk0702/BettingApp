@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Button, Container, Row, Col, ButtonToolbar, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 import NavbarIn from './navbar/NavbarIn'
-import MyIndividaulBet from './IndividaulBet/MyIndividaulBet';
+//import MyIndividaulBet from './IndividaulBet/MyIndividaulBet';
 import IndividaulBet from './IndividaulBet/IndividaulBet';
 import ExpiredIndiBet from './IndividaulBet/ExpiredIndiBet';
 import PileIndiBet from './IndividaulBet/PileIndiBet';
@@ -20,12 +20,8 @@ let redPending = <div></div>;
 let redVoted = <div></div>;
 
 let blue = true;
-let tab = 'active';
 
 let final = <div></div>;
-
-let Holder = <div></div>;
-
 
 
 class MyBets extends Component {
@@ -216,7 +212,8 @@ fetch('http://localhost:3000/getPileBets', {
    redExpired = data.map((user, i) => { 
      return <ExpiredPileBet key={i} betid={data[i].betid} name={data[i].description} 
      expiry={data[i].expires} creator={data[i].creator} amount={data[i].amount}  
-     side={data[i].side}  better={this.props.better}  userId={this.props.userId}/>
+     side={data[i].side}  better={this.props.better}  userId={this.props.userId}
+     chosen={this.chosen}/>
 
    })
 
@@ -298,6 +295,14 @@ expiredBets = () => {
   this.setState({tab:'expired'});
 }
 
+
+chosen=()=>{
+  final = <div>Noting</div>
+  this.setState({jo:45}) 
+  this.getAllBets()
+  this.setState({jona:4565}) 
+}
+
 untaken = () => {
 
   this.setState({tab:'untaken'});
@@ -322,7 +327,7 @@ grabbingBetsM = () => {
 grabbingBetsP = () => {
   blue = false;
   this.setState({a:13});
-  this.setState({a:51254});
+ 
 }
 
  render() {
@@ -410,7 +415,6 @@ grabbingBetsP = () => {
 
    {final}
    
-   <ExpiredIndiBet/>
    </Col>
 
    </Row>

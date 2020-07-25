@@ -44,7 +44,27 @@ const handleChooseMatchWinTaken = (req, resp, db) =>{
                         where('betid', '=', betid)
                         .then(data => {
                             if(data[0].winner == 'no'){
-                                //Shit
+                                db.select('balance').from('users')
+                                .where('id', '=', userId)
+                                .then(data => {
+                                    db('users').where('id', '=', userId)
+                                    .update({
+                                        balance: (data[0].balance + amount )
+                                    })
+                                    .then(data => {
+                                        db.select('balance').from('users')
+                                .where('id', '=', othersId)
+                                .then(data => {
+                                    db('users').where('id', '=', othersId)
+                                    .update({
+                                        balance: (data[0].balance + amount)
+                                    })
+                                    .then(data => {
+                                        resp.json("Sucess")
+                                    })
+                                })
+                                    })
+                                })
                             }
                             if(data[0].winner == 'cr' ){
                                 
@@ -53,7 +73,7 @@ const handleChooseMatchWinTaken = (req, resp, db) =>{
                                 .then(data => {
                                     db('users').where('id', '=', userId)
                                     .update({
-                                        balance: (data[0].balance + amount)
+                                        balance: (data[0].balance + amount * 2)
                                     })
                                     .then(data => {
                                         resp.json("Sucess")
@@ -66,7 +86,7 @@ const handleChooseMatchWinTaken = (req, resp, db) =>{
                                 .then(data => {
                                     db('users').where('id', '=', othersId)
                                     .update({
-                                        balance: (data[0].balance + amount)
+                                        balance: (data[0].balance + (amount * 2))
                                     })
                                     .then(data => {
                                         resp.json("Sucess")
